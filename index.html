@@ -1,16 +1,115 @@
+<!doctype html>
 <html>
-  <head>
-   <title>Digital Rebar Project</title>
-  </head>
-  <body>
-    <h1>Digital Rebar Project</h1>
-    <p>Welcome to the Digital Rebar project.  Founded by the original Crowbar team, Rebar is a rethinking of how we do physical operations using containers, microservices, loose coupling and functional decomposition.</p>
-    <h2>Join Us!</h2>
-    <ul>
-      <li>Mailing List: http://bit.ly/digitalrebarlist</li>
-      <li>IRC: Freenode #digitalrebar</li>
-      <li>Code: https://github.com/digitalrebar/core</li>
-    </ul>
-    <p>Digital Rebar is sponsored by RackN.com</p>
-  </body>
+	<head>
+		<title>Digital Rebar</title>
+		<script src="jquery.min.js"></script>
+		<script src="parallax.js"></script>
+		<link href="reset.css" rel="stylesheet" type="text/css" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+	<body>
+
+		<div class='full-screen' data-parallax="scroll" data-image-src="images/image.jpg" id='top'>
+			<img src="images/digital_rebar.png" style="width:15%; margin: 1em; margin-left: 5em; position: absolute;" />
+			<div class='title-text'>
+				<span class="slash">./</span>we_get_physical<span class="slash blink">&block;</span>
+			</div>
+			<div class='bottom-text'>
+				scroll down
+			</div>
+		</div>
+		<article>
+			<header>
+				Digital Rebar Project
+			</header>
+			<p>
+				<a href='https://github.com/digitalrebar/core'>Digital Rebar</a> is a container-ready hardware provisioning platform that delivers the best of software deployment automation and orchestration without locking you into a single hardware platform or operating system. Our mission is to embrace the heterogenous nature of data center operations.
+			</p><br/>
+			<p>
+				While it's been completly rebuilt by DevOps artisans, Digital Rebar history includes years of battle-tested ops learnings by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
+			</p>
+		</article>
+		<div class='full-screen' data-parallax="scroll" data-image-src="images/space.jpg">
+			<div class='title-text'>
+				<span class="slash">./</span>ready_state_go<span class="slash blink">&block;</span>
+			</div>
+		</div>
+		<article>
+			<header>
+				Getting Started
+			</header>
+			<p>
+				Want to <b>install Digital Rebar</b>? Here's the <a href="https://github.com/digitalrebar/doc/blob/master/install.rst">Install Guide</a>.
+			</p><br/>
+			<ul>
+				<li><a href="http://bit.ly/digitalrebarcalendar">Live Weekly Planning and Design Meetings</a></li>
+				<li><a href="http://bit.ly/digitalrebarlist">Mailing List</a></li>
+				<li><a href="https://gitter.im/digitalrebar/core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">Live Chat</a>  (Gitter.im)</li>
+				<li><a href="https://waffle.io/digitalrebar/core">Issues and Roadmap</a></li>
+				<li><code>#digitalrebar</code> IRC channel on <a href="https://webchat.freenode.net/">Freenode</a> (hint: Gitter.im is more active).</li>
+			</ul>
+		</article>
+		<div class='full-screen' data-parallax="scroll" data-image-src="images/cat.jpg">
+			<div class='title-text'>
+				<span class="slash">./</span>metal_api_tldr<span class="slash blink">&block;</span>
+			</div>
+		</div>
+		<article>
+			<header>
+				Executive Summary
+			</header>
+			<p>
+				The principal motivation for creation of Digital Rebar is the transition a from bare metal installer into a tool that manages ongoing operations. Digital Rebar enables upgrade and continuous deployment automation. This capability is important for large scale deployments of evolving complex projects like OpenStack, Hadoop, and Ceph.
+			<p><br/>
+			<p>
+				Digital Rebar provides the foundation for operations automation. Digital Rebar is an open reference implementation that can be reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and we benefit by having consistent installations across the ecosystem.
+			</p>
+		</article>
+		<div class='full-screen' data-parallax="scroll" data-image-src="images/drop.jpg">
+			<div class='title-text'>
+				<span class="slash">./</span>devops_for_physical<span class="slash blink">&block;</span>
+			</div>
+		</div>
+		<article>
+			<header>
+				Benefits of Digital Rebar
+			</header>
+			<p>
+				Digital Rebar reduces the cost of datacenter hardware infrastructure preparation. The immediate benefits of Digital Rebar are realized in the deployment of complex compute and storage clusters. Digital Rebar reduces the human resource cost of getting compute platform systems into productive use, automates continuous hardware redeployment, automates hypervisor, operating systems, and application layer software installation and management. All of these add up to significant gains in operational reliability, consistency, and concomitant reduction in defects handling costs.			</p>
+		</article>
+		<div class='full-screen' data-parallax="scroll" data-image-src="images/ice.jpg">
+			<div class='title-text'>
+				<span class="slash">./</span>frictionless_it_ops<span class="slash blink">&block;</span>
+			</div>
+		</div>
+		<article>
+			<header>
+				Project Sponsored by RackN
+			</header>
+			<p>
+				
+			</p>
+		</article>
+		<article class='footer'>
+			<footer>
+				&copy;2015 Lorem ipsum dolor sit amet<br/>
+				<a href="">link</a> | <a href="">to</a> | <a href="">other</a> | <a href="">places</a>
+			</footer>
+		</article>
+
+	<script>
+
+	//autoscroll function
+	//to use: <tag onclick="javascript:scrollTo('#selector.class')" />
+	function scrollTo(destination) {
+		$('html, body').animate({
+	        scrollTop: $( destination ).offset().top
+	    }, 500);
+	}
+	$('#top').click(function(){
+	    scrollTo($('article')[0]);
+	    return false;
+	});
+	</script>
+
+	</body>
 </html>

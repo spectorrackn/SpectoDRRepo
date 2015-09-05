@@ -1,0 +1,138 @@
+.full-screen {
+	height:100vh;
+	filter: grayscale(100%);
+}
+
+.slash {
+	color: #0c3;
+}
+
+.blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+code {
+	font-family: monospace;
+}
+
+.title-text {
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 5em;
+	color: #fff;
+
+	/* vertically and horizontally center text*/
+	text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    /*text-shadow: 0px 0px 0.2em #000;*/
+}
+
+.bottom-text {
+	font-family: Tahoma, sans-serif;
+	font-weight: bold;
+	color: #fff;
+
+	position: absolute;
+	padding-bottom: 1em;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-100%);
+
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 0.75em;
+}
+
+article {
+	font-family: Tahoma, sans-serif;
+	padding: 2em;
+	padding-left: 20%;
+	padding-right: 20%;
+	padding-bottom: 4em;
+	width: 100% auto;
+	margin: 0 auto;
+	min-height: 200px;
+
+	-webkit-box-shadow: inset 0px 11px 18px -2px rgba(0,0,0,0.43);
+	-moz-box-shadow: inset 0px 11px 18px -2px rgba(0,0,0,0.43);
+	box-shadow: inset 0px 11px 18px -2px rgba(0,0,0,0.43);
+
+}
+
+article header {
+	font-weight: bold;
+	font-size: 2em;
+	color: #222;
+	text-align: center;
+	padding: 2em;
+}
+
+article p {
+	line-height: 1.7em;
+}
+
+article.footer {
+	padding-top: 3em;
+	min-height: 50px;
+	color: #777;
+	background: #222;
+}
+
+article.footer footer {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 0.75em;
+}
+
+article.footer footer a:link {
+	color: #ddd;
+	text-decoration: none;
+}
+
+article.footer footer a:hover {
+	color: #aaa;
+	text-decoration: underline;
+}
+
+article.footer footer a:visited {
+	color: #ddd;
+}
+
+article.footer footer a:active {
+	color: #fff;
+}
