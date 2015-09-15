@@ -106,6 +106,24 @@ article p {
 	line-height: 1.7em;
 }
 
+article a:link {
+	color: #66c;
+	text-decoration: none;
+}
+
+article a:hover {
+	color: #99d;
+	text-decoration: underline;
+}
+
+article a:visited {
+	color: #449;
+}
+
+article a:active {
+	color: #eef;
+}
+
 article.footer {
 	padding-top: 3em;
 	min-height: 50px;
@@ -135,4 +153,8 @@ article.footer footer a:visited {
 
 article.footer footer a:active {
 	color: #fff;
+}
+
+b {
+	font-weight: bold;
 }
