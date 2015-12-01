@@ -82,6 +82,32 @@ code {
 	font-size: 0.75em;
 }
 
+nav {
+	font-family: monospace;
+	font-size: 2em;
+	position: fixed;
+	text-align: right;
+	right: 0;
+	width: 100%;
+}
+
+nav a {
+	white-space: none;
+	display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5em;
+    margin: 0;
+
+    text-shadow: 0 0 0.4em #000;
+ 	background-color: rgba(0, 0, 0, 0);
+ 	transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
 article {
 	font-family: Tahoma, sans-serif;
 	padding: 2em;
@@ -106,6 +132,8 @@ article header {
 	text-align: center;
 	padding: 2em;
 }
+
+
 
 article p {
 	line-height: 1.7em;

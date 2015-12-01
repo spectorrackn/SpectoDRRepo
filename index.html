@@ -8,7 +8,13 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
         <link href="/images/digitalrebar.ico" rel="SHORTCUT ICON" />
     <body>
-
+        <nav>
+            <a href="#intro">intro</a>
+            <a href="#gettingStarted">starting</a>
+            <a href="#glance">glance</a>
+            <a href="#benefits">benefits</a>
+            <a href="#sponsor">sponsor</a>
+        </nav>
         <div class='full-screen' data-parallax="scroll" data-image-src="images/image.jpg" id='top'>
             <div class='title-text'>
                 <span class="slash">./</span>start_to_scale<span class="slash blink">&block;</span>
@@ -18,7 +24,7 @@
             </div>
         </div>
         <article>
-            <header>
+            <header id="intro">
                 Digital Rebar Project
             </header>
             <p>
@@ -37,7 +43,7 @@
             </div>
         </div>
         <article>
-            <header>
+            <header id="gettingStarted">
                 Getting Started
             </header>
             <p>
@@ -58,7 +64,7 @@
             </div>
         </div>
         <article>
-            <header>
+            <header id="glance">
                 At a glance
             </header>
             <p>
@@ -74,7 +80,7 @@
             </div>
         </div>
         <article>
-            <header>
+            <header id="benefits">
                 Benefits of Digital Rebar
             </header>
             <p>
@@ -86,7 +92,7 @@
             </div>
         </div>
         <article>
-            <header>
+            <header id="sponsor">
                 Project Sponsored by <a href="http://rackn.com">RackN</a>
 
             </header>
@@ -114,6 +120,11 @@
     $('#top').click(function(){
         scrollTo($('article')[0]);
         return false;
+    });
+
+    $('a[href*=#]').click(function(event){
+        scrollTo($.attr(this, 'href'));
+        event.preventDefault();
     });
 
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
