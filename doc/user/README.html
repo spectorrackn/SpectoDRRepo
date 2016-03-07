@@ -1,0 +1,330 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Guide &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="next" title="Deploy Guide" href="../deployment/README.html" />
+    <link rel="prev" title="Welcome to Digital Rebar Documentation" href="../README.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../deployment/README.html" title="Deploy Guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../README.html" title="Welcome to Digital Rebar Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User Guide</a><ul>
+<li><a class="reference internal" href="#state-image-key">State Image Key</a></li>
+<li><a class="reference internal" href="#getting-the-admin-up">Getting the Admin up</a></li>
+<li><a class="reference internal" href="#digital-rebar-admin-up-add-nodes">Digital Rebar Admin Up! Add Nodes</a><ul>
+<li><a class="reference internal" href="#ready-state-wizard">Ready State Wizard</a></li>
+<li><a class="reference internal" href="#step-by-step-instructions">Step by Step Instructions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-a-deployment">Create a Deployment</a></li>
+<li><a class="reference internal" href="#adding-nodes-to-a-deployment">Adding Nodes to a Deployment</a></li>
+<li><a class="reference internal" href="#adding-networks-to-a-deployment">Adding Networks to a Deployment</a></li>
+<li><a class="reference internal" href="#adding-roles-to-a-deployment">Adding Roles to a Deployment</a></li>
+<li><a class="reference internal" href="#installing-an-os-on-a-node">Installing an OS on a Node</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../README.html"
+                        title="previous chapter">Welcome to Digital Rebar Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../deployment/README.html"
+                        title="next chapter">Deploy Guide</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user/README.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<p>This is the Digital Rebar user guide. Please feel free to add sections
+and information as needed.</p>
+<div class="section" id="state-image-key">
+<h2>State Image Key<a class="headerlink" href="#state-image-key" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="25%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">State</th>
+<th class="head">Icon</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Ready</td>
+<td><img alt="Ready (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/active.png" /></td>
+<td>Updates applied, Stable</td>
+</tr>
+<tr class="row-odd"><td>Error</td>
+<td><img alt="Error (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/error.png" /></td>
+<td>Failed, Incomplete transition</td>
+</tr>
+<tr class="row-even"><td>Blocked</td>
+<td><img alt="Blocked (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/blocked.png" /></td>
+<td>Annealer waiting until all prereq&#8217;s met</td>
+</tr>
+<tr class="row-odd"><td>Idle</td>
+<td><img alt="Idle (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/active.png" /></td>
+<td>System not active</td>
+</tr>
+<tr class="row-even"><td>Off</td>
+<td><img alt="Off (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/off.png" /></td>
+<td>Power is off. No activity possible</td>
+</tr>
+<tr class="row-odd"><td>Wait</td>
+<td><img alt="Wait (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/wait.png" /></td>
+<td>Todo action but power is off. Waiting until power is on</td>
+</tr>
+<tr class="row-even"><td>Proposed</td>
+<td><img alt="Proposed (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/proposed.png" /></td>
+<td>Waiting on user input</td>
+</tr>
+<tr class="row-odd"><td>Reserved</td>
+<td><img alt="Reserved (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/reserved.png" /></td>
+<td>User hold on activity</td>
+</tr>
+<tr class="row-even"><td>To do</td>
+<td><img alt="TODO (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/todo.png" /></td>
+<td>All prereq&#8217;s met but not Annealer not started yet</td>
+</tr>
+<tr class="row-odd"><td>Transition</td>
+<td><img alt="Transition (image)" src="https://raw.githubusercontent.com/digitalrebar/core/master/rails/app/assets/images/icons/led/transition.png" /></td>
+<td>Annealer sent work to Jig</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="getting-the-admin-up">
+<h2>Getting the Admin up<a class="headerlink" href="#getting-the-admin-up" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve got a working Digital Rebar Admin node running, you access the UI
+via port <a class="reference external" href="http://[Admin">http://[Admin</a> IP]:3000. The default user is <code class="docutils literal"><span class="pre">rebar</span></code> with
+password <code class="docutils literal"><span class="pre">rebar</span></code>.</p>
+<blockquote>
+<div>All (and more) of the UI capabilities are also exposed by the Digital Rebar
+CLI which is automatically setup on the Admin node.</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">production.sh</span></code> script will automatically configure the Admin node
+to a complete working state. When the Admin node is ready, you can
+validate that the Admin node is working correctly in several ways:</p>
+<ul>
+<li><p class="first">the Deployments...System Overview (<code class="docutils literal"><span class="pre">/dashboard/layercake</span></code>) should
+should all green checks</p>
+</li>
+<li><p class="first">the Deployments...Annealer (<code class="docutils literal"><span class="pre">/annealer</span></code>) should show no active work</p>
+</li>
+<li><p class="first">the Deployments...Deployments...system (<code class="docutils literal"><span class="pre">/deployments/system</span></code>)
+should show all green checks</p>
+</li>
+<li><p class="first">the Nodes...Nodes (<code class="docutils literal"><span class="pre">/nodes</span></code>) show should a green check for the
+Admin node</p>
+<blockquote>
+<div><p>You can check these screens <em>before</em> the annealer has completed
+bringing up the Admin node and watch Rebar provision the 1st admin
+node.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="digital-rebar-admin-up-add-nodes">
+<h2>Digital Rebar Admin Up! Add Nodes<a class="headerlink" href="#digital-rebar-admin-up-add-nodes" title="Permalink to this headline">¶</a></h2>
+<p>Once the Digital Rebar Admin is running, simply booting VMs or physical nodes
+onto the management network will engage the discovery process (using
+DHCP and PXE). Digital Rebar does not event hook the PXE service (to maintain
+separation of duties) so please be patient, the default discovery
+process requires the system to boot the Sledgehammer image which
+requires time.</p>
+<p>Once the node is booted, Digital Rebar automatically adds the node into the
+system deployment. The system deployment is a special purpose deployment
+used for discovery and base management. Users have limited options to
+change it; however, you can easily monitor the discovery process
+watching the Annealer or system deployment screens. They will show
+exactly which steps of the discovery progress are pending, acting and
+completed.</p>
+<p>A node is completely discovered when all the system deployment steps
+(aka &#8220;node roles&#8221;) are complete with green checks.</p>
+<p>It is acceptable to configure nodes (the next steps) even before the
+discovery is complete. Digital Rebar will figure out the correct order of
+operations and perform actions in sequence.</p>
+<div class="section" id="ready-state-wizard">
+<h3>Ready State Wizard<a class="headerlink" href="#ready-state-wizard" title="Permalink to this headline">¶</a></h3>
+<p>The Ready State Wizard performs multiple steps for provisioning
+discovered nodes from a single screen. This convenience eliminates
+several steps that are commonly performed together.</p>
+<p>From the Ready State Wizard Screen:
+1. name the deployment (network will be named the same as the deployment)
+2. describe the network settings (you can change this later from the Networks page)
+3. check the nodes that you want to provision
+4. select the o/s that you want to be installed 1. accept the changes (this takes you to the deployment page)
+5. commit the deployment to begin.</p>
+</div>
+<div class="section" id="step-by-step-instructions">
+<h3>Step by Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="create-a-deployment">
+<h2>Create a Deployment<a class="headerlink" href="#create-a-deployment" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>These steps duplicate the Ready State wizard operations as
+individual steps</div></blockquote>
+<p>To do additional operations on a node, it must be part of a deployment.</p>
+<p>Create a deployment from the Deployment...Deployments (<code class="docutils literal"><span class="pre">/deployments</span></code>)
+page. Provide the name for your deployment (default is <code class="docutils literal"><span class="pre">default</span></code>) and
+click the <code class="docutils literal"><span class="pre">add</span></code> button.</p>
+<p>Once the deployment is created, you can navigate directly to the
+deployment from the Deployment...Deployments submenu or direct using
+<code class="docutils literal"><span class="pre">/deployments/[my</span> <span class="pre">deployment]</span></code>.</p>
+<blockquote>
+<div>Deployments are automatically set to have the system deployment as
+their parent. In the future, other parents may be set.</div></blockquote>
+</div>
+<div class="section" id="adding-nodes-to-a-deployment">
+<h2>Adding Nodes to a Deployment<a class="headerlink" href="#adding-nodes-to-a-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Once you have a deployment, you must attach nodes to it before you can
+take further action.</p>
+<p>You can set a node into a deployment from the Nodes list drill down into
+each node page (<code class="docutils literal"><span class="pre">/nodes/[node</span> <span class="pre">name]</span></code>) or several at a time from the
+Nodes...Bulk Edit (<code class="docutils literal"><span class="pre">/dashboard/list</span></code>). Both methods provide a list of
+available deployments.</p>
+</div>
+<div class="section" id="adding-networks-to-a-deployment">
+<h2>Adding Networks to a Deployment<a class="headerlink" href="#adding-networks-to-a-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Generally, deployments also configure one or more networks.</p>
+<p>To create a network, visit the Network...Networks page (<code class="docutils literal"><span class="pre">/networks</span></code>)
+and fill out the table row for your network making sure to select your
+deployment. Click <code class="docutils literal"><span class="pre">add</span></code> to create the network.</p>
+<p>Creating a network will also create a matching <code class="docutils literal"><span class="pre">network-[name]</span></code> role
+in the system. These roles allow you to bind the network definition to
+specific nodes in later steps.</p>
+<blockquote>
+<div>Once you create a network, you cannot change the assigned network.</div></blockquote>
+</div>
+<div class="section" id="adding-roles-to-a-deployment">
+<h2>Adding Roles to a Deployment<a class="headerlink" href="#adding-roles-to-a-deployment" title="Permalink to this headline">¶</a></h2>
+<p>The new deployment page should now have a list of assigned nodes. Digital Rebar
+uses roles to determine the specific configuration required for a
+deployment. You manage the deployment using special purpose milestone
+roles (aka &#8220;noop&#8221;) that represent target states. Digital Rebar tracks the
+subroles needed to achieve the milestone and automatically adds them.</p>
+<p>To add a milestone role, select it from the list at the top of the
+screen and click <code class="docutils literal"><span class="pre">add</span> <span class="pre">role</span></code>. For these instructions, use the
+<code class="docutils literal"><span class="pre">O/S</span> <span class="pre">Installed</span></code> role to install an operating system.</p>
+<p>Once a role is added to a deployment, Digital Rebar will add it an it&#8217;s
+dependencies as columns into the deployment matrix.</p>
+<p>Clicking on the role header will allow you to make deployment wide
+configuration changes if that role has configuration settings.</p>
+</div>
+<div class="section" id="installing-an-os-on-a-node">
+<h2>Installing an OS on a Node<a class="headerlink" href="#installing-an-os-on-a-node" title="Permalink to this headline">¶</a></h2>
+<p>To install an operating system on a node, you must attach the
+<code class="docutils literal"><span class="pre">O/S</span> <span class="pre">Installed</span></code> milestone role to the node.</p>
+<p>To attach the O/S role to the node, you much click the green plus
+button. This will automatically add both the <code class="docutils literal"><span class="pre">O/S</span> <span class="pre">Installled</span></code> and
+<code class="docutils literal"><span class="pre">Install</span> <span class="pre">O/S</span></code> role.</p>
+<p>Once the O/S role is attached, the icon changes to a wrench. Clicking
+the wrench on the <code class="docutils literal"><span class="pre">Install</span> <span class="pre">O/S</span></code> role allows you to choose which
+operating system Digital Rebar will deploy if you&#8217;ve added multiple boot ISOs.</p>
+<p>Once the roles are attached, you start the process by clicking the
+<code class="docutils literal"><span class="pre">commit</span></code> button.</p>
+<p>Once the deployment is committed, Digital Rebar will automatically reboot the
+node and start the O/S install process.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../deployment/README.html" title="Deploy Guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../README.html" title="Welcome to Digital Rebar Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

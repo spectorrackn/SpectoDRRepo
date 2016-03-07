@@ -1,0 +1,189 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The smoketest framework lives on the admin node, and consists of: &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Development Guide" href="README.html" />
+    <link rel="next" title="Digital Rebar API" href="api/README.html" />
+    <link rel="prev" title="Sledgehammer Hooks" href="sledgehammer/sledgehammer-hooks.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api/README.html" title="Digital Rebar API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sledgehammer/sledgehammer-hooks.html" title="Sledgehammer Hooks"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The smoketest framework lives on the admin node, and consists of:</a></li>
+<li><a class="reference internal" href="#the-smoketest-command-works-like-this">The smoketest command works like this:</a></li>
+<li><a class="reference internal" href="#writing-barclamp-smoketests">Writing Barclamp Smoketests</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sledgehammer/sledgehammer-hooks.html"
+                        title="previous chapter">Sledgehammer Hooks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api/README.html"
+                        title="next chapter">Digital Rebar API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/smoketesting.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>This file documents the Digital Rebar smoketest framework</p>
+<p><strong>Note:</strong> The default admin node memory allocation is 4G. It may be
+necessary to run smoke tests with more (6 or 8G) to get speedy or more
+reliable results.</p>
+<div class="section" id="the-smoketest-framework-lives-on-the-admin-node-and-consists-of">
+<h1>The smoketest framework lives on the admin node, and consists of:<a class="headerlink" href="#the-smoketest-framework-lives-on-the-admin-node-and-consists-of" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>smoketest: This is the front-end to the in-cluster side of the
+smoketest framework: It takes a single parameter, which is the name
+of a barclamp to smoketest. smoketest must be run as root.</li>
+<li>check_ready: This checks to see if a node had transitioned to a given
+state. smoketest uses it internally.</li>
+<li>run_on: This runs a command on a given node as root.</li>
+<li>knife_node_find: This is a very thin and stupid wrapper around knife
+search node.</li>
+<li>name_to_ip: This translates an hostname into an IP address.</li>
+<li>parse_yml_or_json: This is a cheesy little function that parses yml
+(or JSON), extracts fields of interest, and prints them in a form
+suitable for bash&#8217;s eval.</li>
+</ul>
+</div>
+<div class="section" id="the-smoketest-command-works-like-this">
+<h1>The smoketest command works like this:<a class="headerlink" href="#the-smoketest-command-works-like-this" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Your admin node is in the ready state, and the rest of the nodes are
+in discovered.</li>
+<li>You run /opt/dell/bin/smoketest nova (for example).</li>
+<li>smoketest allocates all the nodes, and waits for them to transition
+to ready. If any node transitions to problem, the smoketest fails.</li>
+<li>Once all the nodes are in ready state, smoketest will examine the
+barclamp metadata for all installed barclamps. It will then deploy
+and test all the barclamps needed to meet the dependencies of the
+barclamp to test, including itself.</li>
+<li>The output from all the tests along with the proposals that were
+created, modified, and deployed will be saved in /var/log/smoketests.</li>
+<li>If any deploys or tests fail, the smoketest fails.</li>
+<li>You can test more than one barclamp at a time by passing multiple
+arguments to the smoketest command: /opt/dell/bin/smoketest
+nova_dashboard swift tempest will run the smoketests for
+nova_dashboard, swift and tempest and all the barclamps they depend
+on.</li>
+<li>It is a good idea to make sure that the admin node has IP addresses
+on the public, storage, and nova_fixed networks. The dev tool and
+test_rebar.sh do this automatically, otherwise you can run this
+script on the admin node to add the networks:</li>
+</ul>
+</div>
+<div class="section" id="writing-barclamp-smoketests">
+<h1>Writing Barclamp Smoketests<a class="headerlink" href="#writing-barclamp-smoketests" title="Permalink to this headline">¶</a></h1>
+<p>* Smoketest Metadata. This consists of metadata in the barclamp&#8217;s rebar.yml that declares any
+smoketest-specific barclamp dependencies and an overall timeout that the smoketest for this barclamp cannot exceed.</p>
+<p>The smoketests use the following metadata:</p>
+<p>* barclamp.requires and smoketest.requires Any barclamps that are in these arrays will be deployed and smoketested
+before the current smoketest.</p>
+<p>* barclamp.member: This is used to satisfy group dependencies if a group is listed as a dependency in the
+barclamp.requires and smoketest.requires.</p>
+<p>* smoketest.timeout: This is the number of seconds that a smoketest can run before the framework
+decides that it is never going to finish and returns failure.</p>
+<p>*smoketest/modify-json&#8221; This executable should accept the proposal JSON on stdin, make whatever changes are needed to let it run in the framework (changing free space requirements, replication factors, etc), and write the modified JSON to stdout.</p>
+<p>* smoketest/*.test: These executables should each perform a discrete test of the barclamp. The smoketest framework will run them in ascending order, and the first test that exits with a nonzero status will signal that the overall smoketest for this barclamp failed, and the framework will stop processing further tests. The framework does not care what language the tests are written in, as long as the build/test system can run them. The smoketest framework arranges for the rebar CLI and the framework helper commands to be available during the run. Any output from the test hooks will be captured and logged.</p>
+<p>Any other files will be ignored by the smoketest framework &#8211; you can
+use them for shared libraries, templates, etc. as the needs of your
+smoketest require.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api/README.html" title="Digital Rebar API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sledgehammer/sledgehammer-hooks.html" title="Sledgehammer Hooks"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar CLI &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Digital Rebar Clients" href="README.html" />
+    <link rel="next" title="Ansible Dynamic Inventory" href="ansible.html" />
+    <link rel="prev" title="Digital Rebar Clients" href="README.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ansible.html" title="Ansible Dynamic Inventory"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Digital Rebar Clients"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Digital Rebar Clients</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Rebar CLI</a><ul>
+<li><a class="reference internal" href="#ping">Ping</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="previous chapter">Digital Rebar Clients</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ansible.html"
+                        title="next chapter">Ansible Dynamic Inventory</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/clients/cli.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-cli">
+<h1>Digital Rebar CLI<a class="headerlink" href="#digital-rebar-cli" title="Permalink to this headline">¶</a></h1>
+<p>The Digital Rebar CLI provides simple access to the <a class="reference external" href="../development/api">REST API</a> for all common use cases.
+The CLI provides advantages including simpler authentication and non-JSON access to many simple commands.
+It is written in Golang and can be adapted as a Golang client.</p>
+<p>The CLI is automatically created during deployment and accessible inside the Rebar_API container or from the host via <cite>docker exec -it compose_rebar_api_1 rebar &#8211;help</cite></p>
+<p>If you&#8217;d like to access the CLI <em>without a deployment</em>, the <a class="reference external" href="http://rackn.com">RackN</a> teams makes it available for download:
+Select the correct architecture to retrieve the CLI:</p>
+<ul>
+<li><p class="first"><a class="reference external" href="https://s3-us-west-2.amazonaws.com/rebar-cli/rebar-linux-amd64">Linux</a></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span>sudo curl -o /usr/local/sbin/rebar https://s3-us-west-2.amazonaws.com/rebar-cli/rebar-linux-amd64
+sudo chmod +x /usr/local/sbin/rebar
+rebar --help
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://s3-us-west-2.amazonaws.com/rebar-cli/rebar-darwin-amd64">Mac</a></p>
+</li>
+</ul>
+<p>You must <cite>chmod +x</cite> to use the CLI.  We also recommend renaming the CLI as &#8220;rebar&#8221; and placing in your execution path.</p>
+<p>To use the CLI, type <cite>rebar &#8211;help</cite> for instructions</p>
+<div class="section" id="ping">
+<h2>Ping<a class="headerlink" href="#ping" title="Permalink to this headline">¶</a></h2>
+<p>There are many commands in the CLI described in &#8211;help.  The most basic is &#8220;rebar ping&#8221; which is used to make sure the CLI can connect to the server.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Parameters are used to set the server address (-E) and credentials (-U &amp; -P).  A typical instruction looks like <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">ping</span> <span class="pre">-E</span> <span class="pre">https://127.0.0.1:3000</span> <span class="pre">-U</span> <span class="pre">rebar</span> <span class="pre">-P</span> <span class="pre">rebar1</span></code>.  To avoid passing parameters into each call, we recommend setting your environment variables.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The CLI uses environment variables &#8216;REBAR_ENDPOINT&#8217; and &#8216;REBAR_KEY&#8217; if set.  The key holds both user and password using the following a &#8220;user:password&#8221; format.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ansible.html" title="Ansible Dynamic Inventory"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Digital Rebar Clients"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Digital Rebar Clients</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,293 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Group APIs &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Digital Rebar API" href="README.html" />
+    <link rel="next" title="Interface (NICs) API" href="interfaces.html" />
+    <link rel="prev" title="DNS Name Filter APIs" href="dns_name_filter.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="interfaces.html" title="Interface (NICs) API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dns_name_filter.html" title="DNS Name Filter APIs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Group APIs</a><ul>
+<li><a class="reference internal" href="#group-crud">Group CRUD</a><ul>
+<li><a class="reference internal" href="#list">List</a></li>
+<li><a class="reference internal" href="#json-format">JSON Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dns_name_filter.html"
+                        title="previous chapter">DNS Name Filter APIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interfaces.html"
+                        title="next chapter">Interface (NICs) API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/api/group.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="group-apis">
+<h1>Group APIs<a class="headerlink" href="#group-apis" title="Permalink to this headline">¶</a></h1>
+<p>Group APIs are used to manage groups. Groups are used to organize
+things.</p>
+<div class="section" id="group-crud">
+<h2>Group CRUD<a class="headerlink" href="#group-crud" title="Permalink to this headline">¶</a></h2>
+<p>Create, Read, Update, Delete actions for Groups</p>
+<div class="section" id="list">
+<h3>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h3>
+<p>Returns list of group id:names in the system</p>
+<blockquote>
+<div>Note: Category is not included in this list</div></blockquote>
+<p><strong>Input:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="35%" />
+<col width="10%" />
+<col width="10%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Verb</th>
+<th class="head">URL</th>
+<th class="head">Options</th>
+<th class="head">Returns</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>/2.0/rebar/2.0/group</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>All groups</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/2.0/rebar/2.0/group/:id</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Single Group</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td>/2.0/rebar/2.0/group</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Creats Group</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td>/2.0/rebar/2.0/group/:id</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Updates Group values</td>
+</tr>
+<tr class="row-even"><td>DELETE</td>
+<td>/2.0/rebar/2.0/group/:id</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Remove Group</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/2.0/rebar/2.0/group/:id/nodes</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Lists nodes in group</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td>/2.0/rebar/2.0/group/:id/nodes</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Adds Node based on JSON {node_id:#}</td>
+</tr>
+<tr class="row-odd"><td>DELETE</td>
+<td>/2.0/rebar/2.0/group/:id/nodes/:id</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Removes Node from Group</td>
+</tr>
+</tbody>
+</table>
+<p>Details:</p>
+<ul class="simple">
+<li>id - Node id</li>
+<li>name - Node name</li>
+<li>category - limited to ui, rack, class or tag</li>
+</ul>
+</div>
+<div class="section" id="json-format">
+<h3>JSON Format<a class="headerlink" href="#json-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span>{
+  &quot;id&quot;:1
+  &quot;name&quot;:&quot;fqdn.example.com&quot;,
+  &quot;description&quot;:&quot;description&quot;,
+  &quot;category&quot;:&quot;ui&quot;
+  &quot;order&quot;:10000,
+}
+</pre></div>
+</div>
+<p>Details:</p>
+<ul class="simple">
+<li>name - group name (must be letters - numbers and start with a letter)</li>
+<li>description - optional (default null)</li>
+<li>category - (default = ui) determines the collection of groups.
+Allowed categories are</li>
+<li>ui</li>
+<li>rack</li>
+<li>tag</li>
+<li>class</li>
+<li>order - optional (default 10000)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="interfaces.html" title="Interface (NICs) API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dns_name_filter.html" title="DNS Name Filter APIs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

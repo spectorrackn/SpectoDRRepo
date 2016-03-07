@@ -1,0 +1,227 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operational Principles &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="next" title="Attribute Injection" href="attribute_injection.html" />
+    <link rel="prev" title="Using CURL with Digital Rebar" href="../clients/curl.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="attribute_injection.html" title="Attribute Injection"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../clients/curl.html" title="Using CURL with Digital Rebar"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operational Principles</a><ul>
+<li><a class="reference internal" href="#design-objective">Design Objective</a></li>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#key-features-of-digital-rebar">Key Features of Digital Rebar</a></li>
+<li><a class="reference internal" href="#digital-rebar-vs-crowbar-opencrowbar">Digital Rebar vs Crowbar/OpenCrowbar</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../clients/curl.html"
+                        title="previous chapter">Using CURL with Digital Rebar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="attribute_injection.html"
+                        title="next chapter">Attribute Injection</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/principles/README.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="operational-principles">
+<h1>Operational Principles<a class="headerlink" href="#operational-principles" title="Permalink to this headline">¶</a></h1>
+<p>The operational model behind Digital Rebar is entering its third generation and
+its important to understand the principles behind that model. The model
+is critical because it shapes how Rebar approaches the infrastructure at
+a fundamental level so it makes it easier to interact with the platform
+if you see how we are approaching operations. Rebar’s goal is to create
+emergent services.</p>
+<p>The topics in this guide help explain Digital Rebar&#8217;s core architectural
+principles.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="attribute_injection.html">Attribute Injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Digital Rebar Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="emergent_services.html">Emergent services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogenous-os-support.html">Heterogenous Operating System Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="late_binding.html">Ops Late Binding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ready_state.html">Digital Rebar delivers &#8220;Ready State&#8221; infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulated_annealing.html">Simulated Annealing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_rebar.html">What is actual Rebar?</a></li>
+</ul>
+</div>
+<div class="section" id="design-objective">
+<h2>Design Objective<a class="headerlink" href="#design-objective" title="Permalink to this headline">¶</a></h2>
+<p>Digital Rebar delivers repeatable best practice deployments. Rebar is not just
+about installation: we define success as a sustainable operations model
+where we continuously improve how people use their infrastructure. The
+complexity and pace of technology change is accelerating so we must have
+an approach that embraces continuous delivery in the data center.</p>
+<p>Rebar’s objective is to help operators and technology become more efficient, stable and
+resilient over time.</p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>When Greg Althaus (github &#64;GAlthaus) and Rob &#8220;zehicle&#8221; Hirschfeld
+(github &#64;Zehicle) started the project, we had some very specific
+targets in mind. We’d been working towards using organic emergent
+swarming (think ants) to model continuous application deployment. We had
+also been struggling with the most routine foundational tasks (bios,
+raid, o/s install, networking, ops infrastructure) when bringing up
+early scale cloud &amp; data applications. Another key contributor, Victor
+Lowther (github &#64;VictorLowther) has critical experience in Linux
+operations, networking and dependency resolution that lead to made
+significant contributions around the
+<a class="reference external" href="simulated_annealing.md">Annealing</a> and networking model. These
+backgrounds heavily influenced how we approached Rebar.</p>
+<p>First, we started with best of field DevOps infrastructure: Opscode
+Chef. There was already a remarkable open source community around this
+tool and an enthusiastic following for cloud and scale operators . Using
+Chef to do the majority of the installation left the Rebar team to focus
+on infrastructure provisioning.</p>
+</div>
+<div class="section" id="key-features-of-digital-rebar">
+<h2>Key Features of Digital Rebar<a class="headerlink" href="#key-features-of-digital-rebar" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>Heterogeneous Operating Systems</em> – chose which operating system you
+want to install on the target servers.</li>
+<li><em>CMDB Flexibility</em> – don’t be locked in to a devops toolset.</li>
+<li><em>Attribute injection</em> - allows clean abstraction boundaries so you can
+use multiple tools (Chef and Puppet, playing together).</li>
+<li><em>Ops Annealer</em> –the orchestration at Rebar’s heart combines the best
+of directed graphs with late binding and parallel execution. We
+believe annealing is the key ingredient for repeatable and OpenOps
+shared code upgrades</li>
+<li><em>Upstream Friendly</em> – infrastructure as code works best as a
+community practice and Rebar use upstream code without injecting “rebarisms” that were previously required. So you
+can share your learning with the broader DevOps community even if
+they don’t use Rebar.</li>
+<li><em>Node Discovery (or not)</em> – Rebar maintains the same proven discovery
+image based approach that we used before, but we’ve streamlined and
+expanded it. You can use Rebar’s API outside of the PXE discovery
+system to accommodate Docker containers, existing systems and VMs.</li>
+<li><em>Hardware Configuration</em> – Rebar maintains the same optional hardware
+neutral approach to RAID and BIOS configuration. Configuring hardware
+with repeatability is difficult and requires much iterative testing.
+While our approach is open and generic, the team works hard
+to validate a on specific set of gear: it’s impossible to make
+statements beyond that test matrix.</li>
+<li><em>Network Abstraction</em> – Rebar dramatically extended our DevOps
+network abstraction. We’ve learned that a networking is the key to
+success for deployment and upgrade so we’ve made Rebar networking
+flexible and concise. Rebar networking works with attribute injection
+so that you can avoid hardwiring networking into DevOps scripts.</li>
+<li><em>Out of band control</em> – when the Annealer hands off work, Rebar gives
+the worker implementation flexibility to do it on the node (using
+SSH) or remotely (using an API). Making agents optional means allows
+operators and developers make the best choices for the actions that
+they need to take.</li>
+<li><em>Technical Debt Paydown</em> - We’ve also updated the Rebar
+infrastructure to use the latest libraries like Ruby 2, Rails 4, Chef
+11. Even more importantly, we’re dramatically simplified the code
+structure including in repo documentation and a Docker based
+developer environment that makes building a working Rebar environment
+fast and repeatable.</li>
+</ul>
+</div>
+<div class="section" id="digital-rebar-vs-crowbar-opencrowbar">
+<h2>Digital Rebar vs Crowbar/OpenCrowbar<a class="headerlink" href="#digital-rebar-vs-crowbar-opencrowbar" title="Permalink to this headline">¶</a></h2>
+<p>Some of you may remember us from our Dell days (we&#8217;ve all since left and founded, RackN) when we founded the Crowbar Project. Since Crowbar was an &#8220;MVP&#8221; and is still being actively developed by SUSE and focuses solely on installing OpenStack, splitting the repositories allow both versions to progress with less confusion. This new generation is structurally and philosphically different from Crowbar and we’ve investing substantially in expanding the extensibility of the architecture, refactoring the tooling, paying down technical debt and cleanup up documentation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="attribute_injection.html" title="Attribute Injection"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../clients/curl.html" title="Using CURL with Digital Rebar"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

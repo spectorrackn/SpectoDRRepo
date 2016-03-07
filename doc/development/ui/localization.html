@@ -1,0 +1,151 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adding Localizations (i18n) &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="User Interface Development" href="README.html" />
+    <link rel="next" title="Adding Menu Items" href="navigation.html" />
+    <link rel="prev" title="User Interface Development" href="README.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="navigation.html" title="Adding Menu Items"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="User Interface Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="previous chapter">User Interface Development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="navigation.html"
+                        title="next chapter">Adding Menu Items</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/ui/localization.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="adding-localizations-i18n">
+<h1>Adding Localizations (i18n)<a class="headerlink" href="#adding-localizations-i18n" title="Permalink to this headline">¶</a></h1>
+<p>Digital Rebar uses the Rails I18N library. Please refer to the
+documentation <a class="reference external" href="http://guides.rubyonrails.org/i18n.html">http://guides.rubyonrails.org/i18n.html</a> for usage hints
+that can help you reduce coding, and to add features such as
+Interpolation.</p>
+<p>Each barclamp is expected to add its own localization (i18n) file.
+&gt;<strong>Note</strong>: Please do <em>not</em> add your localizations into another
+barclamp&#8217;s i18n file. You must also be careful not to create duplicate
+entries; doing so can confuse Digital Rebar.</p>
+<ol class="arabic">
+<li><p class="first">Add your localization file (<code class="docutils literal"><span class="pre">en.yml</span></code> is the default) into the
+<code class="docutils literal"><span class="pre">rebar_framework/config/locales/[barclamp]</span></code> directory. &gt;<strong>Note</strong>:
+You must replace [barclamp] with the name of your barclamp.</p>
+</li>
+<li><p class="first">If you are supporting multiple languages, replace <code class="docutils literal"><span class="pre">en</span></code> with the
+target language code. For example, use <code class="docutils literal"><span class="pre">fr.yml</span></code> if you want to
+provide French translations.</p>
+</li>
+<li><p class="first">Inside the i18n file, provide a simple YML hash for translations. For
+example:</p>
+  <pre>en:
+    # Layout
+    nav:
+      nodes: Nodes
+      nodes_description: Infrastructure Components</pre>
+
+**Reminder**: Encode your translations in quotes if you need to use
+comma ( : ) or tick ( \` ) characters!</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="navigation.html" title="Adding Menu Items"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="User Interface Development"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

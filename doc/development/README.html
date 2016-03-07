@@ -1,0 +1,181 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development Guide &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="next" title="Contributing Code" href="contributing/contributing.html" />
+    <link rel="prev" title="Vagrant and Digital Rebar" href="../deployment/vagrant.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="contributing/contributing.html" title="Contributing Code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../deployment/vagrant.html" title="Vagrant and Digital Rebar"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development Guide</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#dev-environment">Dev Environment</a></li>
+<li><a class="reference internal" href="#setting-rails-development-mode">Setting Rails Development Mode</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../deployment/vagrant.html"
+                        title="previous chapter">Vagrant and  Digital Rebar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing/contributing.html"
+                        title="next chapter">Contributing Code</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/README.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development-guide">
+<h1>Development Guide<a class="headerlink" href="#development-guide" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the amazing world of Digital Rebar!</p>
+<p>This guide is targeted at individuals who wish to <em>contribute and extend</em>
+Digital Rebar. You should review the architectural and operator
+instructions as part of the learning process.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/contributing.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/contributing-code.html">Contributing to Digital Rebar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/mark.html">Mark Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/workflow.html">Workflow Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui/README.html">User Interface Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jigs/README.html">Configuration Managers (aka Jigs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sledgehammer/build_sledgehammer.html">Build Sledgehammer (Advanced Dev Only)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sledgehammer/dev-build-sledgehammer.html">Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sledgehammer/sledgehammer-hooks.html">Sledgehammer Hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smoketesting.html">The smoketest framework lives on the admin node, and consists of:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smoketesting.html#the-smoketest-command-works-like-this">The smoketest command works like this:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smoketesting.html#writing-barclamp-smoketests">Writing Barclamp Smoketests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/README.html">Digital Rebar API</a></li>
+</ul>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>Our intention is to keep
+the API documentation focused just on using the API and leave more it to
+curious readers to review the model and principles areas.</p>
+</div>
+<div class="section" id="dev-environment">
+<h2>Dev Environment<a class="headerlink" href="#dev-environment" title="Permalink to this headline">¶</a></h2>
+<p>Our development environments include a <em>working</em> administrative server
+for testing. It is very important in our process that developers are
+able to run deployments in their environment as part of the testing
+cycle.</p>
+<p>While we have invested in BDD and system tests to catch core logic
+errors, most changes require performing a deployment to test
+correctness!</p>
+<p>&gt; Protip: You can enter the Rails Console from the host, using <code class="docutils literal"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span> <span class="pre">compose_rebar_api_1</span> <span class="pre">/opt/digitalrebar/core/tools/rails-console.sh</span></code>.  This works for development and production!</p>
+</div>
+<div class="section" id="setting-rails-development-mode">
+<h2>Setting Rails Development Mode<a class="headerlink" href="#setting-rails-development-mode" title="Permalink to this headline">¶</a></h2>
+<p>Digital Rebar does not use use RAILS_ENV=development in the traditional way because most of our testing is targeted at doing real provisioning work that requires the production system.</p>
+<p>If you have a need for development behavior (classes and views the refresh when code changes) then perform the following steps:</p>
+<ol class="arabic">
+<li><p class="first">Deploy Digital Rebar in the normal way</p>
+</li>
+<li><p class="first">From the host, create the <code class="docutils literal"><span class="pre">dev.mode</span></code> file in the digitalrebar home directory and restart the rebar_api contain</p>
+<p><code class="docutils literal"><span class="pre">`touch</span> <span class="pre">~/digitalrebar/dev.mode</span>
+<span class="pre">cd</span> <span class="pre">~/digitalrebar/deploy/compose</span> <span class="pre">&amp;&amp;</span> <span class="pre">docker-compose</span> <span class="pre">restart</span> <span class="pre">rebar_api</span>
+<span class="pre">`</span></code></p>
+</li>
+</ol>
+<p>You may make any Rails configuration changes by created your own <code class="docutils literal"><span class="pre">core/rails/config/environments/production.rb</span></code> file.  Since we ignore <code class="docutils literal"><span class="pre">production.rb</span></code> you can leave your own customized version in place.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="contributing/contributing.html" title="Contributing Code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../deployment/vagrant.html" title="Vagrant and Digital Rebar"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

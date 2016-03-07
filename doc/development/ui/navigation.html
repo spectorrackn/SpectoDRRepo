@@ -1,0 +1,169 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adding Menu Items &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="User Interface Development" href="README.html" />
+    <link rel="next" title="Barclamp Roles - User Interface Development and Testing" href="role.html" />
+    <link rel="prev" title="Adding Localizations (i18n)" href="localization.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="role.html" title="Barclamp Roles - User Interface Development and Testing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="localization.html" title="Adding Localizations (i18n)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Adding Menu Items</a><ul>
+<li><a class="reference internal" href="#example-from-the-network-barclamp">Example from the Network barclamp:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="localization.html"
+                        title="previous chapter">Adding Localizations (i18n)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="role.html"
+                        title="next chapter">Barclamp Roles - User Interface Development and Testing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/ui/navigation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="adding-menu-items">
+<h1>Adding Menu Items<a class="headerlink" href="#adding-menu-items" title="Permalink to this headline">¶</a></h1>
+<p>You add menu items into Digital Rebar using database migrations that
+insert into the <code class="docutils literal"><span class="pre">navs</span></code> table using the <code class="docutils literal"><span class="pre">Nav</span></code> object.</p>
+<p>You must add the migration to the <code class="docutils literal"><span class="pre">rebar_framework/db/migrate</span></code>
+directory and follow the Rails migration naming convention of
+<code class="docutils literal"><span class="pre">YYYYMMDDHHMMSS_barclamp_navs.rb</span></code>.</p>
+<p>Inside the migration, use the <code class="docutils literal"><span class="pre">Nav.find_or_create_by_item</span></code> to populate
+the information for the menu item:</p>
+<ul class="simple">
+<li>item = the id of the item</li>
+<li>parent_item = the id of the top level menu you want to use (<code class="docutils literal"><span class="pre">root</span></code>
+creates a top level menu)</li>
+<li>name = the i18n path to the menu text</li>
+<li>description = the i18n path to the menu hover information</li>
+<li>path = the Rails path you want to follow. Unless it starts with http,
+<code class="docutils literal"><span class="pre">eval</span></code> will be applied to the path.</li>
+<li>order = the display order of the menu item</li>
+</ul>
+<p>Remember to:</p>
+<ul class="simple">
+<li>Provide a <code class="docutils literal"><span class="pre">self.down</span></code> that removes your menu item, to maintain a
+clean environment.</li>
+<li>Create matching entries in your barclamp&#8217;s i18n files.</li>
+</ul>
+<div class="section" id="example-from-the-network-barclamp">
+<h2>Example from the Network barclamp:<a class="headerlink" href="#example-from-the-network-barclamp" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span>class NetworkNavs &lt; ActiveRecord::Migration
+  def self.up
+    Nav.find_or_create_by_item :item=&gt;&#39;switches&#39;, :parent_item=&gt;&#39;network&#39;, :name=&gt;&#39;nav.switch&#39;, :description=&gt;&#39;nav.switch_description&#39;, :path=&gt;&quot;switch_path&quot;, :order=&gt;500
+  end
+
+  def self.down
+    Nav.delete_by_item &#39;switches&#39;
+    Nav.delete_by_item &#39;vlan&#39;
+  end
+end
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="role.html" title="Barclamp Roles - User Interface Development and Testing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="localization.html" title="Adding Localizations (i18n)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

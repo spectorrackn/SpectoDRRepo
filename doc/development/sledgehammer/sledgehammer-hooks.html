@@ -1,0 +1,182 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sledgehammer Hooks &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Development Guide" href="../README.html" />
+    <link rel="next" title="The smoketest framework lives on the admin node, and consists of:" href="../smoketesting.html" />
+    <link rel="prev" title="Failures" href="dev-build-sledgehammer.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../smoketesting.html" title="The smoketest framework lives on the admin node, and consists of:"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dev-build-sledgehammer.html" title="Failures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dev-build-sledgehammer.html"
+                        title="previous chapter">Failures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../smoketesting.html"
+                        title="next chapter">The smoketest framework lives on the admin node, and consists of:</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/sledgehammer/sledgehammer-hooks.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sledgehammer-hooks">
+<h1>Sledgehammer Hooks<a class="headerlink" href="#sledgehammer-hooks" title="Permalink to this headline">¶</a></h1>
+<p>This file documents the hooks available in the Sledgehammer image that
+can be used to customize how Sledgehammer transitions through states.</p>
+<p>The primary Sledgehammer control script (control.sh) will search for
+-pre and -post hooks for every Rebar state transition it knows how to go
+through. The hooks can be general (all nodes transitioning through the
+state will run them) or specific to one machine. This functionality is
+intended to be used to facilitate automated testing that must happen
+outside of the chef-client runs. Hooks will run in the following order:</p>
+<p>1: Machine-specific -pre hooks, 2: General -pre hooks, 3: chef-client,
+4: General -post hooks, 5: Machine-specific -post hooks.</p>
+<p>All hooks will be run in alphabetic order, and non-executable hooks will
+be skipped. All hooks to be run should be staged in the /updates NFS
+share on the admin node in the following directories:</p>
+<ul class="simple">
+<li>/updates/<span class="math">nodename/</span>state-pre</li>
+<li>/updates/$state-pre</li>
+<li>/updates/$state-post</li>
+<li>/updates/<span class="math">nodename/</span>state-post</li>
+</ul>
+<p>$state = the Rebar state that Sledgehammer is transitioning through.
+discovering, discovered, update, etc.</p>
+<p>$nodename = the name of the node according to Chef.</p>
+<p>To make writing hooks simpler, certian functions in the control.sh
+script have been split into /updates/control_lib.sh, and control.sh has
+been refactored to account for these changes. If your hooks are written
+in bash, they can source /updates/control_lib.sh to pull in the
+following functions:</p>
+<ul class="simple">
+<li>get_state get_state will pull some information about from the
+chef-server, and store it in the local environment. Specifically, it
+will set the following environment variables: BMC_ROUTER = the
+gateway IP address of the BMC network, if any. BMC_ADDRESS = the IP
+address of the BMC for , if any. BMC_NETMASK = the netmask in dotted
+quad format of the BMC network, if any. CROWBAR_STATE = the current
+Rebar state that the node is in. HOSTNAME = the hostname of the
+system according to the Chef server. ALLOCATED = whether or not has
+been allocated</li>
+<li>post_state post_state will attempt to transition to . If
+successful, it will then update the same environment data that</li>
+</ul>
+<p>get_state does.</p>
+<ul class="simple">
+<li>reboot_system This will cleanly reboot the node. You should use it
+instead of reboot to ensure that all the logs are flushed and that
+the NFS shares get umounted.</li>
+<li>wait_for_allocated This function will spin until has been allocated
+by Rebar.</li>
+<li>wait_for_rebar_state If is not passed, this function will wait
+until transitions to a state other than the one it is currently at.
+If is passed, this function will wait until transitions into</li>
+<li>hook_has_run If the current hook has already run for the current
+-pre or -post state, hook_has_run will return 0. Otherwise, return
+1. This function works by creating state tracking files in
+/install-logs/. To facilitate this function, control.sh exports the
+following environment variables to the hooks:</li>
+<li>HOOKNAME = the name of the hook without any path components.</li>
+<li>HOOKSTATE = the -pre or -post state that the hook is running in.</li>
+</ul>
+<p>Hook Exit Status</p>
+<p>All hooks must exit successfully (with a 0 return status), otherwise the
+system will reboot into the debug state.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../smoketesting.html" title="The smoketest framework lives on the admin node, and consists of:"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dev-build-sledgehammer.html" title="Failures"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

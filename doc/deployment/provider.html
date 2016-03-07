@@ -1,0 +1,363 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Provider Usage &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Provising Process" href="provisioning.html" />
+    <link rel="prev" title="Node Registration Process" href="node_registration.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="provisioning.html" title="Provising Process"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="node_registration.html" title="Node Registration Process"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Provider Usage</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#saving-config-in-dr-info">Saving Config in dr_info</a></li>
+<li><a class="reference internal" href="#supported-providers">Supported Providers</a><ul>
+<li><a class="reference internal" href="#phantom">Phantom</a></li>
+<li><a class="reference internal" href="#metal">Metal</a></li>
+<li><a class="reference internal" href="#amazon-ec2">Amazon EC2</a></li>
+<li><a class="reference internal" href="#google-compute-engine">Google Compute Engine</a></li>
+<li><a class="reference internal" href="#packet-net">Packet.net</a></li>
+<li><a class="reference internal" href="#testing-provider">Testing Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="node_registration.html"
+                        title="previous chapter">Node Registration Process</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="provisioning.html"
+                        title="next chapter">Provising Process</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/provider.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="provider-usage">
+<h1>Provider Usage<a class="headerlink" href="#provider-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Providers are intended to be used by the Rebar core to handle various aspects of node management.  For now, they just let Rebar create and manage nodes on external providers (such as AWS, Rackspace, and Packet).  In the future, though, their scope will be expanded to handle all aspects of node provisioning and network management.</p>
+</div>
+<div class="section" id="saving-config-in-dr-info">
+<h2>Saving Config in dr_info<a class="headerlink" href="#saving-config-in-dr-info" title="Permalink to this headline">¶</a></h2>
+<p>For regular uses, you can store your provider credentials in the <code class="docutils literal"><span class="pre">~/.dr_info</span></code> file ( <a class="reference external" href="./dr_info.rst">details here</a> )</p>
+</div>
+<div class="section" id="supported-providers">
+<h2>Supported Providers<a class="headerlink" href="#supported-providers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="phantom">
+<h3>Phantom<a class="headerlink" href="#phantom" title="Permalink to this headline">¶</a></h3>
+<p>The Phantom provider is the default provider type for internal Rebar
+nodes.  You will normally never see or operate on a node with the
+Phantom provider.</p>
+</div>
+<div class="section" id="metal">
+<h3>Metal<a class="headerlink" href="#metal" title="Permalink to this headline">¶</a></h3>
+<p>The Metal provider is what Rebar uses to manage bare-metal nodes that
+it has direct control over.  In future releases of Rebar, the current
+built-in provisioner and network management code will be folded in to
+the Metal provider.  Metal is the default Provider for all nodes
+created via the Rebar API.</p>
+</div>
+<div class="section" id="amazon-ec2">
+<h3>Amazon EC2<a class="headerlink" href="#amazon-ec2" title="Permalink to this headline">¶</a></h3>
+<p>The Amazon EC2 provider is used to let Rebar create, reboot, and
+delete Amazon EC2 virtual machines. In order to use it, you should:</p>
+<ul class="simple">
+<li>Create a new IAM user on Amazon.</li>
+<li>Make sure that IAM user has rights to create, reboot, and delete EC2
+instances, along with being able to create and delete keys for those
+instances.</li>
+<li>Create a new Provider with the following Rebar CLI call</li>
+</ul>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first"><a class="reference external" href="mailto:victor&#37;&#52;&#48;m4700">victor<span>&#64;</span>m4700</a>:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 providers create </p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>&#8216;{&#8220;name&#8221;: &#8220;amazon-vl-test&#8221;,</dt>
+<dd><blockquote class="first">
+<div><p>&#8220;type&#8221;: &#8220;AwsProvider&#8221;,
+&#8220;auth_details&#8221;: {</p>
+<blockquote>
+<div>&#8220;aws_access_key_id&#8221;: &#8220;IAM_aws_access_key&#8221;,
+&#8220;aws_secret_access_key&#8221;: &#8220;IAM_secret_key_for_access_key&#8221;,
+&#8220;region&#8221;: &#8220;your-preferred-region&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}&#8217;</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+<p>Once you have created a new Provider, you can create EC2 instances
+using that provider</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>victor@m4700:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 nodes create \
+    &#39;{&quot;name&quot;: &quot;amazon-test-2.neode.net&quot;,
+      &quot;provider&quot;: &quot;amazon-vl-test&quot;,
+      &quot;hints&quot;: {
+          &quot;use-proxy&quot;: false,
+          &quot;provider-create-hint&quot;: {
+              &quot;flavor_id&quot;: &quot;t2.small&quot;,
+              &quot;image_id&quot;: &quot;ami-b4a2b5d5&quot;
+          }
+      }
+     }&#39;
+</pre></div>
+</div>
+<p>This will create a t2.small node running Ubuntu 14.04 in the region
+the provider was configured to use.  You can omit the
+&#8216;provider-create-hint&#8217; section of the JSON, which will cause the
+provider to default to using a t2.micro instance running Ubuntu 14.04.</p>
+</div>
+<div class="section" id="google-compute-engine">
+<h3>Google Compute Engine<a class="headerlink" href="#google-compute-engine" title="Permalink to this headline">¶</a></h3>
+<p>The Google Compute Engine provider lets Rebar create, reboot, and
+delete GCE virtual machines. In order to use it, you should:</p>
+<ul class="simple">
+<li>Create a new project to use, if you do not already have one.</li>
+<li>Make sure your project has the Google Compute Engine API enabled.</li>
+<li>Create a new service account key with permission to create, delete,
+and reboot GCE instances in your project.  Be sure and save the
+generated JSON file somewhere secure where you can access it with
+the rebar CLI.</li>
+<li>Create a new Provider with the following Rebar CLI call</li>
+</ul>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first"><a class="reference external" href="mailto:victor&#37;&#52;&#48;m4700">victor<span>&#64;</span>m4700</a>:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 providers create &#8220;{&#8220;name&#8221;: &#8220;gce-vl-test&#8221;,</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>&#8220;type&#8221;: &#8220;GoogleProvider&#8221;,
+&#8220;auth_details&#8221;: {</p>
+<blockquote>
+<div>&#8220;google_project&#8221;: &#8220;your-project-name&#8221;,
+&#8220;google_json_key&#8221;: $(cat &#8220;/path/to/downloaded/token.json&#8221;)</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}&#8221;</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>Once you have created the Provider, you can create GCE instances using it</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>victor@m4700:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 nodes create \
+&#39;{&quot;name&quot;: &quot;gce-test-2.neode.net&quot;,
+  &quot;provider&quot;: &quot;gce-vl-test&quot;,
+  &quot;hints&quot;: {
+      &quot;use-proxy&quot;: false,
+      &quot;provider-create-hint&quot;: {
+          &quot;machine_type&quot;: &quot;n1-standard-2&quot;,
+          &quot;zone_name&quot;: &quot;us-east1-b&quot;,
+          &quot;disks&quot;: [
+              {&quot;autoDelete&quot;: &quot;true&quot;,
+               &quot;boot&quot;: &quot;true&quot;,
+               &quot;type&quot;: &quot;PERSISTENT&quot;,
+               &quot;initializeParams&quot;: {
+                   &quot;sourceImage&quot;: &quot;projects/centos-cloud/global/images/centos-7-v20151104&quot;
+               }
+              }
+          ]
+      }
+  }
+ }&#39;
+</pre></div>
+</div>
+<p>If you omit the information in &#8216;provider-create-hint&#8217;, it will default
+to then &#8216;n1-standard-1&#8217; machine type, the &#8216;us-central1-f&#8217; zone, and a
+single disk with Ubuntu 14.04 as the installed OS.</p>
+</div>
+<div class="section" id="packet-net">
+<h3>Packet.net<a class="headerlink" href="#packet-net" title="Permalink to this headline">¶</a></h3>
+<p>The Packet.net provider lets Rebar manage bare metal nodes provided by
+Packet.  In order to use it, you should:</p>
+<ul class="simple">
+<li>Create an account and an API key with Packet.</li>
+<li>Create a new Project at Packet, and record its ID.</li>
+<li>Create a new Provider using the following Rebar CLI call</li>
+</ul>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first"><a class="reference external" href="mailto:victor&#37;&#52;&#48;m4700">victor<span>&#64;</span>m4700</a>:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 providers create &#8216;{&#8220;auth_details&#8221;: {</p>
+<blockquote>
+<div><blockquote>
+<div>&#8220;project_token&#8221;: &#8220;your-API-key&#8221;,
+&#8220;project_id&#8221;: &#8220;your-project-UUID&#8221;</div></blockquote>
+<p>},
+&#8220;name&#8221;: &#8220;RackN Packet Account&#8221;,
+&#8220;type&#8221;: &#8220;PacketProvider&#8221;</p>
+</div></blockquote>
+<p class="last">}&#8217;</p>
+</dd>
+</dl>
+<p>Once you have created the Provider, you can use it to allocate bare
+metal nodes from Packet</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first"><a class="reference external" href="mailto:victor&#37;&#52;&#48;m4700">victor<span>&#64;</span>m4700</a>:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 nodes create &#8216;{&#8220;name&#8221;: &#8220;packet-1.neode.net&#8221;,</p>
+<blockquote>
+<div><p>&#8220;provider&#8221;: &#8220;RackN Packet Account&#8221;,
+&#8220;hints&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;use-proxy&#8221;: false,
+&#8220;provider-create-hint&#8221;: {</p>
+<blockquote>
+<div>&#8220;facility&#8221;: &#8220;ewr1&#8221;,
+&#8220;plan&#8221;: &#8220;baremetal_1&#8221;,
+&#8220;os&#8221;: &#8220;centos_7&#8221;,
+&#8220;hostname&#8221;: &#8220;packet-1.neode.net&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}&#8217;</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="testing-provider">
+<h3>Testing Provider<a class="headerlink" href="#testing-provider" title="Permalink to this headline">¶</a></h3>
+<p>The testing provider adds debugging instructions to the Amazon EC2 provider so you can simulate activity without actually creating remote notes.</p>
+<ul class="simple">
+<li>Create a new Provider with the following Rebar CLI call</li>
+</ul>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first"><a class="reference external" href="mailto:victor&#37;&#52;&#48;m4700">victor<span>&#64;</span>m4700</a>:~/src/digitalrebar/deploy/compose (master)
+$ rebar -U rebar -P rebar1 providers create </p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>&#8216;{&#8220;name&#8221;: &#8220;test-vl-test&#8221;,</dt>
+<dd><blockquote class="first">
+<div><p>&#8220;type&#8221;: &#8220;AwsProvider&#8221;,
+&#8220;auth_details&#8221;: {</p>
+<blockquote>
+<div><blockquote>
+<div><p>&#8220;aws_access_key_id&#8221;: &#8220;IAM_aws_access_key&#8221;,
+&#8220;aws_secret_access_key&#8221;: &#8220;IAM_secret_key_for_access_key&#8221;,
+&#8220;region&#8221;: &#8220;your-preferred-region&#8221;,
+&#8220;debug&#8221;: {</p>
+<blockquote>
+<div>&#8220;host_ip&#8221;:&#8221;[address of a ssh/pingable node]&#8221;,
+&#8220;boot_delay_time&#8221;:0,
+&#8220;ssh_delay_time&#8221;:0</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</div></blockquote>
+<p class="last">}&#8217;</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="provisioning.html" title="Provising Process"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="node_registration.html" title="Node Registration Process"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Attribute Injection &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Operational Principles" href="README.html" />
+    <link rel="next" title="Digital Rebar Concepts" href="concepts.html" />
+    <link rel="prev" title="Operational Principles" href="README.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="concepts.html" title="Digital Rebar Concepts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Operational Principles"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="previous chapter">Operational Principles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="concepts.html"
+                        title="next chapter">Digital Rebar Concepts</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/principles/attribute_injection.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="attribute-injection">
+<h1>Attribute Injection<a class="headerlink" href="#attribute-injection" title="Permalink to this headline">¶</a></h1>
+<p>Attribute Injection is an essential aspect of the &#8220;FuncOps&#8221; story
+because it helps clean boundaries needed to implement consistent
+scripting behavior between divergent sites.</p>
+<p>It also allows Digital Rebar to abstract and isolate provisioning layers. This
+operational approach means that deployments are composed of layered
+services (see emergent services) instead of locked &#8220;golden&#8221; images. The
+layers can be maintained independently and allow users to compose
+specific configurations <em>a la cart</em>. This approach works if the layers
+have clean functional boundaries (FuncOps) that can be scoped and
+managed atomically.</p>
+<p>To explain how Attribute Injection accomplishes this, we need to explore
+why search became an anti-pattern in Crowbar v1. Originally, being able to
+use server based search functions in operational scripting was a
+critical feature. It allowed individual nodes to act as part of a system
+by searching for global information needed to make local decisions. This
+greatly added Crowbar&#8217;s mission of system level configuration; however, it
+also created significant hidden interdependencies between scripts. As
+Crowbar v1 grew in complexity, searches became more and more difficult to
+maintain because they were difficult to correctly scope, hard to
+centrally manage and prone to timing issues.</p>
+<blockquote>
+<div>Digital Rebar was not unique in dealing with this problem - the Attribute
+Injection pattern has become a preferred alternative to search in
+integrated community cookbooks.</div></blockquote>
+<p>Attribute Injection in Digital Rebar works by establishing specific
+inputs and outputs for all state actions (NodeRole runs). By declaring
+the exact inputs needed and outputs provided, Digital Rebar can better manage
+each annealing operation. This control includes deployment scoping
+boundaries, time sequence of information plus override and substitution
+of inputs based on execution paths.</p>
+<p>This concept is <em>not</em> unique to Digital Rebar. It has become best practice for
+operational scripts. Digital Rebar simply extends to paradigm to the system
+level and orchestration level.</p>
+<p>Attribute Injection enabled operations to be:</p>
+<ul class="simple">
+<li>Atomic - only the information needed for the operation is provided so
+risk of &#8220;bleed over&#8221; between scripts is minimized. This is also a
+functional programming preference.</li>
+<li>Isolated Idempotent - risk of accidentally picking up changed
+information from previous runs is reduced by controlling the inputs.
+That makes it more likely that scripts can be idempotent.</li>
+<li>Cleanly Scoped - information passed into operations can be limited
+based on system deployment boundaries instead of search parameters.
+This allows the orchestration to manage when and how information is
+added into configurations.</li>
+<li>Easy to troubleshoot - since the information is limited and
+controlled, it is easier to recreate runs for troubleshooting. This
+is a substantial value for diagnostics.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="concepts.html" title="Digital Rebar Concepts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Operational Principles"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

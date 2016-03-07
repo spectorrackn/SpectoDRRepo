@@ -1,0 +1,152 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Emergent services &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Operational Principles" href="README.html" />
+    <link rel="next" title="Heterogenous Operating System Support" href="heterogenous-os-support.html" />
+    <link rel="prev" title="Digital Rebar Concepts" href="concepts.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="heterogenous-os-support.html" title="Heterogenous Operating System Support"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="Digital Rebar Concepts"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="concepts.html"
+                        title="previous chapter">Digital Rebar Concepts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="heterogenous-os-support.html"
+                        title="next chapter">Heterogenous Operating System Support</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/principles/emergent_services.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="emergent-services">
+<h1>Emergent services<a class="headerlink" href="#emergent-services" title="Permalink to this headline">¶</a></h1>
+<p>We see data center operations as a duel between conflicting priorities.
+On one hand, the environment is constantly changing and systems must
+adapt quickly to these changes. On the other hand, users of the
+infrastructure expect it to provide stable and consistent services for
+consumption. We’ve described that as “always ready, never finished.”</p>
+<p>Our solution to this duality to expect that the infrastructure Digital Rebar
+builds is decomposed into well-defined service layers that can be
+(re)assembled dynamically. Rather than require any component of the
+system to be in a ready state, Digital Rebar design principles assume that we
+can automate the construction of every level of the infrastructure from
+BIOS to network and application. Consequently, we can hold off
+(re)making decisions at the bottom levels until we’ve figured out that
+we’re doing at the top.</p>
+<p>Effectively, we allow the overall infrastructure services configuration
+to evolve or emerge based on the desired end use. These concepts are
+built on computer science principles that we have appropriated for Ops
+use. Since we also subscribe to Chef&#8217;s “Infrastructure-As-Code”, we
+believe that these terms are fitting in a DevOps environment. In the
+next few pages, we’ll explore the principles behind this approach including
+concepts around simulated annealing, late binding, attribute injection
+and emergent design.</p>
+<p>Emergent (aka iterative or evolutionary) design challenges the
+traditional assumption that all factors must be known before starting</p>
+<ul class="simple">
+<li>Dependency graph – multidimensional relationship</li>
+<li>High degree of reuse via abstraction and isolation of service
+boundaries.</li>
+<li>Increasing complexity of deployments means more dependencies</li>
+<li>Increasing revision rates of dependencies but with higher stability
+of APIs</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="heterogenous-os-support.html" title="Heterogenous Operating System Support"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="Digital Rebar Concepts"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

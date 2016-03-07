@@ -1,0 +1,160 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Interact with Chef &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="KVM Worker Nodes" href="kvm-slaves.html" />
+    <link rel="prev" title="External Services Configuration" href="external-services.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="kvm-slaves.html" title="KVM Worker Nodes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="external-services.html" title="External Services Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="external-services.html"
+                        title="previous chapter">External Services Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="kvm-slaves.html"
+                        title="next chapter">KVM Worker Nodes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/knife-config.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="interact-with-chef">
+<h1>Interact with Chef<a class="headerlink" href="#interact-with-chef" title="Permalink to this headline">¶</a></h1>
+<p>First you must sync local date and time with that on the target system -
+especially if you run in a development environment and did not do so on
+installation (chef protects agains replay attacks and needs a correct
+time setting)</p>
+<p>Get your local time</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>echo \&#39;date -us \&quot;`date -u &quot;+%Y-%m-%d %H:%M&quot;`\&quot;\&#39;
+&#39;date -us &quot;2012-10-10 18:07&quot;&#39;
+</pre></div>
+</div>
+<p>and set it on all nodes (from the rebar admin machine as root)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>knife ssh node:* -- &#39;date -us &quot;2012-10-10 18:07&quot;&#39;
+</pre></div>
+</div>
+<p>Next copy your <code class="docutils literal"><span class="pre">/etc/chef/webui.pem</span></code> file from the admin machine to
+<code class="docutils literal"><span class="pre">.chef/webui.pem</span></code></p>
+<p>Copy the template knife.rb file and set the server url to the correct
+value</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">.</span><span class="n">chef</span><span class="o">/</span><span class="n">knife</span><span class="o">.</span><span class="n">rb</span><span class="o">.</span><span class="n">example</span> <span class="o">.</span><span class="n">chef</span><span class="o">/</span><span class="n">knife</span><span class="o">.</span><span class="n">rb</span>
+</pre></div>
+</div>
+<p>copy the template <code class="docutils literal"><span class="pre">.rvmrc</span></code> in place and trust it (or install the
+corresponding ruby)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cp dot-rvmrc .rvmrc
+rvm rvmrc trust .
+rvm rvmrc load
+</pre></div>
+</div>
+<p>install chef with the Gemfile</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>bundle install
+</pre></div>
+</div>
+<p>finally you can work with knife from your local machine:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ knife status
+6 minutes ago, admin.v1.cr0wbar.de, admin.v1.cr0wbar.de, 10.124.0.10, ubuntu 12.04.
+4 minutes ago, dc0-ff-ee-00-00-02.v1.cr0wbar.de, dc0-ff-ee-00-00-02.v1.cr0wbar.de, 10.124.3.2, ubuntu 12.04.
+4 minutes ago, dc0-ff-ee-00-00-01.v1.cr0wbar.de, dc0-ff-ee-00-00-01.v1.cr0wbar.de, 10.124.3.3, ubuntu 12.04.
+3 minutes ago, dc0-ff-ee-00-00-03.v1.cr0wbar.de, dc0-ff-ee-00-00-03.v1.cr0wbar.de, 10.124.3.1, ubuntu 12.04.
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="kvm-slaves.html" title="KVM Worker Nodes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="external-services.html" title="External Services Configuration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

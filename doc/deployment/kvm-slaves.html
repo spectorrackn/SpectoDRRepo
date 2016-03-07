@@ -1,0 +1,169 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>KVM Worker Nodes &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Node Registration Process" href="node_registration.html" />
+    <link rel="prev" title="Interact with Chef" href="knife-config.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="node_registration.html" title="Node Registration Process"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="knife-config.html" title="Interact with Chef"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">KVM Worker Nodes</a><ul>
+<li><a class="reference internal" href="#using-kvm-slaves-with-kvm-slaves-script">Using kvm-slaves with <em>kvm-slaves</em> script</a><ul>
+<li><a class="reference internal" href="#prereqs">Prereqs</a></li>
+<li><a class="reference internal" href="#start-up">Start Up</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shutdown">Shutdown</a></li>
+<li><a class="reference internal" href="#common-usage">Common Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="knife-config.html"
+                        title="previous chapter">Interact with Chef</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="node_registration.html"
+                        title="next chapter">Node Registration Process</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/kvm-slaves.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="kvm-worker-nodes">
+<h1>KVM Worker Nodes<a class="headerlink" href="#kvm-worker-nodes" title="Permalink to this headline">¶</a></h1>
+<p>Digital Rebar developers are <em>strongly</em> encouraged to always build and test
+deployment code in multi-node situations.</p>
+<div class="section" id="using-kvm-slaves-with-kvm-slaves-script">
+<h2>Using kvm-slaves with <em>kvm-slaves</em> script<a class="headerlink" href="#using-kvm-slaves-with-kvm-slaves-script" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Closing the KVM window will <em>not</em> stop the VM because the scripts
+are designed to restart the VM if it halts.</div></blockquote>
+<div class="section" id="prereqs">
+<h3>Prereqs<a class="headerlink" href="#prereqs" title="Permalink to this headline">¶</a></h3>
+<p>There are some. Run the script and it will tell you!</p>
+<p>For reference, here are the current Ubuntu requirements:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">qemu-kvm</span> <span class="pre">libvirt-bin</span> <span class="pre">ubuntu-vm-builder</span> <span class="pre">bridge-utils</span> <span class="pre">ruby1.9.1-dev</span> <span class="pre">make</span></code></li>
+<li><code class="docutils literal"><span class="pre">gem</span> <span class="pre">install</span> <span class="pre">json</span> <span class="pre">net-http-digest_auth</span></code></li>
+</ul>
+</div>
+<div class="section" id="start-up">
+<h3>Start Up<a class="headerlink" href="#start-up" title="Permalink to this headline">¶</a></h3>
+<p>From the dev system, <code class="docutils literal"><span class="pre">tools/kvm-slave</span></code></p>
+<p>This creates a KVM machine and attaches it to the Docker bridge.</p>
+</div>
+</div>
+<div class="section" id="shutdown">
+<h2>Shutdown<a class="headerlink" href="#shutdown" title="Permalink to this headline">¶</a></h2>
+<p>If you kill the pid of the kvm-slave, it will exit gracefully.</p>
+</div>
+<div class="section" id="common-usage">
+<h2>Common Usage<a class="headerlink" href="#common-usage" title="Permalink to this headline">¶</a></h2>
+<p>Most of our kvm-slave usage looks like:</p>
+<ul class="simple">
+<li>Create 3: <code class="docutils literal"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">in</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3;</span> <span class="pre">do</span> <span class="pre">tools/kvm-slave</span> <span class="pre">&amp;</span> <span class="pre">done</span></code></li>
+<li>Destroy 3: <code class="docutils literal"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">in</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3;</span> <span class="pre">do</span> <span class="pre">kill</span> <span class="pre">%$j</span> <span class="pre">;</span> <span class="pre">done</span></code></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="node_registration.html" title="Node Registration Process"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="knife-config.html" title="Interact with Chef"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

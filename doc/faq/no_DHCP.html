@@ -1,0 +1,133 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar did not start DHCP &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Frequently Asked Questions (FAQ)" href="README.html" />
+    <link rel="next" title="PXE Required?" href="pxe required.html" />
+    <link rel="prev" title="tools/kvm_slave timeout in TFTP" href="kvm_slave_timeout.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pxe required.html" title="PXE Required?"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kvm_slave_timeout.html" title="tools/kvm_slave timeout in TFTP"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Frequently Asked Questions (FAQ)</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Rebar did not start DHCP</a></li>
+<li><a class="reference internal" href="#how-to-use-uefi">How To Use UEFI:</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kvm_slave_timeout.html"
+                        title="previous chapter">tools/kvm_slave timeout in TFTP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pxe required.html"
+                        title="next chapter">PXE Required?</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/faq/no_DHCP.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-did-not-start-dhcp">
+<h1>Digital Rebar did not start DHCP<a class="headerlink" href="#digital-rebar-did-not-start-dhcp" title="Permalink to this headline">¶</a></h1>
+<p>The DHCP/PXE process is optional for Digital Rebar, you must as the system to start the Provisioner to get this functionality.</p>
+<p>NOTE: You must also include at least one ISO for the provisioner to convert into install images.  The discovery images (aka Sledgehammer) is downloaded automatically by the provisioner.</p>
+</div>
+<div class="section" id="how-to-use-uefi">
+<h1>How To Use UEFI:<a class="headerlink" href="#how-to-use-uefi" title="Permalink to this headline">¶</a></h1>
+<p>To start DHCP and PXE, you need to include the Provisioner using the <code class="docutils literal"><span class="pre">--con-provisioner</span></code> flag.  If you are using the <code class="docutils literal"><span class="pre">tools/docker-admin</span></code> dev process then that flag is set automatically.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pxe required.html" title="PXE Required?"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kvm_slave_timeout.html" title="tools/kvm_slave timeout in TFTP"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Frequently Asked Questions (FAQ)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

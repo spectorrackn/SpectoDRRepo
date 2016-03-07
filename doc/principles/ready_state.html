@@ -1,0 +1,180 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar delivers “Ready State” infrastructure &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Operational Principles" href="README.html" />
+    <link rel="next" title="Simulated Annealing" href="simulated_annealing.html" />
+    <link rel="prev" title="Ops Late Binding" href="late_binding.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="simulated_annealing.html" title="Simulated Annealing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="late_binding.html" title="Ops Late Binding"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="late_binding.html"
+                        title="previous chapter">Ops Late Binding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="simulated_annealing.html"
+                        title="next chapter">Simulated Annealing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/principles/ready_state.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-delivers-ready-state-infrastructure">
+<h1>Digital Rebar delivers &#8220;Ready State&#8221; infrastructure<a class="headerlink" href="#digital-rebar-delivers-ready-state-infrastructure" title="Permalink to this headline">¶</a></h1>
+<p>The following points focus on the unique aspects of the Digital Rebar Operations
+Model. Unlike other Operating System Provisioning Tools (like Razor,
+Foreman, Cobbler), Digital Rebar takes a systems perspective to physical
+infrastracture management. Specifically, Rebar acknowledges that
+successful deployment means connecting all the various operational
+components together including NTP, DNS and (most critically) networking
+from both the server and switch sides. We also believe there are no
+&#8220;application islands&#8221; in production data centers: operators manage Ceph
+and OpenStack as independent but connected applications. While a
+coordinated system perspective is essential, we seek to complement and leverage
+existing operational tools like Chef and Puppet.</p>
+<p>This coordinated system perspective requires that actions take place in
+controlled sequences both within and between data center components;
+consequently, Rebar&#8217;s heart is an orchestration platform designed for
+physical hardware. Infrastructure has distinct challenges and needs that
+are unique from other cloud focused orchestration and configuration
+managment technologies. If we can solve these problems, then the general cloud focused
+tools become even more effective in delivering their value to the operator.</p>
+<p>For this reason, we see Digital Rebar as complementary to application
+provisioning tools like Fuel, Puppet, Chef, Juju, Salt or Ansible which
+focus on application configuration post ready state. In these tools, the
+community is working to capture the specific operational characteristics
+of the applications. Rebar can be used to to simply provide ready state
+or taken further to drive these tools at the system level. For example,
+the OpenStack Chef Cookbooks lack the system orchestration that Rebar
+provides but Juju includes. With that said, Juju lacks the ready-state capability and system-level awareness Digital Rebar posesses.</p>
+<p>These are <em>not</em> OpenStack focused items. They are universal operations
+concerns for any scale out application including OpenStack, Ceph, Docker
+Hadoop, Cloud Foundry, Cloud Stack or others.</p>
+<p>Key Points: * configure RAID &amp; BIOS systems (ideally, &#8220;late bound&#8221; so
+target configuration is determined with application bring-up) * in band
+configuration using discovery images (as needed) * out of band RAID &amp;
+BIOS - does not require systems to boot into discovery image for iDRAC
+or iLO * UEFI boot capable to handle &gt; 2 TB drives * IPv6 native *
+able to handle IPv6 communication * setup IPv6 DNS records when nodes
+are managed * easier to change/reconfigure IPv4 * Repeatable
+server-side networking config * able to use topology to setup bridges
+and bonds * able to correctly enumerate NICs over different hardware
+types and configurations * Operating System agnostic * CMDB agnostic
+(Chef &amp; Chef Solo, Bash Scripts via SSH, Puppet, others possible) *
+DevOps configuration improves flexibly and reduces maintenance over
+&#8220;golden&#8221; image based * Rebar can deploy your golden images as you wish,
+and even they can notify Rebar to change hardware configs, but they must
+be part of the overall graph of attributes so that other workloads have
+a say in hardware config.</p>
+<p>Rebar’s key function ends up being orchestration, so it can plug in the
+app provisioning tools to do their specific work. We tried to make Rebar
+work as either &#8220;disolvable provisioning&#8221; or long term support.
+Since Rebar uses SSH means there’s really no penalty for leaving Rebar
+around and ready if you have to maintain the system; however, things
+won’t crash if you stop using it. That was not true in v1 because we
+relied on Chef Server to do everything.</p>
+<p>Rebar is focused more on ready state because we’ve heard that is the
+more universal problem. This time around, we really wanted to be able to use
+community cookbooks – it was not productive to have Rebar only versions.
+We do much better sharing operations knowledge in the
+OpenStack/Ceph/Hadoop/etc communities and collaborating there. I think
+Rebar brings a lot of operational value into those cookbooks but we
+don’t want to force adoption in order to collaborate.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="simulated_annealing.html" title="Simulated Annealing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="late_binding.html" title="Ops Late Binding"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Operational Principles</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

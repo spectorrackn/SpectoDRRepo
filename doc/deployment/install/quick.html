@@ -1,0 +1,224 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar Quick Start &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Deploy Guide" href="../README.html" />
+    <link rel="next" title="Digital Rebar Install" href="../install.html" />
+    <link rel="prev" title="Deploy Guide" href="../README.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../install.html" title="Digital Rebar Install"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../README.html" title="Deploy Guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Rebar Quick Start</a><ul>
+<li><a class="reference internal" href="#base-installation-10-mins">Base Installation (10 mins)</a></li>
+<li><a class="reference internal" href="#let-s-add-nodes">Let&#8217;s Add Nodes!</a></li>
+<li><a class="reference internal" href="#build-a-docker-swarm-cluster">Build a Docker Swarm Cluster</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../README.html"
+                        title="previous chapter">Deploy Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../install.html"
+                        title="next chapter">Digital Rebar Install</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/deployment/install/quick.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-quick-start">
+<h1>Digital Rebar Quick Start<a class="headerlink" href="#digital-rebar-quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This TL;DR only! See <a class="reference external" href="../install.rst">Full Install</a> page for more options.</p>
+<p>For this quick start, we assume you&#8217;ll ssh to the install server.  The goal is a temporary playground, not a long term install.  It is possible to install different operating systems and work by remote or fully automated, but we are keeping it very simple in this guide.</p>
+<p>Once you have the server, it should take about 20 minutes in AWS or Packet.net to complete all steps.</p>
+<div class="section" id="base-installation-10-mins">
+<h2>Base Installation (10 mins)<a class="headerlink" href="#base-installation-10-mins" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">AWS Path:</p>
+<ol class="arabic simple">
+<li>Create AWS m4.large (or larger) Ubuntu instance with your SSH key.</li>
+<li>The &#8220;default&#8221; Security Group needs Port 22 (ssh), 443 &amp; 3000 (rebar), 2375 &amp; 2475 (docker), 4646 (chef), 8300 &amp; 8301 (consul) and ICMP!  This our recommended base, depending on your application, you&#8217;ll need additional ports open or may be able to omit Docker, Chef and Consul.</li>
+<li>Connect to the server: <code class="docutils literal"><span class="pre">ssh</span> <span class="pre">ubuntu&#64;[ip</span> <span class="pre">address]</span></code></li>
+</ol>
+</li>
+<li><p class="first">Packet or B-Y-O-Server Path:</p>
+<ol class="arabic simple">
+<li>Create Packet Type 1 Ubuntu Server with your SSH key</li>
+<li>Make sure your policy gives access to ports 22, 443, 3000, 2375, 2475, 4646, 8300, 8301 and ICMP.</li>
+<li>Connect to the server: <code class="docutils literal"><span class="pre">ssh</span> <span class="pre">root&#64;[ip</span> <span class="pre">address]</span></code></li>
+</ol>
+</li>
+<li><p class="first">Save your system EXTERNAL IP address: <code class="docutils literal"><span class="pre">export</span> <span class="pre">IPA=[CIDR]</span></code> (<a class="reference external" href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> is the IP address with the /## subnet included)</p>
+</li>
+<li><p class="first">Install Prereqs: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">git</span> <span class="pre">-y</span></code></p>
+</li>
+<li><p class="first">Get the deployment code and test for pre-reqs</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span>cd ~
+mkdir digitalrebar
+git clone https://github.com/rackn/digitalrebar-deploy digitalrebar/deploy
+ln -s ~/digitalrebar/ digitalrebar/deploy/compose/digitalrebar
+cd digitalrebar/deploy
+echo &quot;Checking prerequisites&quot;
+./run-in-system.sh --help
+echo &quot;let&#39;s setup Digital Rebar!&quot;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Install to local system: <code class="docutils literal"><span class="pre">./run-in-system.sh</span> <span class="pre">--deploy-admin=local</span> <span class="pre">--access=HOST</span> <span class="pre">--wl-docker-swarm</span> <span class="pre">--admin-ip=$IPA</span></code></p>
+</li>
+</ol>
+<p>Add <code class="docutils literal"><span class="pre">--wl-kubernetes</span></code> or  other <code class="docutils literal"><span class="pre">--wl-[workload]</span></code> (see list from &#8211;help) if you&#8217;d like to play with other choices later.
+This script ends with the Digital Rebar admin node fully operational but without any nodes.  You need to login to the Digital Rebar UI (default user/pass is <code class="docutils literal"><span class="pre">rebar/rebar1</span></code>) for the next step.</p>
+<p>Troubleshooting Tip:  You can see exactly what&#8217;s going on using &#8220;Monitor...Annealer.&#8221;  If there is an error, that view provides a <code class="docutils literal"><span class="pre">Retry</span></code> button that often resolves simple timing issues.</p>
+</div>
+<div class="section" id="let-s-add-nodes">
+<h2>Let&#8217;s Add Nodes!<a class="headerlink" href="#let-s-add-nodes" title="Permalink to this headline">¶</a></h2>
+<p>To keep it simple, we&#8217;re using cloud servers, not local vms or physical servers.  These are supported in a more complex setup.</p>
+<ol class="arabic">
+<li><p class="first">From your client, you can log on to the system using <code class="docutils literal"><span class="pre">https://[external</span> <span class="pre">ip</span> <span class="pre">address]:3000</span></code>.  Reminders:</p>
+<ol class="arabic simple">
+<li>Use External IP (same as the SSH address) with port 3000</li>
+<li>It&#8217;s HTTPS, so you must accept the self-signed SSL certificate.</li>
+</ol>
+</li>
+<li><p class="first">Add a AWS Provider from the &#8220;Nodes...Providers&#8221; menu:</p>
+<ol class="arabic simple">
+<li>Add a provider using your AWS Credentials.  You should choose the same region as your admin is using.</li>
+</ol>
+</li>
+<li><p class="first">Add 2+ nodes from the &#8220;Nodes&#8221; menu:</p>
+<ol class="arabic simple">
+<li>Add nodes from form at the top of the Nodes page.  The API has additional options.</li>
+<li>Recommended: For Swarm in AWS, the &#8220;default_os&#8221; should be sufficient.  It loads Ubuntu 14.014 and is <a class="reference external" href="https://github.com/rackn/digitalrebar-deploy/blob/master/containers/cloudwrap/cloudwrap/api.rb#L110">mapped in many AWS regions.</a></li>
+</ol>
+<p>#  In Google, you can use the single specific Centos7 with <code class="docutils literal"><span class="pre">projects/centos-cloud/global/images/centos-7-v20151104</span></code>.
+#. If you are trying other clouds or images, you need can override default_os based on <a class="reference external" href="https://github.com/rackn/digitalrebar-deploy/blob/master/workloads/os.map">provider o/s map</a>  For example: Centos 7 AMI UUID for us-west-2 is ami-d440a6e7.
+#. Detailed <a class="reference external" href="../provider.rst">Instructions here</a>.</p>
+</li>
+<li><p class="first">Allow the system to complete annealing (progress in top right corner)</p>
+</li>
+</ol>
+<p>Remember to delete your nodes from the Nodes page before you take the system down!  There is no automatic cleanup.</p>
+</div>
+<div class="section" id="build-a-docker-swarm-cluster">
+<h2>Build a Docker Swarm Cluster<a class="headerlink" href="#build-a-docker-swarm-cluster" title="Permalink to this headline">¶</a></h2>
+<p>We are using a very basic Docker Swarm as a reference app for this quick install.</p>
+<ol class="arabic simple">
+<li>Select 2+ nodes for Docker Swarm using the &#8220;Deployments...Docker Swarm Wizard&#8221;:<ol class="arabic">
+<li>Select one node as <code class="docutils literal"><span class="pre">docker-swarm-manager</span></code> using the checkboxes. This node is your manager for step 4 below.</li>
+<li>Select different node(s) as <code class="docutils literal"><span class="pre">docker-swarm-member</span></code> using the checkboxes</li>
+<li>&#8220;Create&#8221; the proposal for the cluster from the Wizard</li>
+</ol>
+</li>
+<li>&#8220;Commit&#8221; the porposal created by the Docker Swarm Wizard (Deployments...Docker Swarm page)</li>
+<li>Watch Digital Rebar build your cluster!</li>
+<li>Test using <code class="docutils literal"><span class="pre">docker</span> <span class="pre">-H</span> <span class="pre">tcp://[ip</span> <span class="pre">of</span> <span class="pre">manager]:2475</span> <span class="pre">info</span></code> when it&#8217;s done:<ol class="arabic">
+<li>Get the IP of the manager from Nodes...Nodes and looking for the address of the node you assigned as the docker-swarm-manager in step 1i.</li>
+<li>Advanced users may try <code class="docutils literal"><span class="pre">docker</span> <span class="pre">-H</span> <span class="pre">tcp://[ip</span> <span class="pre">of</span> <span class="pre">manager]:2475</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">ubuntu:latest</span> <span class="pre">bash</span></code> to start a container</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../install.html" title="Digital Rebar Install"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../README.html" title="Deploy Guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

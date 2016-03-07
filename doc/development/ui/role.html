@@ -1,0 +1,395 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Barclamp Roles - User Interface Development and Testing &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="User Interface Development" href="README.html" />
+    <link rel="next" title="Tips &amp; Tricks (UI Developer)" href="tips_and_tricks.html" />
+    <link rel="prev" title="Adding Menu Items" href="navigation.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tips_and_tricks.html" title="Tips &amp; Tricks (UI Developer)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="navigation.html" title="Adding Menu Items"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Barclamp Roles - User Interface Development and Testing</a><ul>
+<li><a class="reference internal" href="#development">Development</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="navigation.html"
+                        title="previous chapter">Adding Menu Items</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tips_and_tricks.html"
+                        title="next chapter">Tips &amp; Tricks (UI Developer)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/ui/role.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="barclamp-roles-user-interface-development-and-testing">
+<h1>Barclamp Roles - User Interface Development and Testing<a class="headerlink" href="#barclamp-roles-user-interface-development-and-testing" title="Permalink to this headline">¶</a></h1>
+<p>When a deployment role is in proposed state the user should be able to
+modify the role attributes defined for that role.</p>
+<p>In all other states the attributes should be displayed as read-only.
+Please use the Messaging Barclamp as a reference and this guide for
+developing and testing other custom role user interfaces.</p>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>The steps for building the UI (view) to edit and display node role
+attributes are as follows</p>
+<ol class="arabic">
+<li><p class="first">Define the attributes for the Role in the Barclamp&#8217;s rebar.yml if
+they are not already present. These definitions will create Attrib
+objects for the Role in Rebar.</p>
+<p>Sample attributes: ```yaml roles:</p>
+</li>
+</ol>
+<ul class="simple">
+<li>name: messaging-server jig: chef-solo requires:<ul>
+<li>openstack-base attribs: # name used as id field in haml input
+tags. Needs to follow this convention:
+[barclamp]-[role]*rest*of_id<ul>
+<li>name: &#8216;messaging-openstack_endpoints_mq_host&#8217; # Plain
+English description of attrib description: &#8216;Messaging Host&#8217; #
+map to value in hash:
+hsh[&#8216;openstack&#8217;][&#8216;endpoints&#8217;][&#8216;mq&#8217;][&#8216;host&#8217;] for example map:
+&#8216;openstack/endpoints/mq/host&#8217;</li>
+<li>name: &#8216;messaging-openstack_endpoints_mq_port&#8217; description:
+&#8216;Messaging Port&#8217; map: &#8216;openstack/endpoints/mq/port&#8217;</li>
+<li>name: &#8216;messaging-rebar_messaging_mq_user&#8217; description:
+&#8216;Messaging User&#8217; map: &#8216;rebar_messaging/mq/user&#8217;</li>
+<li>name: &#8216;messaging-rebar_messaging_mq_password&#8217; description:
+&#8216;Messaging Password&#8217; map: &#8216;rebar_messaging/mq/password&#8217; ```</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol class="arabic" start="2">
+<li><p class="first">Create the view for the role</p>
+<p>Rebar expects the view file location and name to follow the
+convention:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>[barclamp_name]/rebar_engine/barclamp_[barclamp_name]/app/views/barclamp_[barclamp_name]/node_roles/_[@role.name].html.haml
+</pre></div>
+</div>
+<p>For the messaging server role the following Rails partial was
+created:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">messaging</span><span class="o">/</span><span class="n">rebar_engine</span><span class="o">/</span><span class="n">barclamp_messaging</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">barclamp_messaging</span><span class="o">/</span><span class="n">node_roles</span><span class="o">/</span><span class="n">_messaging</span><span class="o">-</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">haml</span>
+</pre></div>
+</div>
+<p>The partial is made up of four main components, the form, the
+validation rules, the validation messages and the read-only view. The
+template for the overall partial should follow this pattern:</p>
+</li>
+</ol>
+<p>```haml - data_nil_empty = (data.nil? || data=={}) - if
+&#64;node_role.proposed? # The node role can be edited in this state, show
+the form %dl.attribs %dt= t(&#8216;.[label_key]&#8217;) %dd= text_field_tag
+&#8216;data_[&#64;role.name]<em>[map_to_value]&#8217;, (data</em>nil_empty ||
+data[&#8220;map&#8221;][&#8220;to&#8221;][&#8220;value&#8221;].nil?) ? template[&#8220;map&#8221;][&#8220;to&#8221;][&#8220;value&#8221;] :
+data[&#8220;map&#8221;][&#8220;to&#8221;][&#8220;value&#8221;] , :size =&gt; 30 ... = hidden_field_tag
+:dataprefix, &#8220;data_&#8221;</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>:javascript
+  var rules = new Array();
+  // cannot use regular json syntax because you cannot have hyphen in key names and attribs have hyphen, TODO should re-factor attribs to use json friendly key names
+  rules[&quot;data_[@role.name]_[map_to_value]&quot;] = new Object({
+    required: true,
+    minlength: 8
+    //...
+  });
+  //...
+  var messages = new Array();
+  messages[&quot;data_[@role.name]_[map_to_value]&quot;] = new Object({
+    required: &quot;#{t(&#39;.[field_label_required]&#39;, size: 8)}&quot;
+    //...
+  });
+  //..
+</pre></div>
+</div>
+<ul class="simple">
+<li>else # Not in proposed state, show read-only page. %dl.attribs %dt=
+t(&#8216;.[label_key]&#8217;) %dd= (data_nil_empty) ?
+template[&#8220;map&#8221;][&#8220;to&#8221;][&#8220;value&#8221;] : data[&#8220;map&#8221;][&#8220;to&#8221;][&#8220;value&#8221;] ...
+```</li>
+<li><em>IMPORTANT</em>: The ids used in the form fields <em>MUST</em> match the ids
+used to build the rules and messages javascript arrays.</li>
+</ul>
+<ol class="arabic" start="3">
+<li><p class="first">Add localization for all labels and validation messages. This follows
+the conventions mentioned in the <a class="reference external" href="localization.md">localization</a>
+documentation and the general localization pattern for the view above
+is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>en:
+  barclamp_[barclamp_name]:
+    node_roles:
+      [role_name]:
+        label_key: Label Value
+        message_key: Message with parameter: %{parameter}
+</pre></div>
+</div>
+</li>
+<li><p class="first">Override Role hooks if needed</p>
+<p>If any special actions need to take place prior to sending the data
+down to the node after the Deployment is committed you can override
+one of the hooks declared in
+<a class="reference external" href="https://github.com/rebar/barclamp-rebar/blob/master/rebar_framework/app/models/role.rb">Role</a>.</p>
+<p>For example in the messaging barclamp an encrypted databag needs to
+be created on the admin node populated with the user and password
+from the form. The data bag is then copied downstream to the node
+prior to a chef run.</p>
+<p>Create a class that extends Role and use the following name/location
+convention:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>class Barclamp[Role::Name} &lt; BarclampChef::Role
+
+[barclamp_name]/rebar_engine/barclamp_[barclamp_name]/app/models/barclamp_[barclamp_name]/[role_name].rb
+</pre></div>
+</div>
+<p>For example, in the messaging barclamp the class used for the server
+role hook override is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>class BarclampMessaging::Server &lt; BarclampChef::Role
+
+messaging/rebar_engine/barclamp_messaging/app/models/barclamp_messaging/server.rb
+</pre></div>
+</div>
+<p>The hook override used in the encrypted data bag use case is the
+<em>on_todo</em> hook which is called when the node role is moved into the
+to_do state once all, if any, blocking parent roles make it to
+active state, but before the data is pushed down to the target node,
+so this hook is ideal for this use case. Sample code from Messaging
+Barclamp below:</p>
+<div class="code ruby highlight-python"><div class="highlight"><pre><span></span>def on_todo(node_role, *args)
+   nrd= node_role.data
+   if(!nrd.nil? &amp;&amp; nrd != {} &amp;&amp; !nrd[&quot;rebar_messaging&quot;][&quot;mq&quot;][&quot;user&quot;].nil? \
+   &amp;&amp; !nrd[&quot;rebar_messaging&quot;][&quot;mq&quot;][&quot;password&quot;].nil?)
+  messaging_user_id = nrd[&quot;rebar_messaging&quot;][&quot;mq&quot;][&quot;user&quot;]
+  messaging_password = nrd[&quot;rebar_messaging&quot;][&quot;mq&quot;][&quot;password&quot;]
+  store_credential( &quot;messaging&quot;, &quot;user&quot;, messaging_user_id, messaging_password)
+end
+  end
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>A typical front-to-back testing scenario is outlined below, using the
+Messaging Barclamp as an example:</p>
+<ol class="arabic">
+<li><p class="first">Start the Admin node, log in and create new Deployment.</p>
+</li>
+<li><p class="first">Start a new test node, either a VM or actual hardware.</p>
+</li>
+<li><p class="first">Validate the test node has PXE booted and is the discovered state in
+the UI</p>
+</li>
+<li><p class="first">Create a new Deployment and add the single role you are trying to
+test, messaging-server for example.</p>
+</li>
+<li><p class="first">Add the newly discovered node to the Deployment</p>
+</li>
+<li><p class="first">At the intersection of the role and node click the green + icon to
+expand all the parent roles.</p>
+</li>
+<li><p class="first">At this point the very last role, from left-to-right, should be the
+role you are testing with a blue diamond icon at the intersection of
+the node and role. The blue diamond indicates the node role is in
+the Proposed state. Click this icon, this will bring you to the Node
+Role view that contains the functionality you are testing.</p>
+</li>
+<li><p class="first">Before proceeding copy the ID of the node role you are editing to be
+used later on. This can be found by looking at the URL of the page.
+For instance the following
+<a class="reference external" href="http://192.168.124.10:3000/node_roles/84">http://192.168.124.10:3000/node_roles/84</a>, shows that the node role
+is 84</p>
+</li>
+<li><p class="first">Validate the form fields and labels are correct that the form
+validation is working properly. Validation error messages should be
+displayed to the right of the field in question. In order to
+validate the rules the tester should know what each field&#8217;s validation rules are supposed to be.</p>
+</li>
+<li><p class="first">Test required fields by clearing them all and attempt to save the
+node role. You should see required messages for every field in the
+messaging server role for example as every field is required</p>
+</li>
+<li><p class="first">Validate and field length rules are working correctly, there are
+on-key-up event handlers on each field and when the length doesn&#8217;t
+meet the defined max/min length, you should be notified.</p>
+</li>
+<li><p class="first">Validate special case fields like password and email. In messaging
+there is a custom validator defined that will not allow special
+characters in the password. If you enter % you should see a
+validation error message.</p>
+</li>
+<li><p class="first">Enter all required information in the correct format and save the
+node role. You should see a notification in the standard global
+notification section of the page that the node role has been saved
+successfully.</p>
+</li>
+<li><p class="first">Navigate through the deployments menu to get back to the deployment
+node role list page again. Click the blue icon for the role you are
+testing and validate the information you previously changed. This action will
+repopulate the form.</p>
+</li>
+<li><p class="first">Make additional changes and repeat previous step to validate the
+additional update was successful. The reason for this is the first
+time you edited the node role you were overwriting the defaults,
+creating a new object. This second pass is an update of that object.</p>
+</li>
+<li><p class="first">Testing of the rendered form is done at this point. It may be
+worthwhile to validate model data itself is correct prior to
+committing the deployment. This can be easily done through the Rails
+console:</p>
+</li>
+<li><p class="first">SSH into the admin node navigate to the rebar_framework director
+<code class="docutils literal"><span class="pre">:~$</span> <span class="pre">cd</span> <span class="pre">/opt/dell/rebar_framework</span></code></p>
+</li>
+<li><p class="first">Start the rails console
+<code class="docutils literal"><span class="pre">:~$</span> <span class="pre">RAILS_ENV=development</span> <span class="pre">bundle</span> <span class="pre">exec</span> <span class="pre">rails</span> <span class="pre">c</span></code></p>
+</li>
+<li><p class="first">Use the Rails console to retrieve the node role object
+<code class="docutils literal"><span class="pre">irb(main):001:0&gt;</span> <span class="pre">nr</span> <span class="pre">=</span> <span class="pre">NodeRole.find(84)</span></code></p>
+</li>
+<li><p class="first">Verify the model matches the changes made in UI
+<code class="docutils literal"><span class="pre">irb(main):001:0&gt;</span> <span class="pre">y</span> <span class="pre">nr.data</span> <span class="pre">#</span> <span class="pre">This</span> <span class="pre">prints</span> <span class="pre">out</span> <span class="pre">a</span> <span class="pre">yaml</span> <span class="pre">version</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">data</span> <span class="pre">that</span> <span class="pre">was</span> <span class="pre">modified</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">UI</span></code>
+It should look something like:</p>
+<div class="code yaml highlight-python"><div class="highlight"><pre><span></span>openstack:
+  endpoints:
+    mq:
+      port: 5532
+      host: 127.0.0.1
+  rebar_messaging:
+    mq:
+      user: the_user
+      password: the_password
+</pre></div>
+</div>
+</li>
+<li><p class="first">If the information looks correct in the model commit of the Deployment
+UI. While the parent node is executing, such as
+installing the operating system etc, you can take a look at the
+read-only node role view by clicking the grey circle icon
+(indicating blocked state) at the intersection of the node and role.
+This will take you to the read-only node role view. Validate the
+fields and data correct.</p>
+</li>
+<li><p class="first">When the Deployment is finished and active, the last step is to
+verify the settings in the UI actually made it to the target
+node and configured the service correctly. The validation steps will
+be different for each role. For the Messaging Server role the
+following should be verified:</p>
+</li>
+<li><p class="first">SSH into the target node and verify that the service is running
+<code class="docutils literal"><span class="pre">:~$</span> <span class="pre">sudo</span> <span class="pre">rabbitmqctl</span> <span class="pre">status</span></code></p>
+</li>
+<li><p class="first">Verify the settings are correct in the RabbitMQ config and
+environment files
+<code class="docutils literal"><span class="pre">:~$</span> <span class="pre">sudo</span> <span class="pre">less</span> <span class="pre">/etc/rabbitmq/rabbitmq.config</span>&nbsp;&nbsp; <span class="pre">:~$</span> <span class="pre">sudo</span> <span class="pre">less</span> <span class="pre">/etc/rabbitmq/rabbitmq-env.conf</span></code></p>
+</li>
+<li><p class="first">This completes testing and verification of the entire life-cyle,
+from the UI to the actual deployed service.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tips_and_tricks.html" title="Tips &amp; Tricks (UI Developer)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="navigation.html" title="Adding Menu Items"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >User Interface Development</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

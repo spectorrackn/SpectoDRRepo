@@ -1,0 +1,161 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Node Registration Process &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Provider Usage" href="provider.html" />
+    <link rel="prev" title="KVM Worker Nodes" href="kvm-slaves.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="provider.html" title="Provider Usage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kvm-slaves.html" title="KVM Worker Nodes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kvm-slaves.html"
+                        title="previous chapter">KVM Worker Nodes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="provider.html"
+                        title="next chapter">Provider Usage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/node_registration.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="node-registration-process">
+<h1>Node Registration Process<a class="headerlink" href="#node-registration-process" title="Permalink to this headline">¶</a></h1>
+<p>Digital Rebar uses its API to creates nodes and bind their initial NodeRoles
+(generally No-Op roles).</p>
+<p>Use the following steps to register a new node in the system and add
+under Digital Rebar management. These steps are automatically used by the PXE
+discovery image (Sledgehammer) when Nodes are detected during their
+initial boot.</p>
+<ol class="arabic">
+<li><p class="first">POST to <code class="docutils literal"><span class="pre">/api/v2/nodes</span></code> to create a basic Node object. This will
+not have any roles bound to it nor will it have any addresses from
+the admin network assigned to it. The node will neither be alive nor
+available.</p>
+</li>
+<li><p class="first">in the CLI, use <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">create</span> <span class="pre">...</span></code></p>
+</li>
+<li><p class="first">(Optional) PUT any node-specific hints that may be needed for the
+bootstrap process, including node MAC addresses or your suggested IP
+address.</p>
+</li>
+<li><p class="first">POST to <code class="docutils literal"><span class="pre">/api/v2/node_roles</span></code> to bind default roles to the node.
+Binding rebar-admin-node will result in the node having all the roles
+needed for it to act as an admin node and a rebar-managed-node will
+bind all the roles needed for the Sledgehammer discovery process to
+work.</p>
+</li>
+<li><p class="first">in the CLI, use <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">[node]</span> <span class="pre">bind</span> <span class="pre">[role]</span></code></p>
+</li>
+<li><p class="first">(Optional) PUT any node-specific attrib updates to the node.</p>
+</li>
+<li><p class="first">PUT to <code class="docutils literal"><span class="pre">/api/v2/nodes/[node-key]/commit</span></code> to move all the node&#8217;s
+NodeRoles from PROPOSED to TODO, and mark the node as available (but
+still not alive).</p>
+</li>
+<li><p class="first">PUT to <code class="docutils literal"><span class="pre">/api/v2/nodes/[node-key]/alive</span></code> to make the node as alive
+so processing can start.</p>
+<blockquote>
+<div><p>An example of this process is implemented in the <code class="docutils literal"><span class="pre">production.sh</span></code>
+script in the root of the Digital Rebar repo.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="provider.html" title="Provider Usage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kvm-slaves.html" title="KVM Worker Nodes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

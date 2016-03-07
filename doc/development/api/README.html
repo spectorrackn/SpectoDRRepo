@@ -1,0 +1,605 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar API &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Development Guide" href="../README.html" />
+    <link rel="next" title="Attribute (aka Attrib) APIs" href="attrib.html" />
+    <link rel="prev" title="The smoketest framework lives on the admin node, and consists of:" href="../smoketesting.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="attrib.html" title="Attribute (aka Attrib) APIs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../smoketesting.html" title="The smoketest framework lives on the admin node, and consists of:"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Rebar API</a><ul>
+<li><a class="reference internal" href="#using-the-api">Using the API</a></li>
+<li><a class="reference internal" href="#api-index">API Index</a></li>
+<li><a class="reference internal" href="#digital-rebar-api-pattern">Digital Rebar API Pattern</a><ul>
+<li><a class="reference internal" href="#expectations">Expectations:</a></li>
+<li><a class="reference internal" href="#digest-authentication">Digest Authentication</a></li>
+<li><a class="reference internal" href="#common-api-url-patterns">Common API URL Patterns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#expected-fields">Expected Fields</a></li>
+<li><a class="reference internal" href="#api-headers-response-patterns">API Headers &amp; Response Patterns</a></li>
+<li><a class="reference internal" href="#example-documentation">Example Documentation</a><ul>
+<li><a class="reference internal" href="#api-actions">API Actions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#json-output-example">JSON Output Example:</a></li>
+<li><a class="reference internal" href="#some-workflow-examples-using-the-rebar-cli">Some workflow examples (using the Rebar CLI)</a><ul>
+<li><a class="reference internal" href="#creating-a-node-for-a-system-that-already-has-an-os">Creating a Node for a system that already has an OS:</a></li>
+<li><a class="reference internal" href="#installing-an-operating-system-on-a-node">Installing an operating system on a node</a><ul>
+<li><a class="reference internal" href="#get-the-names-of-the-nodes-you-want-to-install">Get the names of the nodes you want to install:</a></li>
+<li><a class="reference internal" href="#create-a-deployment-to-deploy-the-nodes-into">Create a deployment to deploy the nodes into:</a></li>
+<li><a class="reference internal" href="#update-the-target-node-with-the-new-deployment-that-you-just-created">Update the target node with the new deployment that you just created:</a></li>
+<li><a class="reference internal" href="#create-a-node-role-to-bind-the-role-to-the-node">Create a node-role to bind the role to the node:</a></li>
+<li><a class="reference internal" href="#optional-change-the-operating-system-to-deploy-onto-the-node">(Optional) Change the operating system to deploy onto the node:</a></li>
+<li><a class="reference internal" href="#commit-the-deployment">Commit the deployment:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../smoketesting.html"
+                        title="previous chapter">The smoketest framework lives on the admin node, and consists of:</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="attrib.html"
+                        title="next chapter">Attribute (aka Attrib) APIs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/api/README.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-api">
+<h1>Digital Rebar API<a class="headerlink" href="#digital-rebar-api" title="Permalink to this headline">¶</a></h1>
+<p>This document is the reference guide for the Digital Rebar API.
+<a class="reference external" href="./">Additional information is provided in the API</a> directory.</p>
+<div class="section" id="using-the-api">
+<h2>Using the API<a class="headerlink" href="#using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>The Digital Rebar API is RESTful and accepts/returns JSON. XML output is
+not supported.</p>
+<p>The Digital Rebar API is versioned. API urls include the Digital Rebar
+version of the API (e.g.: 1.0 or v2). Please use the most recent version
+available!</p>
+<blockquote>
+<div>Legacy Note: routes with 1.0 are deprecated!</div></blockquote>
+</div>
+<div class="section" id="api-index">
+<h2>API Index<a class="headerlink" href="#api-index" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="attrib.html">Attribute (aka Attrib) APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="barclamp.html">Barclamp APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_role.html">Deployment-Role API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dns_name_filter.html">DNS Name Filter APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Group APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">Interface (NICs) API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jig.html">Jig (aka CMDB interface) APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network.html">Network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_role.html">Node Role APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_role.html#node-error">Node_Error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider.html">Provider APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="range.html">Range API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="role.html">Role APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="role.html#structure-of-the-template-json-from-an-example">Structure of the template JSON (from an example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="router.html">Router API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Status APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User CRUD: List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#user-crud-show">User CRUD: Show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#user-crud-create">User CRUD: Create</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#user-crud-update">User CRUD: Update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#reset-user-password">Reset User Password</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#lock-user">Lock User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#unlock-user">Unlock User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#make-user-admin">Make User Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#remove-user-admin">Remove User Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html#user-crud-delete">User CRUD: Delete</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="digital-rebar-api-pattern">
+<h2>Digital Rebar API Pattern<a class="headerlink" href="#digital-rebar-api-pattern" title="Permalink to this headline">¶</a></h2>
+<p>The Digital Rebar API follows the following behavior patterns.</p>
+<div class="section" id="expectations">
+<h3>Expectations:<a class="headerlink" href="#expectations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Core objects can be referenced equally by name or ID. This means that
+objects with natural key names are NOT allowed to start with a number
+(similar to FQDN restrictions)</li>
+<li>JSON is the API serialization model</li>
+</ul>
+</div>
+<div class="section" id="digest-authentication">
+<h3>Digest Authentication<a class="headerlink" href="#digest-authentication" title="Permalink to this headline">¶</a></h3>
+<p>API callers use digest authentication for all requests. User accounts
+need to be specifically configured for API only access. A user account
+with API access will still be able to log in normally.</p>
+<p>To get the digest, make a HEAD or GET request to /api/v2/digest</p>
+</div>
+<div class="section" id="common-api-url-patterns">
+<h3>Common API URL Patterns:<a class="headerlink" href="#common-api-url-patterns" title="Permalink to this headline">¶</a></h3>
+<p>Digital Rebar uses a versioned URL pattern. By convention, resource
+names are pluralized in the API. For example, the API will use =nodes=
+instead of =node= in paths.</p>
+<ul class="simple">
+<li>Base Form: <code class="docutils literal"><span class="pre">[workload</span> <span class="pre">|</span> <span class="pre">api]/[version]/[resources]/[id]</span></code></li>
+<li>version - version of Digital Rebar framework being used (v2 for this
+guide)</li>
+<li>workload - workload (aka barclamp) that owns the requested activity.
+Framework uses &#8216;api&#8217;</li>
+<li>bc_version - the version of the barclamp being used.</li>
+<li>key_word - groups the API into different categories<ul>
+<li>reserved words such as status and rebar</li>
+<li>resource types like node, group, network, etc</li>
+</ul>
+</li>
+<li>id - (optional) name or DB id of the barclamp configuration</li>
+<li>Result codes<ul>
+<li>200 = OK, success</li>
+<li>500 = Error in processing.</li>
+<li>404 = item not found in database (may return 500 in some cases)</li>
+</ul>
+</li>
+<li>List:</li>
+<li>HTTP get</li>
+<li>Returns a json array of objects</li>
+<li>CRUD Operations:</li>
+<li>id - name or database ID of the item. Items that do not have natural
+keys are not expected to honor use of name instead of database ID.
+When possible, either will be allowed.</li>
+<li>RESTful Verbs for CRUD:<ul>
+<li>POST / Create - ID is ignored if provided</li>
+<li>GET / Read - Objects will be shallow</li>
+<li>PUT / Update - returns the updated object serialized</li>
+<li>DELETE/ Delete - no return data except 200</li>
+</ul>
+</li>
+<li>Special Cases<ul>
+<li>PUT - used to start an action on existing data (commit a node or
+deployment)</li>
+<li>DELETE - Unlink/Deactivate/Dequeue</li>
+</ul>
+</li>
+</ul>
+<p>In general, Digital Rebar REST pattern uses the 4 HTTP verbs as follows:</p>
+<ul class="simple">
+<li>GET to retrieve information</li>
+<li>PUT to transform or change existing data</li>
+<li>POST to create new data or relationships</li>
+<li>DELETE to remove data or relationships</li>
+</ul>
+</div>
+</div>
+<div class="section" id="expected-fields">
+<h2>Expected Fields<a class="headerlink" href="#expected-fields" title="Permalink to this headline">¶</a></h2>
+<p>By convention, most Digital Rebar models have the same fields.</p>
+<ul>
+<li><p class="first">id - database assigned role, number</p>
+</li>
+<li><p class="first">name - resource name, often a natural key with enforced uniqueness</p>
+</li>
+<li><p class="first">description - user definable content</p>
+</li>
+<li><p class="first">created_at - when object was created</p>
+</li>
+<li><p class="first">updated_at - when object was last updated</p>
+</li>
+<li><p class="first">object_id - cross reference id to an object. In most cases, you can
+use the name of the object instead of the API</p>
+<blockquote>
+<div><p>Some of the information stored in objects is maintained as json and
+will appear as nested data.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="api-headers-response-patterns">
+<h2>API Headers &amp; Response Patterns<a class="headerlink" href="#api-headers-response-patterns" title="Permalink to this headline">¶</a></h2>
+<p>The Digital Rebar REST API uses HTTP <code class="docutils literal"><span class="pre">content-type</span></code> metadata header
+tags to help clients quickly identify the information being returned by
+the API.</p>
+<p>The API adds =&#8221;application/vnd.rebar.[type].[form]+json;version=2.0&#8221;= to
+the content-type tag.</p>
+<p>If you only care about certian attributes being returned for an API
+call, you can set the <code class="docutils literal"><span class="pre">x-return-attributes</span></code> header to a JSON array of
+the attributes you want to return.</p>
+<ul class="simple">
+<li>[type] is the object type being returned. E.g.: node, deployment,
+jig, etc</li>
+<li>[form] describes how the objects are formed</li>
+<li>obj = single obj</li>
+<li>list = list of objects</li>
+<li>empty = nothing</li>
+<li>error = error.</li>
+</ul>
+<p>REST results should be returned with the appropriate standard HTTP
+response code, such as:</p>
+<ul class="simple">
+<li>200 = ok</li>
+<li>404 = object not found</li>
+<li>500 = application error</li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">complete
+list</a></li>
+</ul>
+</div>
+<div class="section" id="example-documentation">
+<h2>Example Documentation<a class="headerlink" href="#example-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The following table should be populated for all API calls:</p>
+<div class="section" id="api-actions">
+<h3>API Actions<a class="headerlink" href="#api-actions" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="52%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Verb</th>
+<th class="head">URL</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>api/v2/resources</td>
+<td>List</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>api/v2/resources/:id</td>
+<td>Specific Item</td>
+</tr>
+<tr class="row-even"><td>PUT</td>
+<td>api/v2/resources/:id</td>
+<td>Update Item</td>
+</tr>
+<tr class="row-odd"><td>POST</td>
+<td>api/v2/resources</td>
+<td>Create Item</td>
+</tr>
+<tr class="row-even"><td>DELETE</td>
+<td>api/v2/resources/:id</td>
+<td>Delete Item</td>
+</tr>
+<tr class="row-odd"><td>VARIOUS</td>
+<td>api/v2/resources/:id/extra</td>
+<td>Special Ops</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="json-output-example">
+<h2>JSON Output Example:<a class="headerlink" href="#json-output-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;sim.cr0wbar.com&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;example&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;order&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+  <span class="s2">&quot;admin&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;alive&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;allocated&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;available&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;bootenv&quot;</span><span class="p">:</span><span class="s2">&quot;sledgehammer&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;deployment_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;discovery&quot;</span><span class="p">:{</span>
+     <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span><span class="s2">&quot;this is json&quot;</span><span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span><span class="s2">&quot;2013-11-01T03:23:27Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span><span class="s2">&quot;2013-11-01T03:23:27Z&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="some-workflow-examples-using-the-rebar-cli">
+<h2>Some workflow examples (using the Rebar CLI)<a class="headerlink" href="#some-workflow-examples-using-the-rebar-cli" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-node-for-a-system-that-already-has-an-os">
+<h3>Creating a Node for a system that already has an OS:<a class="headerlink" href="#creating-a-node-for-a-system-that-already-has-an-os" title="Permalink to this headline">¶</a></h3>
+<p>This example will show how to create a new node in Rebar for an
+already-installed system that we want to bring under Rebar management.
+This example assumes that it has a non-conflicting IP address that is
+already in the nodes range of the admin network, that the public key of
+the Rebar user will let the Script jig run things as root on the node,
+and that there is already a Rebar-compatible operating system installed.</p>
+<ul class="simple">
+<li>CLI:
+<code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">create</span> <span class="pre">'{&quot;name&quot;:</span> <span class="pre">&quot;newtest.cr0wbar.com&quot;,</span> <span class="pre">&quot;bootenv&quot;:</span> <span class="pre">&quot;local&quot;}</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span> <span class="pre">\</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">\</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">&quot;name=newtest.cr0wbar.com&quot;</span> <span class="pre">\</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">&quot;bootenv=local&quot;</span> <span class="pre">\</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span> <span class="pre">\</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes</span></code></li>
+</ul>
+<p>This will return: { &#8220;admin&#8221;:false, &#8220;alive&#8221;:false, &#8220;allocated&#8221;:false,
+&#8220;available&#8221;:false, &#8220;bootenv&#8221;:&#8221;local&#8221;,
+&#8220;created_at&#8221;:&#8221;2013-12-21T05:49:00Z&#8221;, &#8220;deployment_id&#8221;:1,
+&#8220;description&#8221;:&#8221;&#8221;, &#8220;discovery&#8221;:{}, &#8220;hint&#8221;:{}, &#8220;id&#8221;:41,
+&#8220;name&#8221;:&#8221;newtest.cr0wbar.com&#8221;, &#8220;order&#8221;:100, &#8220;target_role_id&#8221;:null,
+&#8220;updated_at&#8221;:&#8221;2013-12-21T05:49:00Z&#8221; }</p>
+<p>After creating the node, we still need to set the hint for the Admin IP
+to have Rebar try and use the one it already has:</p>
+<ul class="simple">
+<li>CLI:
+<code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">set</span> <span class="pre">newtest.cr0wbar.com</span> <span class="pre">attrib</span> <span class="pre">hint-admin-v4addr</span> <span class="pre">to</span> <span class="pre">'{&quot;value&quot;:</span> <span class="pre">&quot;192.168.124.99/24&quot;}</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes/newtest.cr0wbar.com/attribs/hint-admin-v4addr</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;value&quot;:</span> <span class="pre">&quot;192.168.124.99/24&quot;}'</span></code></li>
+</ul>
+<p>We then need to bind a useful set of default noderoles to the node:</p>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">roles</span> <span class="pre">bind</span> <span class="pre">rebar-managed-node</span> <span class="pre">to</span> <span class="pre">newtest.cr0wbar.com</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">POST</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/node_roles</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;node&quot;:</span> <span class="pre">&quot;newtest.cr0wbar.com&quot;,</span> <span class="pre">&quot;role&quot;:</span> <span class="pre">&quot;rebar-managed-node&quot;}'</span></code></li>
+</ul>
+<p>Commit the node, which will move the newly-created noderoles from
+proposed to todo or blocked, and mark the node as available:</p>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">commit</span> <span class="pre">newtest.cr0wbar.com</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes/newtest.cr0wbar.com/commit</span></code></li>
+</ul>
+<p>Mark the node as alive, which will allow the annealer to do its thing:</p>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">update</span> <span class="pre">newtest.cr0wbar.com</span> <span class="pre">'{&quot;alive&quot;:</span> <span class="pre">true}'</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes/newtest.cr0wbar.com</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'alive=true'</span></code></li>
+</ul>
+</div>
+<div class="section" id="installing-an-operating-system-on-a-node">
+<h3>Installing an operating system on a node<a class="headerlink" href="#installing-an-operating-system-on-a-node" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-the-names-of-the-nodes-you-want-to-install">
+<h4>Get the names of the nodes you want to install:<a class="headerlink" href="#get-the-names-of-the-nodes-you-want-to-install" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">list</span> <span class="pre">--attributes</span> <span class="pre">name</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">GET</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">'x-return-attributes:[&quot;name&quot;]'</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;78e3be198029.smoke.test&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;d52-54-05-3f-00-00.smoke.test&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-deployment-to-deploy-the-nodes-into">
+<h4>Create a deployment to deploy the nodes into:<a class="headerlink" href="#create-a-deployment-to-deploy-the-nodes-into" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">deployments</span> <span class="pre">create</span> <span class="pre">'{&quot;name&quot;:</span> <span class="pre">&quot;test1&quot;}'</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">POST</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/deployments</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;name&quot;:</span> <span class="pre">&quot;test1&quot;}'</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>{
+  &quot;system&quot;: false,
+  &quot;created_at&quot;: &quot;2014-03-03T04:40:07.351Z&quot;,
+  &quot;state&quot;: 0
+  &quot;parent_id&quot;: 1,
+  &quot;description&quot;: null,
+  &quot;updated_at&quot;: &quot;2014-03-03T04:40:07.351Z&quot;,
+  &quot;id&quot;: 2,
+  &quot;name&quot;: &quot;test1&quot;
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-the-target-node-with-the-new-deployment-that-you-just-created">
+<h4>Update the target node with the new deployment that you just created:<a class="headerlink" href="#update-the-target-node-with-the-new-deployment-that-you-just-created" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">move</span> <span class="pre">d52-54-05-3f-00-00.smoke.test</span> <span class="pre">to</span> <span class="pre">test1</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes/d52-54-05-3f-00-00.smoke.test</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;deployment&quot;:</span> <span class="pre">&quot;test1&quot;}'</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;target_role_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;deployment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;alive&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;admin_macs&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;52:54:05:3f:00:00&quot;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;bootenv&quot;</span><span class="p">:</span> <span class="s2">&quot;sledgehammer&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:35:19.642Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;d52-54-05-3f-00-00.smoke.test&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="s2">&quot;discovery&quot;</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;available&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;allocated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:41:13.342Z&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-node-role-to-bind-the-role-to-the-node">
+<h4>Create a node-role to bind the role to the node:<a class="headerlink" href="#create-a-node-role-to-bind-the-role-to-the-node" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI:
+<code class="docutils literal"><span class="pre">rebar</span> <span class="pre">roles</span> <span class="pre">bind</span> <span class="pre">rebar-installed-node</span> <span class="pre">to</span> <span class="pre">d52-54-05-3f-00-00.smoke.test</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">POST</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/node_roles</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;node&quot;:</span> <span class="pre">&quot;d52-54-05-3f-00-00.smoke.test&quot;,</span> <span class="pre">&quot;role&quot;:</span> <span class="pre">&quot;rebar-installed-node&quot;}'</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="s2">&quot;role_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">&quot;run_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">&quot;node_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;deployment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;available&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;runlog&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:47:43.856Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:47:43.860Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;cohort&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional-change-the-operating-system-to-deploy-onto-the-node">
+<h4>(Optional) Change the operating system to deploy onto the node:<a class="headerlink" href="#optional-change-the-operating-system-to-deploy-onto-the-node" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI:
+<code class="docutils literal"><span class="pre">rebar</span> <span class="pre">nodes</span> <span class="pre">set</span> <span class="pre">d52-54-05-3f-00-00.smoke.test</span> <span class="pre">attrib</span>&nbsp;&nbsp; <span class="pre">provisioner-target_os</span> <span class="pre">to</span> <span class="pre">'{&quot;value&quot;:</span> <span class="pre">&quot;ubuntu-12.04&quot;}'</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/nodes/d52-54-05-3f-00-00.smoke.test/attribs/provisioner-target_os</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-d</span> <span class="pre">'{&quot;value&quot;:</span> <span class="pre">&quot;ubuntu-12.04&quot;}'</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T16:37:43.478Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The operating system to install on a node&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;barclamp_id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;ubuntu-12.04&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;provisioner-target_os&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
+  <span class="s2">&quot;role_id&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T16:37:43.466Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;ubuntu-12.04&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;redhat-6.5&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;centos-6.6&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;map&quot;</span><span class="p">:</span> <span class="s2">&quot;rebar/target_os&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="commit-the-deployment">
+<h4>Commit the deployment:<a class="headerlink" href="#commit-the-deployment" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">deployments</span> <span class="pre">commit</span> <span class="pre">test1</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-X</span> <span class="pre">PUT</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--url</span> <span class="pre">http://127.0.0.1:3000/api/v2/deployments/test1/commit</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;system&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;parent_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:40:07.351Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T04:40:07.351Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="attrib.html" title="Attribute (aka Attrib) APIs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../smoketesting.html" title="The smoketest framework lives on the admin node, and consists of:"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

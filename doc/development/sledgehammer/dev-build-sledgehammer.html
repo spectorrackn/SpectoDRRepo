@@ -1,0 +1,168 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Failures &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Development Guide" href="../README.html" />
+    <link rel="next" title="Sledgehammer Hooks" href="sledgehammer-hooks.html" />
+    <link rel="prev" title="Build Sledgehammer (Advanced Dev Only)" href="build_sledgehammer.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sledgehammer-hooks.html" title="Sledgehammer Hooks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="build_sledgehammer.html" title="Build Sledgehammer (Advanced Dev Only)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Failures</a><ul>
+<li><a class="reference internal" href="#example-diff">Example diff</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="build_sledgehammer.html"
+                        title="previous chapter">Build Sledgehammer (Advanced Dev Only)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sledgehammer-hooks.html"
+                        title="next chapter">Sledgehammer Hooks</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/sledgehammer/dev-build-sledgehammer.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>Sledgehammer is the component of Digital Rebar that is used as a
+bootstrapping tool to perform initial node discovery and register its
+discovered state within the Digital Rebar node provisioning framework.
+After it has been discovered, Sledehammer can be controlled to prepare
+the hardware, lay down the operating system, and assure correct
+node configuration. It consists of a slightly modified Centos 6.5 live
+environment. To build Sledgehammer you need:</p>
+<ul class="simple">
+<li>A CentOS 6.5 install DVD from bittorrent or your favorite CentOS
+mirror.</li>
+</ul>
+<p>To create Sledgehammer, run the <code class="docutils literal"><span class="pre">tools\build_sledgehammersh</span></code> script in
+the main Digital Rebar core checkout.</p>
+<div class="section" id="failures">
+<h1>Failures<a class="headerlink" href="#failures" title="Permalink to this headline">¶</a></h1>
+<p>If it fails to find some packages, change the mirror kickstart is using
+in <code class="docutils literal"><span class="pre">sledgehammer\sledgehammer.ks</span></code></p>
+<p>List of mirrors here:
+<a class="reference external" href="http://isoredirect.centos.org/centos/6/isos/x86_64/">http://isoredirect.centos.org/centos/6/isos/x86_64/</a></p>
+<div class="section" id="example-diff">
+<h2>Example diff<a class="headerlink" href="#example-diff" title="Permalink to this headline">¶</a></h2>
+<div class="code diff highlight-python"><div class="highlight"><pre><span></span>diff --git a/sledgehammer/sledgehammer.ks b/sledgehammer/sledgehammer.ks
+index 27fc7c0..7f8aa2f 100644
+--- a/sledgehammer/sledgehammer.ks
++++ b/sledgehammer/sledgehammer.ks
+@@ -7,9 +7,9 @@ rootpw --iscrypted $1$H6F/NLec$Fps2Ut0zY4MjJtsa1O2yk0
+ selinux --disabled
+ firewall --disabled
+
+-repo --name=a-base    --baseurl=http://mirror.centos.org/centos/6/os/$basearch
+-repo --name=a-updates --baseurl=http://mirror.centos.org/centos/6/updates/$basearch
+-repo --name=a-extras  --baseurl=http://mirror.centos.org/centos/6/extras/$basearch
++repo --name=a-base    --baseurl=http://mirrors.kernel.org/centos/6/os/$basearch
++repo --name=a-updates --baseurl=http://mirrors.kernel.org/centos/6/updates/$basearch
++repo --name=a-extras  --baseurl=http://mirrors.kernel.org/centos/6/extras/$basearch
+ repo --name=a-live    --baseurl=http://www.nanotechnologies.qc.ca/propos/linux/centos-live/$basearch/live
+ repo --name=a-wsman   --baseurl=http://download.opensuse.org/repositories/Openwsman/CentOS_CentOS-6
+ %packages
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sledgehammer-hooks.html" title="Sledgehammer Hooks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="build_sledgehammer.html" title="Build Sledgehammer (Advanced Dev Only)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

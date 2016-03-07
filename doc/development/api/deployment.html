@@ -1,0 +1,306 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Deployment APIs &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Digital Rebar API" href="README.html" />
+    <link rel="next" title="Deployment-Role API" href="deployment_role.html" />
+    <link rel="prev" title="Barclamp APIs" href="barclamp.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deployment_role.html" title="Deployment-Role API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="barclamp.html" title="Barclamp APIs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Deployment APIs</a><ul>
+<li><a class="reference internal" href="#deployment-routes">Deployment Routes</a><ul>
+<li><a class="reference internal" href="#json-fields">JSON fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="barclamp.html"
+                        title="previous chapter">Barclamp APIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="deployment_role.html"
+                        title="next chapter">Deployment-Role API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/api/deployment.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="deployment-apis">
+<h1>Deployment APIs<a class="headerlink" href="#deployment-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deployment-routes">
+<h2>Deployment Routes<a class="headerlink" href="#deployment-routes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="38%" />
+<col width="8%" />
+<col width="41%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Verb</th>
+<th class="head">URL</th>
+<th class="head">Options</th>
+<th class="head">Returns</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/deployments</td>
+<td>none</td>
+<td>Deployment List</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>POST</td>
+<td>/api/v2/deployments</td>
+<td>none</td>
+<td>New Deployment</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/deployments/[:id]</td>
+<td>none</td>
+<td>Existing Deployment Detail</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td>/api/v2/deployments/[:id]</td>
+<td>none</td>
+<td>Update Deployment Detail</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/deployments/[:id]</td>
+<td>none</td>
+<td>Existing Deployment Detail</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td>/api/v2/deployments/[:id]/commit</td>
+<td>none</td>
+<td>Commit Proposed</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PUT</td>
+<td>/api/v2/deployments/[:id]/propose</td>
+<td>none</td>
+<td>Create an new Proposal based on Active</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td>/api/v2/deployments/[:id]/transition</td>
+<td>none</td>
+<td>Send Transistion Data into the system</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/deployments/[:deployment_id]/attribs</td>
+<td>none</td>
+<td>List Attribs for a specific deployment</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/api/v2/deployments/[:deployment_id]/attribs/[:id]</td>
+<td>none</td>
+<td>Show Attrib (including value) for a specific Deployment</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PUT</td>
+<td>/api/v2/deployments/[:deployment_id]/attribs/[:id]</td>
+<td>none</td>
+<td>Update Attrib</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="json-fields">
+<h3>JSON fields<a class="headerlink" href="#json-fields" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="16%" />
+<col width="12%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Type</th>
+<th class="head">Settable</th>
+<th class="head">Note</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>System</td>
+<td>Boolean</td>
+<td>No</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Parent_id</td>
+<td>Internal Ref</td>
+<td>??</td>
+<td>Actually an Int</td>
+</tr>
+<tr class="row-even"><td>Description</td>
+<td>String</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Limited to Alpha + Numbers - no spaces or special chars</td>
+</tr>
+<tr class="row-even"><td>Created_at</td>
+<td>String</td>
+<td>No</td>
+<td>Unicode - date format</td>
+</tr>
+<tr class="row-odd"><td>Updated_at</td>
+<td>String</td>
+<td>No</td>
+<td>Unicode - date format</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum fields needed for create - name</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="deployment_role.html" title="Deployment-Role API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="barclamp.html" title="Barclamp APIs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

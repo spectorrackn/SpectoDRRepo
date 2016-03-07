@@ -1,0 +1,227 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration Managers (aka Jigs) &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Development Guide" href="../README.html" />
+    <link rel="next" title="Chef Jig and Developing with Cookbooks" href="chef.html" />
+    <link rel="prev" title="Tips &amp; Tricks (UI Developer)" href="../ui/tips_and_tricks.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="chef.html" title="Chef Jig and Developing with Cookbooks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ui/tips_and_tricks.html" title="Tips &amp; Tricks (UI Developer)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration Managers (aka Jigs)</a><ul>
+<li><a class="reference internal" href="#for-initial-digital-rebar-work-the-primary-jigs-inclide">For initial Digital Rebar work, the primary <strong>Jigs</strong> inclide:</a></li>
+<li><a class="reference internal" href="#jig-semantic-standard-operations">JIG semantic standard operations:</a><ul>
+<li><a class="reference internal" href="#schema">Schema</a></li>
+<li><a class="reference internal" href="#inbound-path">Inbound path</a><ul>
+<li><a class="reference internal" href="#user-data">User Data</a></li>
+<li><a class="reference internal" href="#system-data">System Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#outbound-path">Outbound path</a></li>
+<li><a class="reference internal" href="#methods">Methods</a><ul>
+<li><a class="reference internal" href="#create-node">Create Node</a></li>
+<li><a class="reference internal" href="#delete-node">Delete Node</a></li>
+<li><a class="reference internal" href="#run-input-is-list-of-tacks">Run (input is list of Tacks)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ui/tips_and_tricks.html"
+                        title="previous chapter">Tips &amp; Tricks (UI Developer)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chef.html"
+                        title="next chapter">Chef Jig and Developing with Cookbooks</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/jigs/README.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration-managers-aka-jigs">
+<h1>Configuration Managers (aka Jigs)<a class="headerlink" href="#configuration-managers-aka-jigs" title="Permalink to this headline">¶</a></h1>
+<p>Jigs are the interface between Digital Rebar and external work that
+needs to be done.</p>
+<p>Digital Rebar provides a pluggable model for interacting with nodes and
+other datacetner infrastructure components such as switches, power
+controllers, failover controllers, etc. Each differing <em>configuration
+manager</em> has its own interfaces and control methods. Digital Rebar
+provides a defined API for the <em>configuration managers</em> needed to
+control and manage a collection of machines and systems.</p>
+<p>For convenience the Digital Rebar method for initiating and controlling
+a node-role state transition operation through a particular <em>control
+manager</em> is via a <strong>Jig</strong>. A <strong>Jig</strong> provides a consistent interface for
+Digital Rebar state transition vectors. State transition vectors operate
+within the context of a predefined dependency graph. The collection of
+Digital Rebar <strong>Jigs</strong> provide a platform-agnostic and operationally
+neutral method for initiating, monitoring, and completing a node-role
+state transition.</p>
+<p>Digital Rebar must have 1 or more Jigs that preform the work of node-role state transition operations, known as <strong>Jobs</strong>.</p>
+<div class="section" id="for-initial-digital-rebar-work-the-primary-jigs-inclide">
+<h2>For initial Digital Rebar work, the primary <strong>Jigs</strong> inclide:<a class="headerlink" href="#for-initial-digital-rebar-work-the-primary-jigs-inclide" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chef.html">Chef Jig and Developing with Cookbooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chef.html#rebar-and-berkshelf">Rebar and Berkshelf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chef.html#developing-cookbooks">Developing Cookbooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chef.html#testing-cookbooks">Testing Cookbooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noop.html">Noop Jig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="script.html">Script Jig</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="jig-semantic-standard-operations">
+<h2>JIG semantic standard operations:<a class="headerlink" href="#jig-semantic-standard-operations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>A jig can create roles for operation</li>
+<li>A jig can set attributes for operations</li>
+</ol>
+<p>The Digital Rebar roadmap includes provision to use a <strong>Puppet</strong> jig.
+The <strong>Puppet JIG</strong> will include both front0-end driver as well as a
+<strong>Puppet-client</strong> capability.</p>
+<p>For testing, Digital Rebar provides a Test Jig that is included in the
+core Digital Rebar barclamp.</p>
+<div class="section" id="schema">
+<h3>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h3>
+<p>Jig names have a limited character set. They can only include
+alphanumeric characters and underscore (_). They cannot start with
+underscore.</p>
+</div>
+<div class="section" id="inbound-path">
+<h3>Inbound path<a class="headerlink" href="#inbound-path" title="Permalink to this headline">¶</a></h3>
+<p>The jig can read data from the system and store it into attribute
+collection via JSON databags.</p>
+<div class="section" id="user-data">
+<h4>User Data<a class="headerlink" href="#user-data" title="Permalink to this headline">¶</a></h4>
+<p>More information to follow.</p>
+</div>
+<div class="section" id="system-data">
+<h4>System Data<a class="headerlink" href="#system-data" title="Permalink to this headline">¶</a></h4>
+<p>More information to follow.</p>
+</div>
+</div>
+<div class="section" id="outbound-path">
+<h3>Outbound path<a class="headerlink" href="#outbound-path" title="Permalink to this headline">¶</a></h3>
+<p>More information to follow.</p>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<p>Each jig overrides the following core methods in Digital Rebar:</p>
+<div class="section" id="create-node">
+<h4>Create Node<a class="headerlink" href="#create-node" title="Permalink to this headline">¶</a></h4>
+<p>Handles when a node is added to the Digital Rebar DB. Allows the jig to
+make approporate entries in independant databases</p>
+</div>
+<div class="section" id="delete-node">
+<h4>Delete Node<a class="headerlink" href="#delete-node" title="Permalink to this headline">¶</a></h4>
+<p>Handles when a node is removed from the Digital Rebar DB. Allows the jig
+to remove entries from its database</p>
+</div>
+<div class="section" id="run-input-is-list-of-tacks">
+<h4>Run (input is list of Tacks)<a class="headerlink" href="#run-input-is-list-of-tacks" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="chef.html" title="Chef Jig and Developing with Cookbooks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ui/tips_and_tricks.html" title="Tips &amp; Tricks (UI Developer)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

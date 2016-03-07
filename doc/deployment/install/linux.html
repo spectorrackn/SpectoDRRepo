@@ -1,0 +1,153 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Run-In-System for Linux System &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Deploy Guide" href="../README.html" />
+    <link rel="next" title="Running on [Packet.net](http://packet.net)" href="packet.html" />
+    <link rel="prev" title="Using the Ansible Playbook" href="ansible.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="packet.html" title="Running on [Packet.net](http://packet.net)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ansible.html" title="Using the Ansible Playbook"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Run-In-System for Linux System</a><ul>
+<li><a class="reference internal" href="#regular-use-dev-systems">Regular Use &amp; Dev Systems</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ansible.html"
+                        title="previous chapter">Using the Ansible Playbook</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="packet.html"
+                        title="next chapter">Running on [Packet.net](http://packet.net)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/deployment/install/linux.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="run-in-system-for-linux-system">
+<h1>Run-In-System for Linux System<a class="headerlink" href="#run-in-system-for-linux-system" title="Permalink to this headline">¶</a></h1>
+<p>This is for install in linux systems that are already out provisioned or to take over an existing Linux system.</p>
+<p>Follow the ../install.rst steps to checkout the DigitalRebar code and RackN deploy.</p>
+<p>From <code class="docutils literal"><span class="pre">digitalrebar/deploy</span></code> directory</p>
+<p>NOTE: You must have key based SSH access to your target system.  The install process logs into your system as root AND will fix that access if you have a non-root account (specify with <code class="docutils literal"><span class="pre">--login-user</span></code>)</p>
+<p>Here are the steps:</p>
+<ol class="arabic simple">
+<li>Figure out your system IP address</li>
+<li>If you don&#8217;t have root login, then use <code class="docutils literal"><span class="pre">./add-from-ssh</span></code> to fix your credentials (our advanced scripts call this automatically)</li>
+<li><code class="docutils literal"><span class="pre">./run-in-system.sh</span> <span class="pre">--help</span></code> to make sure we have all the pre-req&#8217;s</li>
+<li><code class="docutils literal"><span class="pre">./run-in-system.sh</span> <span class="pre">--deploy-admin=[system|local]</span> <span class="pre">--admin-ip=[my</span> <span class="pre">CIDR</span> <span class="pre">ip/subnet]</span></code> Choose <code class="docutils literal"><span class="pre">system</span></code> for remote install and <code class="docutils literal"><span class="pre">local</span></code> for your current system.</li>
+<li>Allow the system to run and you will see Ansible progress</li>
+<li>Follow steps to login to Digital Rebar UI.</li>
+</ol>
+<p>Common Additional Options:</p>
+<ul class="simple">
+<li>If you setup a <code class="docutils literal"><span class="pre">~/.dr_info</span></code> file then you can use <code class="docutils literal"><span class="pre">workloads/add-provider.sh</span></code> to add providers by remote.</li>
+<li>if you don&#8217;t have direct root control, add <code class="docutils literal"><span class="pre">--login-user=[username]</span></code></li>
+<li>for a Metal or KVM booting dev-test add: <code class="docutils literal"><span class="pre">--con-provisioner</span> <span class="pre">--access=FORWARDER</span></code></li>
+<li>for a Docker test Compose scale command add: <code class="docutils literal"><span class="pre">--con-node</span></code></li>
+</ul>
+<div class="section" id="regular-use-dev-systems">
+<h2>Regular Use &amp; Dev Systems<a class="headerlink" href="#regular-use-dev-systems" title="Permalink to this headline">¶</a></h2>
+<p>These scripts are mainly used for single pass setups where you plan to tear down the system after use.  If you are planning to do regular development or</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="packet.html" title="Running on [Packet.net](http://packet.net)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ansible.html" title="Using the Ansible Playbook"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

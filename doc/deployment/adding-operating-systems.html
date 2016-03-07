@@ -1,0 +1,197 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adding Provisionable Operating Systems &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Rebar Admin Node Port Mapping" href="admin_port_maps.html" />
+    <link rel="prev" title="Connecting to the BMC Network" href="accessing_bmcs.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="admin_port_maps.html" title="Rebar Admin Node Port Mapping"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="accessing_bmcs.html" title="Connecting to the BMC Network"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Adding Provisionable Operating Systems</a><ul>
+<li><a class="reference internal" href="#for-docker-installs-only">For Docker Installs only</a></li>
+<li><a class="reference internal" href="#add-a-new-os-after-initial-annealing">Add a new OS after initial annealing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="accessing_bmcs.html"
+                        title="previous chapter">Connecting to the BMC Network</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="admin_port_maps.html"
+                        title="next chapter">Rebar Admin Node Port Mapping</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/adding-operating-systems.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="adding-provisionable-operating-systems">
+<h1>Adding Provisionable Operating Systems<a class="headerlink" href="#adding-provisionable-operating-systems" title="Permalink to this headline">¶</a></h1>
+<p>This process ensures that the Admin node can deploy operating systems to
+slaves.</p>
+<p>When deploying an admin node in production mode, you will want to be
+able to install operating systems on slave nodes. By default, the
+<code class="docutils literal"><span class="pre">provisioner-base-images</span></code> role will look for OS install ISO images in
+<code class="docutils literal"><span class="pre">/tftpboot/isos</span></code>.</p>
+<p>As of August 2015, the provisioner knows how to install the following
+operating systems from the following ISO images:</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">ubuntu-12.04</span></code>: <code class="docutils literal"><span class="pre">ubuntu-12.04.4-server-amd64.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">ubuntu-14.04</span></code>: <code class="docutils literal"><span class="pre">ubuntu-14.04.2-server-amd64.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">ubuntu-15.04</span></code>: <code class="docutils literal"><span class="pre">ubuntu-15.04.1-server-amd64.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">centos-6.6</span></code>: <code class="docutils literal"><span class="pre">CentOS-6.6-x86_64-bin-DVD1.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">centos-7.1.1503</span></code>: <code class="docutils literal"><span class="pre">CentOS-7-x86_64-Minimal-1503-01.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">redhat-6.5</span></code>: <code class="docutils literal"><span class="pre">RHEL6.5-20131111.0-Server-x86_64-DVD1.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">redhat-7.0</span></code>: <code class="docutils literal"><span class="pre">rhel-server-7.0-x86_64-dvd.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">debian-7.8.0</span></code>: <code class="docutils literal"><span class="pre">debian-7.8.0-mini-amd64.iso</span></code></p>
+</li>
+<li><p class="first"><em>NOTE</em> This is really the netboot mini.iso renamed. This can be found
+<a class="reference external" href="http://ftp.nl.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso">here</a></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">debian-8.1.0</span></code> : <code class="docutils literal"><span class="pre">debian-8.1.0-mini-amd64.iso</span></code></p>
+</li>
+<li><p class="first"><em>NOTE</em> This is really the netboot mini.iso renamed. This can be found
+<a class="reference external" href="http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/netboot/mini.iso">here</a></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">ESXi</span> <span class="pre">5.5</span></code>:
+<code class="docutils literal"><span class="pre">VMware-VMvisor-Installer-5.5.0.update02-2068190.x86_64.iso</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">Xen</span> <span class="pre">Server</span> <span class="pre">6.5</span></code>: <code class="docutils literal"><span class="pre">XenServer-6.5.0-xenserver.org-install-cd.iso</span></code></p>
+<blockquote>
+<div><p>This list is subject to change! For the latest list, consult
+<a class="reference external" href="https://github.com/digitalrebar/core/blob/develop/barclamps/provisioner.yml">Provisioner Base
+Images</a>
+template file.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="for-docker-installs-only">
+<h2>For Docker Installs only<a class="headerlink" href="#for-docker-installs-only" title="Permalink to this headline">¶</a></h2>
+<p>To enable the provisioner to install from those images, place them in
+<code class="docutils literal"><span class="pre">$HOME/.cache/digitalrebar/tftpboot/isos</span></code>, either directly or via a
+hard link. These images will then be available inside the Docker
+container at <code class="docutils literal"><span class="pre">/tftpboot/isos</span></code>, and the provisioner will be able to use
+them to install operating systems on slave nodes or if you do not want
+to copy the ISOs into place, you must hard link (not soft link) the ISO
+files because symlinks are not visible on file system paths mapped
+inside containers.</p>
+</div>
+<div class="section" id="add-a-new-os-after-initial-annealing">
+<h2>Add a new OS after initial annealing<a class="headerlink" href="#add-a-new-os-after-initial-annealing" title="Permalink to this headline">¶</a></h2>
+<p>If you add a new OS after the initial annealing, Digital Rebar must be told to
+rediscover available operating systems. You must reapply (retry) the
+<code class="docutils literal"><span class="pre">provisioner-base-images</span></code> role (aka <em>Available O/S</em>) on the Admin
+server in the System deployment.</p>
+<blockquote>
+<div>you can generally navigate directly to this NodeRole using
+<code class="docutils literal"><span class="pre">/nodes/2/node_roles/provisioner-base-images</span></code> or using the name of
+your admin server instead of the #2.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="admin_port_maps.html" title="Rebar Admin Node Port Mapping"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="accessing_bmcs.html" title="Connecting to the BMC Network"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

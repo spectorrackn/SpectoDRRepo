@@ -1,0 +1,376 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Role APIs &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Digital Rebar API" href="README.html" />
+    <link rel="next" title="Router API" href="router.html" />
+    <link rel="prev" title="Range API" href="range.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="router.html" title="Router API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="range.html" title="Range API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Role APIs</a><ul>
+<li><a class="reference internal" href="#role-types">Role Types</a></li>
+<li><a class="reference internal" href="#api-actions">API Actions</a></li>
+<li><a class="reference internal" href="#role-events-triggered-on-noderole-state-changes">Role Events (triggered on NodeRole state changes)</a><ul>
+<li><a class="reference internal" href="#json-fields">JSON fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#structure-of-the-template-json-from-an-example">Structure of the template JSON (from an example)</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="range.html"
+                        title="previous chapter">Range API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="router.html"
+                        title="next chapter">Router API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/api/role.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="role-apis">
+<h1>Role APIs<a class="headerlink" href="#role-apis" title="Permalink to this headline">¶</a></h1>
+<p>Roles are a core data type in Digital Rebar. They are used to define
+services that Digital Rebar deploys in the environment.</p>
+<blockquote>
+<div>Role names are globally unique. This restriction may be related in
+the future</div></blockquote>
+<div class="section" id="role-types">
+<h2>Role Types<a class="headerlink" href="#role-types" title="Permalink to this headline">¶</a></h2>
+<p>Digital Rebar allows Barclamp creators to override the default Role
+behavior. This is a very import extension point for Digital Rebar
+because custom Role beaviors are essential to many orchestration
+situations.</p>
+<p>If no override is provided, Digital Rebar will use the Digital
+Rebar::Role class.</p>
+<p>A role specific override can be created using the name of the
+barclamp-role to create the class in the Barclamp model name space. For
+example, a role called test-admin should be created as
+BarclampTest::Admin (or app/models/barclamp_test/admin.rb). When the
+role is imported, Digital Rebar will automatically use this type if it
+has been defined.</p>
+<p>A Barclamp specific override can be created using the name of the
+barclamp and the class role. If present, this class will be used if no
+specific role class has been provided. This is very useful for barclamps
+that create roles dynamically such as the network barclamp. For example,
+Digital Rebar will use the BarclampNetwork::Role (or
+app/models/barclamp_network/role.rb) class when new Network roles are
+added. This allows Barclamp creators to add custom event handling
+without knowing the name of the roles in advance.</p>
+<blockquote>
+<div>This is also related to how Role Events are handled.</div></blockquote>
+</div>
+<div class="section" id="api-actions">
+<h2>API Actions<a class="headerlink" href="#api-actions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="39%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Verb</th>
+<th class="head">URL</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>api/v2/roles</td>
+<td>List</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>api/v2/roles/:id</td>
+<td>Specific Item</td>
+</tr>
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/roles/[:role_id]/attribs</td>
+<td>List Attribs for a specific role</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/api/v2/roles/[:role_id]/attribs/[:id]</td>
+<td>Show Attrib (including value) for a specific Role</td>
+</tr>
+<tr class="row-even"><td>PUT</td>
+<td>/api/v2/roles/[:role_id]/attribs/[:id]</td>
+<td>Update Attrib</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>NOT SUPPORTED / managed during import only</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>NOT SUPPORTED / roles are only created during import</td>
+</tr>
+<tr class="row-odd"><td>DELETE</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>NOT SUPPORTED</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="role-events-triggered-on-noderole-state-changes">
+<h2>Role Events (triggered on NodeRole state changes)<a class="headerlink" href="#role-events-triggered-on-noderole-state-changes" title="Permalink to this headline">¶</a></h2>
+<p>The Role model has a series of events (Self.on_[STATE]) that are called
+when any NodeRole changes state. This is a designed override point where
+Barclamp Roles can add functionality into the Digital Rebar Annealer
+engine. This functionality is added when a Barclamp defines it&#8217;s own
+Role definitions (Barclamp[Name]::[Role]). If there is no override, then
+the default behavior is used.</p>
+<p>There is a matching event for each NodeRole state. The event is called
+when the NodeRole enters that state. The purpose of this function is to
+enable Barclamp creators to leverage information available to Digital
+Rebar within the Annealer operation including before user editing
+(Proposed) or system error (Error) states.</p>
+<div class="section" id="json-fields">
+<h3>JSON fields<a class="headerlink" href="#json-fields" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="17%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Type</th>
+<th class="head">Settable</th>
+<th class="head">Note</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Description</td>
+<td>String</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Name</td>
+<td>String</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Created_at</td>
+<td>String</td>
+<td>No</td>
+<td>Unicode - date format</td>
+</tr>
+<tr class="row-odd"><td>Updated_at</td>
+<td>String</td>
+<td>No</td>
+<td>Unicode - date format</td>
+</tr>
+<tr class="row-even"><td>Server</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Bootstrap</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Library</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Barclamp_id</td>
+<td>Internal Ref</td>
+<td>??</td>
+<td>Actually an Int</td>
+</tr>
+<tr class="row-even"><td>Cluster</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Implicit</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Template</td>
+<td>String</td>
+<td>Yes</td>
+<td>Another json blob</td>
+</tr>
+<tr class="row-odd"><td>Jig Name</td>
+<td>String</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Destructive</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Service</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>id</td>
+<td>Internal Ref</td>
+<td>??</td>
+<td>Actually an Int</td>
+</tr>
+<tr class="row-odd"><td>Discovery</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="structure-of-the-template-json-from-an-example">
+<h1>Structure of the template JSON (from an example)<a class="headerlink" href="#structure-of-the-template-json-from-an-example" title="Permalink to this headline">¶</a></h1>
+<p>The template structure is multi-layered - in the table assume that the
+lines following a &#8216;blob&#8217; are the subsidiary structure</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Ceph</td>
+<td>json blob</td>
+</tr>
+<tr class="row-odd"><td>config</td>
+<td>json blob</td>
+</tr>
+<tr class="row-even"><td>osd</td>
+<td>json blob</td>
+</tr>
+<tr class="row-odd"><td>journal</td>
+<td>file</td>
+</tr>
+<tr class="row-even"><td>encrypt</td>
+<td>False</td>
+</tr>
+<tr class="row-odd"><td>fstype</td>
+<td>xfs</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="router.html" title="Router API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="range.html" title="Range API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

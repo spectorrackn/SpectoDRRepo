@@ -1,0 +1,175 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Vagrant and Digital Rebar &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Development Guide" href="../development/README.html" />
+    <link rel="prev" title="Digital Rebar Troubleshooting Tips" href="troubleshooting.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../development/README.html" title="Development Guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Digital Rebar Troubleshooting Tips"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Vagrant and  Digital Rebar</a><ul>
+<li><a class="reference internal" href="#vagrant-file">Vagrant File</a></li>
+<li><a class="reference internal" href="#prereqs">Prereqs</a></li>
+<li><a class="reference internal" href="#admin-node">Admin Node</a></li>
+<li><a class="reference internal" href="#workload-nodes">Workload Nodes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="troubleshooting.html"
+                        title="previous chapter">Digital Rebar Troubleshooting Tips</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../development/README.html"
+                        title="next chapter">Development Guide</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/vagrant.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vagrant-and-digital-rebar">
+<h1>Vagrant and  Digital Rebar<a class="headerlink" href="#vagrant-and-digital-rebar" title="Permalink to this headline">¶</a></h1>
+<p>Note: While workable, this is not our suggested path for building an admin node!  It works very well adding local vm nodes to an existing admin node.  Unlike the <code class="docutils literal"><span class="pre">kvm_slave</span></code> approach, Vagrant bypasses the &#8220;bare metal&#8221; sledgehammer discovery process.</p>
+<div class="section" id="vagrant-file">
+<h2>Vagrant File<a class="headerlink" href="#vagrant-file" title="Permalink to this headline">¶</a></h2>
+<p>You only need the <a class="reference external" href="https://raw.githubusercontent.com/rackn/digitalrebar-deploy/master/Vagrantfile">Vagrant file</a> for these instructions.  You do not need to clone the repo.</p>
+<p>Save the file and run Vagrant from that location.</p>
+</div>
+<div class="section" id="prereqs">
+<h2>Prereqs<a class="headerlink" href="#prereqs" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">Vagrant installed (from [Vagrant website](<a class="reference external" href="http://www.vagrantup.com/downloads.html">http://www.vagrantup.com/downloads.html</a>) not apt-get)</p>
+</li>
+<li><p class="first">Vagrant requires several other items:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Virtualbox (or similar) (e.g.: <cite>sudo apt-get install virtualbox</cite>)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">The Vagrant install uses the <a class="reference external" href="../cli/README.rst">rebar cli</a> for actions.  It must be accessible from your Vagrant path.</p>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>You also need the <code class="docutils literal"><span class="pre">vagrant-trigger</span></code> plugin.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="admin-node">
+<h2>Admin Node<a class="headerlink" href="#admin-node" title="Permalink to this headline">¶</a></h2>
+<p>We recommend using the Docker tools directly to bring up an Admin node!</p>
+<p><code class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">base</span></code></p>
+<p>Review the output to see the assigned IP address.</p>
+</div>
+<div class="section" id="workload-nodes">
+<h2>Workload Nodes<a class="headerlink" href="#workload-nodes" title="Permalink to this headline">¶</a></h2>
+<p>You can use this type without the admin node! If you already have an Admin node, define REBAR_ENDPOINT and the script will use that instead of the default above.</p>
+<p><code class="docutils literal"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">node1</span></code></p>
+<p>Numbers up to 20 are supported.</p>
+<p>### Cleanup</p>
+<p>When finished, you can destroy the system using <cite>vagrant destroy</cite></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../development/README.html" title="Development Guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Digital Rebar Troubleshooting Tips"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Barclamp APIs &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../../README.html" />
+    <link rel="up" title="Digital Rebar API" href="README.html" />
+    <link rel="next" title="Deployment APIs" href="deployment.html" />
+    <link rel="prev" title="Attribute (aka Attrib) APIs" href="attrib.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment APIs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="attrib.html" title="Attribute (aka Attrib) APIs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" accesskey="U">Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Barclamp APIs</a><ul>
+<li><a class="reference internal" href="#routes">Routes</a></li>
+<li><a class="reference internal" href="#list-barclamps">List Barclamps</a></li>
+<li><a class="reference internal" href="#show-barclamp">Show Barclamp</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="attrib.html"
+                        title="previous chapter">Attribute (aka Attrib) APIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="deployment.html"
+                        title="next chapter">Deployment APIs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/development/api/barclamp.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="barclamp-apis">
+<h1>Barclamp APIs<a class="headerlink" href="#barclamp-apis" title="Permalink to this headline">¶</a></h1>
+<p>Barclamps are the core modulization for Digital Rebar. For that reason,
+the API for barclamps is more limited because changes to barclamps can
+cause breaking changes to the framework.</p>
+<div class="section" id="routes">
+<h2>Routes<a class="headerlink" href="#routes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="36%" />
+<col width="14%" />
+<col width="24%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Verb</th>
+<th class="head">URL</th>
+<th class="head">Options</th>
+<th class="head">Returns</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>/api/v2/barclamps</td>
+<td>none</td>
+<td>List Barclamps</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/api/v2/barclamps/[:id]</td>
+<td>none</td>
+<td>Show Barclamp</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="list-barclamps">
+<h2>List Barclamps<a class="headerlink" href="#list-barclamps" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">barclamps</span> <span class="pre">list</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">GET</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">http://localhost:3000/api/v2/barclamps</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/digitalrebar/core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.330Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/opt/digitalrebar/core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;barclamp_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;build_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.400Z&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;rebar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://github/digitalrebar/unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.709Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/opt/digitalrebar/core&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Rebar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;barclamp_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;build_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.737Z&quot;</span>
+  <span class="p">},</span>
+  <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-barclamp">
+<h2>Show Barclamp<a class="headerlink" href="#show-barclamp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CLI: <code class="docutils literal"><span class="pre">rebar</span> <span class="pre">barclamps</span> <span class="pre">show</span> <span class="pre">core</span></code></li>
+<li>API:
+<code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">GET</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">--digest</span> <span class="pre">-u</span> <span class="pre">$(cat</span> <span class="pre">/etc/rebar.install.key)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">-H</span> <span class="pre">&quot;Content-Type:application/json&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="pre">http://localhost:3000/api/v2/barclamps/core</span></code></li>
+</ul>
+<p>Returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;build_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.400Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Core&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;barclamp_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/digitalrebar/core&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/opt/digitalrebar/core&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-03T05:18:01.330Z&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;core&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment APIs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="attrib.html" title="Attribute (aka Attrib) APIs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../README.html" >Development Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="README.html" >Digital Rebar API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

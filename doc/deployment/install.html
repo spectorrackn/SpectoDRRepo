@@ -1,0 +1,244 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digital Rebar Install &mdash; Digital Rebar 3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="Digital Rebar 3.0 documentation" href="../README.html" />
+    <link rel="up" title="Deploy Guide" href="README.html" />
+    <link rel="next" title="Using the Ansible Playbook" href="install/ansible.html" />
+    <link rel="prev" title="Digital Rebar Quick Start" href="install/quick.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="install/ansible.html" title="Using the Ansible Playbook"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install/quick.html" title="Digital Rebar Quick Start"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../README.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Rebar Install</a><ul>
+<li><a class="reference internal" href="#jump-to-specific-environments">Jump to Specific Environments</a></li>
+<li><a class="reference internal" href="#provisioning-from-containers">Provisioning from Containers</a></li>
+<li><a class="reference internal" href="#general-installation">General Installation</a><ul>
+<li><a class="reference internal" href="#providers-what-systems-do-i-have-to-play-with">Providers: What Systems Do I Have to Play With?</a></li>
+<li><a class="reference internal" href="#what-system-do-i-have-to-run-an-admin-node">What System Do I Have to Run an Admin Node?</a></li>
+<li><a class="reference internal" href="#what-access-mode-should-i-use">What Access Mode Should I Use?</a><ul>
+<li><a class="reference internal" href="#forwarder-mode">Forwarder Mode</a></li>
+<li><a class="reference internal" href="#host-mode">Host Mode</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#am-i-going-to-develop-digital-rebar-or-workloads-for-digital-rebar">Am I going to develop Digital Rebar or Workloads for Digital Rebar?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes-and-provisos">Notes and Provisos</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install/quick.html"
+                        title="previous chapter">Digital Rebar Quick Start</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="install/ansible.html"
+                        title="next chapter">Using the Ansible Playbook</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/deployment/install.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-rebar-install">
+<h1><a class="toc-backref" href="#id1">Digital Rebar Install</a><a class="headerlink" href="#digital-rebar-install" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/quick.rst">TL;DR Quick Start</a> if you&#8217;ve got easy access to a Ubuntu system (AWS is perfect).</p>
+<div class="contents topic" id="table-contents">
+<p class="topic-title first">Table Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#digital-rebar-install" id="id1">Digital Rebar Install</a><ul>
+<li><a class="reference internal" href="#jump-to-specific-environments" id="id2">Jump to Specific Environments</a></li>
+<li><a class="reference internal" href="#provisioning-from-containers" id="id3">Provisioning from Containers</a></li>
+<li><a class="reference internal" href="#general-installation" id="id4">General Installation</a></li>
+<li><a class="reference internal" href="#notes-and-provisos" id="id5">Notes and Provisos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>Approximate install time: 10-30 minutes depending on bandwidth.</em>  Once cached, reset takes <em>3-10 minutes</em> on most systems.  For the easiest install experience, we recommend trying a cloud based install.</p>
+<p><strong>System Requirements</strong> for Admin Container Host</p>
+<ul class="simple">
+<li>8 Gb of RAM (or better) is recommended.</li>
+<li>4 Physical Cores</li>
+<li>Operating System should be: Mac OSX or Linux</li>
+</ul>
+<p><em>Need help?</em> Jump over to our <a class="reference external" href="https://gitter.im/digitalrebar/core">live chat</a>  (Gitter.im)</p>
+<div class="section" id="jump-to-specific-environments">
+<h2><a class="toc-backref" href="#id2">Jump to Specific Environments</a><a class="headerlink" href="#jump-to-specific-environments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Already have a Linux system (VM or Physical)?  Use the <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/linux.rst">SSH</a> helper to setup your system.  This works for local or remote installs.</li>
+<li>Don&#8217;t have hardware?  No problem, we&#8217;ve got a quick install in <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/packet.rst">Packet.net</a> that includes provisioning.</li>
+<li>Use <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/vagrant.rst">Vagrant</a>? We&#8217;ve automated all these steps for that too for admins and worker nodes.</li>
+<li>Comfortable with <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/ansible.rst">Ansible</a>? Deploy these steps automatically to Ubuntu, Centos and others.  They are the shared basis for the above helper scripts.</li>
+</ul>
+</div></blockquote>
+<p><strong>RECOMMENDATION:</strong> Review the <a class="reference external" href="https://github.com/rackn/digitalrebar-deploy">RackN maintained deploy scripts</a> for updated step-by-step install examples.</p>
+</div>
+<div class="section" id="provisioning-from-containers">
+<h2><a class="toc-backref" href="#id3">Provisioning from Containers</a><a class="headerlink" href="#provisioning-from-containers" title="Permalink to this headline">¶</a></h2>
+<p>Digital Rebar operates all the infrastructure management functions in Docker containers; consequently, you need to be running in an environment that can run Docker (this includes Macs).</p>
+</div>
+<div class="section" id="general-installation">
+<h2><a class="toc-backref" href="#id4">General Installation</a><a class="headerlink" href="#general-installation" title="Permalink to this headline">¶</a></h2>
+<p>First you need to <cite>apt-get install git</cite> or <cite>yum install git</cite>.</p>
+<p>By following the directory structure below, you are set for development or deployments.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~
+mkdir digitalrebar
+git clone https://github.com/rackn/digitalrebar-deploy digitalrebar/deploy
+ln -s digitalrebar/ digitalrebar/deploy/compose/digitalrebar
+cd digitalrebar/deploy
+echo &quot;Checking prerequisites&quot;
+./run-in-system.sh --help
+echo &quot;let&#39;s setup Digital Rebar!&quot;
+</pre></div>
+</div>
+<p>In human words, change to your home directory, make a digitalrebar directory.  Change into the newly created directory and clone the digitalrebar-deploy tree from RackN as deploy.  Once that clone is complete, create a symbolic link from the compose directory to the Digital Rebar top-level directory.</p>
+<p>At this point, you are ready to use the deploy tools to build your node</p>
+<div class="section" id="providers-what-systems-do-i-have-to-play-with">
+<h3>Providers: What Systems Do I Have to Play With?<a class="headerlink" href="#providers-what-systems-do-i-have-to-play-with" title="Permalink to this headline">¶</a></h3>
+<p>Prerequisite: Add your credentials to a <a class="reference external" href="dr_info.rst">.dr_info file</a>.</p>
+<p>The <code class="docutils literal"><span class="pre">run-in-[packet|system|google|docean|aws].sh</span> <span class="pre">[options]</span> <span class="pre">``</span> <span class="pre">or</span> <span class="pre">``workloads\[docker-swarm|kubernetes]</span></code> scripts will quickly build a working Digital Rebar administrate system.  There are advanced workload scripts that will setup Digital Rebar AND provision a workload.</p>
+<p>The Provisioner (include with <code class="docutils literal"><span class="pre">--con-provisioner</span></code>) is able to handle DHCP/PXE boot discovery of metal and KVM.  The cloud providers require that you have an account with the provider.  For first users, we recommend AWS, Google or Packet.</p>
+</div>
+<div class="section" id="what-system-do-i-have-to-run-an-admin-node">
+<h3>What System Do I Have to Run an Admin Node?<a class="headerlink" href="#what-system-do-i-have-to-run-an-admin-node" title="Permalink to this headline">¶</a></h3>
+<p>An admin node needs a docker capable system to run in.  This can be a Linux system with docker-engine installed or a MacOS with docker tools installed.  In theory, a windows box could be used with virtual box and the docker tools, but come on.</p>
+<p>For a linux system, you will want to look at the <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/linux.rst">run-in-system.sh</a> script and its description.  This script can be run against the local system with the &#8211;localhost option or a remote system (with ssh access).</p>
+<p>For a Mac system, you will want to look at the <a class="reference external" href="https://github.com/digitalrebar/doc/blob/master/deployment/install/mac.rst">run-in-mac.sh</a> script and its description.  This script will make sure that tools are installed to run docker in a VirtualBox instance and let you run the developer tools or the deploy tools against it.</p>
+<p>For AWS or Packet, look at the <em>run-in-[aws|packet]</em> scripts.  They will automatically provision systems from those clouds and then install Digital Rebar.</p>
+</div>
+<div class="section" id="what-access-mode-should-i-use">
+<h3>What Access Mode Should I Use?<a class="headerlink" href="#what-access-mode-should-i-use" title="Permalink to this headline">¶</a></h3>
+<p>There are two access modes for Digital Rebar: HOST or FORWADER.  Most tools take a &#8211;host (or &#8211;access host) to specify host mode.  Forwarder mode is the default for all tools except run-in-mac.sh which has a &#8211;no-host flag to set forwarder mode.  Macs work best in HOST mode.  The mode can also be choosen in the group_vars/all.yml file run the ansible playbook is used to deploy the system (or tools that use the playbook - which is all of them).</p>
+<div class="section" id="forwarder-mode">
+<h4>Forwarder Mode<a class="headerlink" href="#forwarder-mode" title="Permalink to this headline">¶</a></h4>
+<p>This mode uses a forwarder container to act as the main access point for all Admin services.  The IP address of the forwarder is specified in the group_vars/all.yml file and gets propogated to all the needed places.  The External IP should be set to match this value as well.  The primary use case is for development on a single system with KVM or docker instances for Digital Rebar to manage.  This mode can also be used to bridge secondary interfaces into the docker bridge to provision physical machines on that network.</p>
+<p>This mode requires an admin network, defined in compose/config-dir/api/config/networks/the_admin.json.forwarder, and a bmc network, defined in compose/config-dir/api/config/networks/the_bmc.json.forwarder.  Editting these to match and contain the FORWARDER_IP is required for a working deployment.  The default networks are 192.168.124.0/24 for the admin network and 192.168.128.0/24 for the BMC network.  The default forwarder ip is 192.168.124.11.  For bridged networks, it is assumed that 192.168.124.1 is the router on that network and that another address will be assigned to the docker0 bridge (like 192.168.124.200) and the physical interface (like eth1) will be added to the docker0 bridge.  This would allow physical nodes on the eth1 network to PXE boot and be discovered by the Admin node.</p>
+<p>The developer tool, kvm-slave, should work on linux-based system to add kvm slaves to run against the admin.</p>
+</div>
+<div class="section" id="host-mode">
+<h4>Host Mode<a class="headerlink" href="#host-mode" title="Permalink to this headline">¶</a></h4>
+<p>This mode makes one of the host&#8217;s addresses the access point for the Admin node.  This is useful for systems that are managing multiple admin networks, lots of joined nodes (VMs or physical nodes), or dedicated hosts.  The Mac system falls into this cases because the boot2docker image is like a separate node running a docker system.</p>
+<p>This mode requires an admin network, defined in compose/config-dir/api/config/networks/the_admin.json.mac.  The current defaults are 192.168.99.0/24.  It matches Greg Althaus&#8217; mac deployment (I took the defaults).</p>
+<p>Instead of specifying the Forwarder IP, we have to specify the external IP to use.  This should be an IP on the host and does NOT have to be in the admin network.  The default is 192.168.99.100 to make the Mac deploy defaults.</p>
+<p>For either mode, the FORWARDER_IP, EXTERNAL_IP, and mode is specified as values in the group_vars/all.yml file or some of the commands take those values as flags.</p>
+<p>At this point, you should be able to choose your tool and install and deploy Digital Rebar.  Once installed and configured, you can provision nodes (using good ole PXE of a physical system or creation of a kvm-slave) or join nodes (using add-from-system.sh) to the admin node.</p>
+</div>
+</div>
+<div class="section" id="am-i-going-to-develop-digital-rebar-or-workloads-for-digital-rebar">
+<h3>Am I going to develop Digital Rebar or Workloads for Digital Rebar?<a class="headerlink" href="#am-i-going-to-develop-digital-rebar-or-workloads-for-digital-rebar" title="Permalink to this headline">¶</a></h3>
+<p>Using the deploy tools, the environment should be setup for doing development as well.  You can switch to using the docker-admin tools provided in core to start and stop Digital Rebar containers.  It has a shell wrap that allows you to quickly stop, clean-up, and restart.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd digitalrebar/core
+tools/docker-admin
+</pre></div>
+</div>
+<p>This leaves you in a show where you can run docker-compose logs and other docker commands to inspect the containers.  Exiting this shell will kill and remove the containers.  <em>docker-admin</em> takes an &#8211;access flag with a value of either HOST or FORWARDER and a very helpful <code class="docutils literal"><span class="pre">--no-pull</span></code> flag that doesn&#8217;t do a pull update to increase iteration speeds.</p>
+</div>
+</div>
+<div class="section" id="notes-and-provisos">
+<h2><a class="toc-backref" href="#id5">Notes and Provisos</a><a class="headerlink" href="#notes-and-provisos" title="Permalink to this headline">¶</a></h2>
+<p>The general installation steps can be reviewed in the Ansible playbook docs.</p>
+<blockquote>
+<div><p>To improve support, the <a class="reference external" href="https://github.com/orgs/digitalrebar/teams">Digital Rebar team</a> is no longer creating or documenting install packages.</p>
+<p>For developers, we&#8217;ve collected some additional guidance in the development section to review after you&#8217;ve got your first install working.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="install/ansible.html" title="Using the Ansible Playbook"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install/quick.html" title="Digital Rebar Quick Start"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../README.html">Digital Rebar 3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >Deploy Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, RackN team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
