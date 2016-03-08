@@ -5,4 +5,4 @@ sphinx-build . ../website
 
 cd ../website
 mv -u static/* static
-grep -rl 'static' . | xargs sed -i "s/static/static/g"
+grep -rl --include=*.html '_static' . | xargs sed -i "s/_static/static/g"
