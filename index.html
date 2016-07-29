@@ -1,148 +1,340 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Digital Rebar</title>
-        <script src="jquery.min.js"></script>
-        <script src="parallax.js"></script>
-        <link href="reset.css" rel="stylesheet" type="text/css" />
-        <link href="style.css" rel="stylesheet" type="text/css" />
-        <link href="/images/digitalrebar.ico" rel="SHORTCUT ICON" />
-    <body>
-        <nav>
-            <a href="#intro">intro</a>
-            <a href="#gettingStarted">starting</a>
-            <a href="#glance">glance</a>
-            <a href="#benefits">benefits</a>
-            <a href="#sponsor">sponsor</a>
-        </nav>
-        <div class='full-screen' data-parallax="scroll" data-image-src="images/image.jpg" id='top'>
-            <div class='title-text'>
-                <span class="slash">./</span>start_to_scale<span class="slash blink">&block;</span>
-            </div>
-            <div class='bottom-text'>
-                scroll down
-            </div>
+  <head>
+    <link href="reset.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href='https://www.google.com/fonts#UsePlace:use/Collection:Roboto' rel='stylesheet' type='text/css' />
+    <link href='https://www.google.com/fonts#UsePlace:use/Collection:Roboto+Mono' rel='stylesheet' type='text/css' />
+    <link href='https://www.google.com/fonts#UsePlace:use/Collection:Allerta+Stencil' rel='stylesheet' type='text/css' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type='text/css' />
+    <link href="digitalrebar.ico" rel="SHORTCUT ICON" />
+    <title>Digital Rebar</title>
+  </head>
+  <body>
+    <nav id='toolbar' class='overlay'>
+      <img src='logo.png' style='height: 100%; cursor: pointer;' onclick="javascript:document.location='http://digital-rebar.readthedocs.org/en/latest/BOOK.html';"/>
+      <div class='nav-bar'>
+        <div class='link-container' onclick='scroll("overview")'>
+          <div class='link' href='test'>
+            <span>Intro</span>
+          </div>
         </div>
-        <article>
-            <header id="intro">
-                Digital Rebar Project
-            </header>
-            <p>
-                <a href='https://github.com/digitalrebar/core'>Digital Rebar</a> is a container-based, infrastructure-as-code provisioning and orchestration platform that provides software deployment automation capabilities without locking you into a specific hardware platform or operating model. Our mission is to embrace the heterogenous nature of data center operations.
-            </p><br/>
-            <p>
-                For physical infrastructure, it functions like an fully integrated Cobbler/Foreman + Ansible Tower (or Juju + MaaS) with the added bonus of being able to configure RAID, IPMI and BIOS.  Even better, Digital Rebar is not opinionated about scripting tools so you can mix and match Chef, Puppet, Ansible, SaltStack and even Bash.
-            </p><br/>
-            <p>
-                For cloud infrastructure, it provides a hybrid cluster install like Terraform but with ongoing iterative operations and upgrade strategy.
-            </p><br/>
-            <p>
-                Why <a herf="https://en.wikipedia.org/wiki/Rebar">Rebar</a>?  It is the metal in reinforced concrete that allows building cloudscraping towers and robust infrastructure (<a href="http://digital-rebar.readthedocs.org/en/latest/principles/what_is_rebar.html">more...</a>).
-            </p><br/>
-            <p>
-                While it's been completely rebuilt by DevOps artisans, Digital Rebar history includes years of battle-tested ops learnings by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
-            </p>
-        </article>
-        <div class='full-screen' data-parallax="scroll" data-image-src="images/wheelmarks.jpg">
-            <div class='title-text'>
-                <span class="slash">./</span>ready_state_go<span class="slash blink">&block;</span>
-            </div>
+        <div class='link-container' onclick='scroll("install")'>
+          <div class='link' href='test'>
+            <span>Starting</span>
+          </div>
         </div>
-        <article>
-            <header id="gettingStarted">
-                Getting Started
-            </header>
-            <p>
-                Want to <b>install Digital Rebar</b>? Here's the <a href="http://digital-rebar.readthedocs.io/en/latest/deployment/README.html">Install Guide</a> (<a href="http://digital-rebar.readthedocs.org/en/latest/deployment/install/quick.html">AWS Quick Start</a>).
-            </p><br/>
-            <ul>
-                <li><a href="https://www.youtube.com/playlist?list=PLXPBeIrpXjfh2lXdXkNnzAuc7_SUtYJR-">Demo Videos!</a></li>
-                <li><a href="http://bit.ly/digitalrebarlist">Mailing List</a></li>
-                <li><a href="https://gitter.im/digitalrebar/core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">Live Chat</a>  (Gitter.im)</li>
-                <li><a href="https://waffle.io/digitalrebar/core">Issues and Roadmap</a></li>
-                <li><a href="http://digital-rebar.readthedocs.org/en/latest/BOOK.html">Documentation Book</a> (<a href="https://readthedocs.org/projects/digital-rebar/downloads/pdf/latest/">Single PDF</a>, <a href="https://github.com/digitalrebar/doc">sources</a>)</li>
-            </ul>
-        </article>
-        <div class='full-screen' data-parallax="scroll" data-image-src="images/metal.jpg">
-            <div class='title-text'>
-                <span class="slash">./</span>baremetal_api<span class="slash blink">&block;</span>
-            </div>
+        <div class='link-container' onclick='scroll("principle")'>
+          <div class='link' href='test'>
+            <span>Glance</span>
+          </div>
         </div>
-        <article>
-            <header id="glance">
-                At a glance
-            </header>
-            <p>
-                The principal motivation for Digital Rebar is to collaborate on a technology that revolutionizes how traditional data center infrastructure operations can gracefully absorb next-genration workloads without churn and additional technological complexity. Digital Rebar capability enables upgrade and continuous deployment automation which is important for large scale, production-scale deployments of evolving complex technologies such as Docker, Kubernetes, Mesos, Cloud Foundry, OpenStack, and Ceph.
-            <p><br/>
-            <p>
-                Digital Rebar is an open reference implementation that can be designed to reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and the community benefits by having consistent installations across the ecosystem.
-            </p>
-        </article>
-        <div class='full-screen' data-parallax="scroll" data-image-src="images/container.jpg">
-            <div class='title-text'>
-                <span class="slash">./</span>devops_for_physical<span class="slash blink">&block;</span>
-            </div>
+        <div class='link-container' onclick='scroll("benefits")'>
+          <div class='link' href='test'>
+            <span>Benefits</span>
+          </div>
         </div>
-        <article>
-            <header id="benefits">
-                Benefits of Digital Rebar
-            </header>
-            <p>
-                Digital Rebar reduces the cost of datacenter hardware infrastructure preparation which provide immediate benefits by way of accelorating the deployment of complex compute and storage clusters. Digital Rebar reduces the human resource cost of orchestrating continuous hardware redeployment, hypervisor, operating systems, and application layer software installation and management. All of these add up to significant gains in operational reliability, consistency, and concomitant reduction in defects handling costs.            </p>
-        </article>
-        <div class='full-screen' data-parallax="scroll" data-image-src="images/clock.jpg">
-            <div class='title-text'>
-                <span class="slash">./</span>frictionless_it_ops<span class="slash blink">&block;</span>
-            </div>
+        <div class='link-container' onclick='scroll("sponsor")'>
+          <div class='link' href='test'>
+            <span>Sponsor</span>
+          </div>
         </div>
-        <article>
-            <header id="sponsor">
-                Project Sponsored by <a href="http://rackn.com">RackN</a>
+      </div>
+    </nav>
 
-            </header>
+    <img src='rebar.jpg' id='top-img' />
+
+    <div class='typing-container'>
+      <div class='typing-font'>
+        <span class='terminal-green'>./</span><span id='typing'></span><span id='cursor' class='terminal-green'>&block;</span>
+      </div>
+    </div>
+
+    <section class='content card' id='_overview'>
+      <a class='anchor' name="overview"></a>
+      <h2>Digital Rebar Project</h2>
+      <p>
+        <a href='https://github.com/digitalrebar/core'>Digital Rebar</a> is a container-based, infrastructure-as-code provisioning and orchestration platform that provides software deployment automation capabilities without locking you into a specific hardware platform or operating model. Our mission is to embrace the heterogenous nature of data center operations.
+      </p>
+      <p>
+        <div class='split'>
+          <div>
+            <div class='material-icon-container'>
+              <i class="material-icons">computer</i>  
+            </div>
             <p>
-                <b>Digital Rebar is an Apache2 Licensed Project.</b><br/>
-                RackN supports a variety of workloads that leverage Digital Rebar. Including <a href="http://github.com/rackn/kubernetes">Kubernetes</a>, <a href="http://github.com/rackn/ceph">Ceph</a>, and a variety of <a href="http://github.com/rackn/hardware">Commodity Hardware</a>. RackN offers enterprise support for Digital Rebar.
+              For physical infrastructure, it functions like an fully integrated Cobbler/Foreman + Ansible Tower (or Juju + MaaS) with the added bonus of being able to configure RAID, IPMI and BIOS.  Even better, Digital Rebar is not opinionated about scripting tools so you can mix and match Chef, Puppet, Ansible, SaltStack and even Bash.
             </p>
-        </article>
-        <article class='footer'>
-            <footer>
-                &copy; 2015 RackN, Inc.<br/>
-                <a href="http://digital-rebar.readthedocs.org/en/latest/BOOK.html">Documentation</a> | <a href="http://github.com/digitalrebar/core">Source</a> | <a href="http://rackn.com">Sponsor</a> | <a href="http://github.com/meshiest">Site Designer</a>
-            </footer>
-        </article>
+          </div>
+          <div>
+            <div class='material-icon-container'>
+              <i class="material-icons">cloud</i>  
+            </div>
+            <p>
+              For cloud infrastructure, it provides a hybrid cluster install like Terraform but with ongoing iterative operations and upgrade strategy.
+            </p>
+          </div>
+        </div>
+      </p>
+      <p>
+        Why <a herf="https://en.wikipedia.org/wiki/Rebar">Rebar</a>?  It is the metal in reinforced concrete that allows building cloudscraping towers and robust infrastructure (<a href="http://digital-rebar.readthedocs.org/en/latest/principles/what_is_rebar.html">more...</a>).
+      </p>
+        <p>
+          While it's been completely rebuilt by DevOps artisans, Digital Rebar history includes years of battle-tested ops learnings by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
+        </p>
+      <div style='text-align: center;'>
+        <img src='battle_history.jpg'/>
+      </div>
+    </section>
+    <div style='background: #eee;'>
+      <section class='content card' id='_install'>
+        <a class='anchor' name="install"></a>
+        <h2>Getting Started</h2>
+        <div class='display-container'>
+          <div class='display' alt='Install Guide' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.io/en/latest/deployment/README.html'>
+            <i class="material-icons">file_download</i>  
+            <div class='dropdown left' style='top: 20px' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.org/en/latest/deployment/install/quick.html'>
+              AWS Quick Start
+            </div>
+          </div>
+          <div class='display' alt='Demo Videos' onclick='displayClick(event, this)' url='https://www.youtube.com/playlist?list=PLXPBeIrpXjfh2lXdXkNnzAuc7_SUtYJR-'>
+            <i class="material-icons">video_library</i>  
+          </div>
+          <div class='display' alt='Mailing List' onclick='displayClick(event, this)' url='http://bit.ly/digitalrebarlist'>
+            <i class="material-icons">mail</i>  
+          </div>
+          <div class='display' alt='Live Chat (Gitter)' onclick='displayClick(event, this)' url='https://gitter.im/digitalrebar/core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge'>
+            <i class="material-icons">chat</i>  
+          </div>
+          <div class='display' alt='Issues and Roadmap' onclick='displayClick(event, this)' url='https://waffle.io/digitalrebar/core'>
+            <i class="material-icons">directions</i>  
+          </div>
+          <div class='display' alt='Documentation' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.org/en/latest/BOOK.html'>
+            <i class="material-icons">book</i>
+            <div class='dropdown' style='top: 20px' onclick='displayClick(event, this)' url='https://readthedocs.org/projects/digital-rebar/downloads/pdf/latest/'>
+              Single PDF
+            </div>
+            <div class='dropdown' style='top: 72px' onclick='displayClick(event, this)' url='https://github.com/digitalrebar/doc'>
+              Git Repo
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class='content card' id='_principle'>
+        <a class='anchor' name="principle"></a>
+        <h2>At a glance</h2>
+        <p>
+          The principle motivation for Digital Rebar is to collaborate on a technology that revolutionizes how traditional data center infrastructure operations can gracefully absorb next-generation workloads without churn and additional technological complexity. Digital Rebar capability enables upgrade and continuous deployment automation which is important for large scale, production-scale deployments of evolving complex technologies such as Docker, Kubernetes, Mesos, Cloud Foundry, OpenStack, and Ceph.
+        </p>
+        <p>
+          Digital Rebar is an open reference implementation that can be designed to reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and the community benefits by having consistent installations across the ecosystem.
+        </p>
+      </section>
+
+      <section class='content card' id='_benefits'>
+        <a class='anchor' name="benefits"></a>
+        <h2>Benefits of Digital Rebar</h2>
+        <p>
+          Digital Rebar reduces the cost of datacenter hardware infrastructure preparation which provide immediate benefits by way of accelerating the deployment of complex compute and storage clusters. Digital Rebar reduces the human resource cost of orchestrating continuous hardware redeployment, hypervisor, operating systems, and application layer software installation and management. All of these add up to significant gains in operational reliability, consistency, and concomitant reduction in defects handling costs.
+        </p>
+        <p>
+          Digital Rebar is an open reference implementation that can be designed to reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and the community benefits by having consistent installations across the ecosystem.
+        </p>
+      </section>
+
+      <section class='content card' id='_sponsor'>
+        <a class='anchor' name="sponsor"></a>
+        <h2>Project Sponsored by <a href="http://rackn.com">Rack<sup>N</sup></a></h2>
+        <p>
+          <b>Digital Rebar is an Apache2 Licensed Project.</b><br/>
+          Rack<sup>N</sup> supports a variety of workloads that leverage Digital Rebar. Including <a href="http://github.com/rackn/kubernetes">Kubernetes</a>, <a href="http://github.com/rackn/ceph">Ceph</a>, and a variety of <a href="http://github.com/rackn/hardware">Commodity Hardware</a>. Rack<sup>N</sup> offers enterprise support for Digital Rebar.
+        </p>
+        <p>
+          Digital Rebar is an open reference implementation that can be designed to reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and the community benefits by having consistent installations across the ecosystem.
+        </p>
+      </section>
+    </div>
+
+    <section class='footer'>
+      <footer>
+        &copy; 2016 RackN, Inc.<br/>
+        <a href="http://digital-rebar.readthedocs.org/en/latest/BOOK.html">Documentation</a> | <a href="http://github.com/digitalrebar/core">Source</a> | <a href="http://rackn.com">Sponsor</a> | <a href="http://github.com/meshiest">Site Designer</a>
+      </footer>
+    </section>
 
     <script>
 
-    //autoscroll function
-    //to use: <tag onclick="javascript:scrollTo('#selector.class')" />
-    function scrollTo(destination) {
-        $('html, body').animate({
-            scrollTop: $( destination ).offset().top
-        }, 500);
+var backgroundImage = document.getElementById('top-img')
+var toolbar = document.getElementById('toolbar')
+var typing = document.getElementById('typing')
+var cursor = document.getElementById('cursor')
+
+var phrases = [
+  'start_to_scale',
+  'ready_state_go',
+  'baremetal_api',
+  'devops_for_physical',
+  'hybrid_devops_control',
+  'frictionless_it_ops',
+]
+var extensions = [
+  'exe',
+  'zip',
+  'tar.gz',
+  'sh',
+  'bat',
+  'mp3',
+  'wav',
+  'mov',
+  'inf',
+  'dll',
+  'yml',
+  'rb',
+  'go',
+]
+var phraseIndex = -1
+var waitTime = 3000
+var letterTime = 50
+
+function typeWord (word) {
+  if(Math.random() < 0.1) {
+    word += '.' + extensions[Math.floor(Math.random() * extensions.length)]
+  }
+  var duration = word.length * letterTime * 2 + waitTime
+  
+  setTimeout(function () {
+    cursor.className = 'blink terminal-green'
+  }, word.length * letterTime)
+
+  setTimeout(function () {
+    cursor.className = 'terminal-green'
+  }, word.length * letterTime + waitTime)
+
+  for(var i = 0; i < word.length; i++) {
+    (function(text){ // type word
+      setTimeout(function () {
+        typing.innerHTML = text
+      }, letterTime * i)
+
+      setTimeout(function () { // remove word
+        typing.innerHTML = text
+      }, duration - letterTime * i) 
+    })(word.substr(0, i+1))
+  }
+  setTimeout(nextPhrase, duration) // queue next word
+}
+
+function nextPhrase () {
+  typeWord (phrases[phraseIndex = (phraseIndex + 1) % phrases.length])
+}
+
+window.onload = function () {
+  setTimeout(nextPhrase, 1000)
+}
+
+function displayClick(e, elem) {
+  if(!e)
+    e = window.event
+
+  if (e.stopPropagation)
+    e.stopPropagation()
+  else
+    e.cancelBubble = true
+  window.location = elem.attributes.url.value
+}
+
+var clouds = [
+  'cloud',
+  'cloud_done',
+  'cloud_download',
+  'cloud_upload'
+]
+
+
+window.onscroll = function () {
+  var scroll = document.body.scrollTop
+  backgroundImage.style.top = (scroll > 400 ? 400/2-scroll/2 : 0) + "px"
+  toolbar.className = (scroll > backgroundImage.height - 400 ? 'card' : 'overlay')
+}
+
+// easing functions http://goo.gl/5HLl8
+Math.easeInOutQuad = function (t, b, c, d) {
+  t /= d/2;
+  if (t < 1) {
+    return c/2*t*t + b
+  }
+  t--;
+  return -c/2 * (t*(t-2) - 1) + b;
+};
+
+Math.easeInCubic = function(t, b, c, d) {
+  var tc = (t/=d)*t*t;
+  return b+c*(tc);
+};
+
+Math.inOutQuintic = function(t, b, c, d) {
+  var ts = (t/=d)*t,
+  tc = ts*t;
+  return b+c*(6*tc*ts + -15*ts*ts + 10*tc);
+};
+
+// requestAnimationFrame for Smart Animating http://goo.gl/sx5sts
+var requestAnimFrame = (function(){
+  return  window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function( callback ){ window.setTimeout(callback, 1000 / 60); };
+})();
+
+function scroll(elem) {
+  var e = document.getElementById('_'+elem)
+  scrollTo(e.offsetTop-32, 0, 500)
+  setTimeout(function(){
+    window.location.href = "#"+elem;
+  }, 500)
+}
+
+function scrollTo(to, callback, duration) {
+  // because it's so fucking difficult to detect the scrolling element, just move them all
+  function move(amount) {
+    document.documentElement.scrollTop = amount;
+    document.body.parentNode.scrollTop = amount;
+    document.body.scrollTop = amount;
+  }
+  function position() {
+    return document.documentElement.scrollTop || document.body.parentNode.scrollTop || document.body.scrollTop;
+  }
+  var start = position(),
+    change = to - start,
+    currentTime = 0,
+    increment = 20;
+  duration = (typeof(duration) === 'undefined') ? 500 : duration;
+  var animateScroll = function() {
+    // increment the time
+    currentTime += increment;
+    // find the value with the quadratic in-out easing function
+    var val = Math.easeInOutQuad(currentTime, start, change, duration);
+    // move the document.body
+    move(val);
+    // do the animation unless its over
+    if (currentTime < duration) {
+      requestAnimFrame(animateScroll);
+    } else {
+      if (callback && typeof(callback) === 'function') {
+        // the animation is done so lets callback
+        callback();
+      }
     }
-    $('#top').click(function(){
-        scrollTo($('article')[0]);
-        return false;
-    });
+  };
+  animateScroll();
+}
 
-    $('a[href*=#]').click(function(event){
-        scrollTo($.attr(this, 'href'));
-        event.preventDefault();
-    });
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-55489714-2', 'auto');
-      ga('send', 'pageview');
+ga('create', 'UA-55489714-2', 'auto');
+ga('send', 'pageview');
 
     </script>
-
-    <img src="images/digital_rebar.png" style="width:15%; top: 1em; left: 2.5%; position: fixed;" onclick="javascript:document.location='http://digital-rebar.readthedocs.org/en/latest/BOOK.html';" />
-
-    </body>
+  </body>
 </html>
