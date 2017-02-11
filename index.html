@@ -60,27 +60,27 @@
         <div class='split'>
           <div>
             <div class='material-icon-container'>
-              <i class="material-icons">computer</i>  
+              <i class="material-icons">computer</i>
             </div>
             <p>
-              For physical infrastructure, it functions like an fully integrated Cobbler/Foreman + Ansible Tower (or Juju + MaaS) with the added bonus of being able to configure RAID, IPMI and BIOS.  Even better, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> is not opinionated about scripting tools so you can mix and match Chef, Puppet, Ansible, SaltStack and even Bash.
+            For physical infrastructure, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> functions as a fully integrated <a href='http://cobbler.github.io/'>Cobbler</a>/i<a href='https://www.theforeman.org/'>Foreman</a> + i<a href='https://www.ansible.com/tower'>Ansible Tower</a> (or <a href='https://www.ubuntu.com/cloud/juju'>Juju</a> + <a href='https://maas.io/'>MaaS</a>) with the added bonus of being able to configure RAID, IPMI and BIOS.  Furthermore, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> is not opinionated about scripting tools so you can mix and match Chef, Puppet, Ansible, SaltStack, or even Bash.
             </p>
           </div>
           <div>
             <div class='material-icon-container'>
-              <i class="material-icons">cloud</i>  
+              <i class="material-icons">cloud</i>
             </div>
             <p>
-              For cloud infrastructure, it provides a hybrid cluster install like Terraform but with ongoing iterative operations and upgrade strategy.
+            For cloud infrastructure, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> provides a hybrid cluster install like <a href='https://www.terraform.io/'>Terraform</a>, but with an ongoing iterative operation and upgrade strategy.
             </p>
           </div>
         </div>
       </p>
       <p>
-        Why <a href="https://en.wikipedia.org/wiki/Rebar">Rebar</a>?  It is the metal in reinforced concrete that allows building cloudscraping towers and robust infrastructure (<a href="http://digital-rebar.readthedocs.io/en/latest/principles/concepts/what_is_rebar.html">more...</a>).
+        Why <a href="https://en.wikipedia.org/wiki/Rebar">Rebar</a>? Rebar is the metal in reinforced concrete that allows building cloudscraping towers and robust infrastructure (<a href="http://digital-rebar.readthedocs.io/en/latest/principles/concepts/what_is_rebar.html">more information...</a>).
       </p>
         <p>
-          While it's been completely rebuilt by DevOps artisans, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> history includes years of battle-tested ops learnings by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
+        While <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> has been completely rebuilt by DevOps artisans, our history includes years of battle-tested ops learning by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
         </p>
     </section>
     <div style='background: #eee;'>
@@ -89,22 +89,22 @@
         <h2>Getting Started</h2>
         <div class='display-container'>
           <div class='display' alt='Install Guide' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.io/en/latest/deployment/README.html'>
-            <i class="material-icons">file_download</i>  
+            <i class="material-icons">file_download</i>
             <div class='dropdown left' style='top: 20px' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.org/en/latest/deployment/install/quick.html'>
               AWS Quick Start
             </div>
           </div>
           <div class='display' alt='Demo Videos' onclick='displayClick(event, this)' url='https://www.youtube.com/playlist?list=PLXPBeIrpXjfh2lXdXkNnzAuc7_SUtYJR-'>
-            <i class="material-icons">video_library</i>  
+            <i class="material-icons">video_library</i>
           </div>
           <div class='display' alt='Mailing List' onclick='displayClick(event, this)' url='http://bit.ly/digitalrebarlist'>
-            <i class="material-icons">mail</i>  
+            <i class="material-icons">mail</i>
           </div>
           <div class='display' alt='Live Chat (Gitter)' onclick='displayClick(event, this)' url='https://gitter.im/digitalrebar/core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge'>
-            <i class="material-icons">chat</i>  
+            <i class="material-icons">chat</i>
           </div>
           <div class='display' alt='Issues and Roadmap' onclick='displayClick(event, this)' url='https://waffle.io/digitalrebar/core'>
-            <i class="material-icons">directions</i>  
+            <i class="material-icons">directions</i>
           </div>
           <div class='display' alt='Documentation' onclick='displayClick(event, this)' url='http://digital-rebar.readthedocs.org/en/latest/BOOK.html'>
             <i class="material-icons">book</i>
@@ -197,7 +197,7 @@ function typeWord (word) {
     word += '.' + extensions[Math.floor(Math.random() * extensions.length)]
   }
   var duration = word.length * letterTime * 2 + waitTime
-  
+
   setTimeout(function () {
     cursor.className = 'blink terminal-green'
   }, word.length * letterTime)
@@ -214,7 +214,7 @@ function typeWord (word) {
 
       setTimeout(function () { // remove word
         typing.innerHTML = text
-      }, duration - letterTime * i) 
+      }, duration - letterTime * i)
     })(word.substr(0, i+1))
   }
   setTimeout(nextPhrase, duration) // queue next word
