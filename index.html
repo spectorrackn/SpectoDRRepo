@@ -72,17 +72,26 @@
               <i class="material-icons">cloud</i>
             </div>
             <p>
-            For cloud infrastructure, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> provides a hybrid cluster install like <a href='https://www.terraform.io/'>Terraform</a>, but with an ongoing iterative operation and upgrade strategy.
+            For cloud infrastructure, <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> provides a hybrid cluster install like <a href='https://www.terraform.io/'>Terraform</a>, but with an ongoing iterative operation and upgrade strategy.  By design, we leverage existing configurations like Ansible playbooks directly from upstreams WITHOUT modification.  Our job is to make them more portable and repeatable by controlling the infrastructure.
             </p>
           </div>
         </div>
       </p>
+      <span>
+        <p>
+          <strong>NEW STAND-ALONE PROVSION - LOOKING FOR COMMUNITY EVALUATORS</strong>
+        </p>
+        <p>
+          <img src="dr_provision.png" align="left">
+          <a href="https://github.com/digitalrebar/provision">Digital Rebar Provision</a> is a stand-alone version of the PXE/DHCP/TFTP system used by the broader project.  It's a great first step for the larger project and sufficient if you are just replacing Cobbler or another metal provisioner (MaaS, Stacki, Foreman, USB).  It does not have out-of-band or firmware features - those services remain under the project umbrella.
+        </p>
+      </span>
       <p>
         Why <a href="https://en.wikipedia.org/wiki/Rebar">Rebar</a>? Rebar is the metal in reinforced concrete that allows building cloudscraping towers and robust infrastructure (<a href="http://digital-rebar.readthedocs.io/en/latest/principles/concepts/what_is_rebar.html">more information...</a>).
       </p>
-        <p>
+      <p>
         While <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> has been completely rebuilt by DevOps artisans, our history includes years of battle-tested ops learning by the <a href="http://github.com/crowbar">Crowbar Project</a> founders.
-        </p>
+      </p>
     </section>
     <div style='background: #eee;'>
       <section class='content card' id='_install'>
@@ -138,9 +147,6 @@
         <h2>Benefits of Digital Rebar</h2>
         <p>
           <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> reduces the cost of datacenter hardware infrastructure preparation which provide immediate benefits by way of accelerating the deployment of complex compute and storage clusters. <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> reduces the human resource cost of orchestrating continuous hardware redeployment, hypervisor, operating systems, and application layer software installation and management. All of these add up to significant gains in operational reliability, consistency, and concomitant reduction in defects handling costs.
-        </p>
-        <p>
-          <a href='https://github.com/digitalrebar/digitalrebar'>Digital Rebar</a> is an open reference implementation that can be designed to reliably deployed in large-scale, multi-site datacenters. This effectively productizes best practices in a way that allows creation of consistent and discoverable operating environments. Users benefit with fast time-to-value and the community benefits by having consistent installations across the ecosystem.
         </p>
       </section>
 
